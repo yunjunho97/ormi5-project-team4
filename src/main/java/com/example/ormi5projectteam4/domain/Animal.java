@@ -1,5 +1,8 @@
 package com.example.ormi5projectteam4.domain;
 
+import com.example.ormi5projectteam4.domain.constant.Gender;
+import com.example.ormi5projectteam4.domain.constant.NeuteringStatus;
+import com.example.ormi5projectteam4.domain.constant.Species;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,14 +39,14 @@ public class Animal {
     @Enumerated(EnumType.STRING)
     private Species species;
 }
-enum Gender {
-    MALE, FEMALE
-}
+//enum Gender {
+//    MALE, FEMALE
+//}
 
-enum NeuteringStatus {
-    COMPLETE, INCOMPLETE, UNKNOWN
-}
-
-enum Species {
-    DOG, CAT, ETC
-}
+//enum NeuteringStatus {
+//    COMPLETE, INCOMPLETE, UNKNOWN
+//}
+//
+//enum Species {
+//    DOG, CAT, ETC
+//}

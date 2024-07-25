@@ -1,5 +1,8 @@
 package com.example.ormi5projectteam4.domain;
 
+import com.example.ormi5projectteam4.domain.constant.Gender;
+import com.example.ormi5projectteam4.domain.constant.NeuteringStatus;
+import com.example.ormi5projectteam4.domain.constant.Species;
 import lombok.*;
 
 import java.time.LocalDate;

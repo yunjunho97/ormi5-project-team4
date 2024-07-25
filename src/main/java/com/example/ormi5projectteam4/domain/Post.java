@@ -1,5 +1,7 @@
 package com.example.ormi5projectteam4.domain;
 
+import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
+import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -52,10 +54,10 @@ public class Post {
         image.setPost(this);
     }
 }
-enum AdoptionStatus {
-    POSTING, PROCEEDING, ADOPTED
-}
-
-enum ApproveStatus {
-    PENDING, APPROVED, DENIED
-}
+//enum AdoptionStatus {
+//    POSTING, PROCEEDING, ADOPTED
+//}
+//
+//enum ApproveStatus {
+//    PENDING, APPROVED, DENIED
+//}

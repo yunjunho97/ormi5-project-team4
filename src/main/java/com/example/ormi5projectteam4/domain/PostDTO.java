@@ -1,5 +1,7 @@
 package com.example.ormi5projectteam4.domain;
 
+import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
+import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
