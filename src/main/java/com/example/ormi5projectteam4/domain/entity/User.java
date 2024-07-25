@@ -1,5 +1,6 @@
-package com.example.ormi5projectteam4.domain;
+package com.example.ormi5projectteam4.domain.entity;
 
+import com.example.ormi5projectteam4.domain.constant.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

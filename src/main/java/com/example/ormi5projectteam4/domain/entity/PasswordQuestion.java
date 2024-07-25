@@ -1,4 +1,4 @@
-package com.example.ormi5projectteam4.domain;
+package com.example.ormi5projectteam4.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
