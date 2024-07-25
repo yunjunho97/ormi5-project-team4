@@ -1,11 +1,11 @@
-package com.example.ormi5projectteam4.domain;
+package com.example.ormi5projectteam4.domain.dto;
 
 import com.example.ormi5projectteam4.domain.constant.Gender;
 import com.example.ormi5projectteam4.domain.constant.NeuteringStatus;
 import com.example.ormi5projectteam4.domain.constant.Species;
+import com.example.ormi5projectteam4.domain.entity.Animal;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter

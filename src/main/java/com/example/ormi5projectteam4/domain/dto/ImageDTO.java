@@ -1,5 +1,6 @@
-package com.example.ormi5projectteam4.domain;
+package com.example.ormi5projectteam4.domain.dto;
 
+import com.example.ormi5projectteam4.domain.entity.Image;
 import lombok.*;
 
 import java.time.LocalDateTime;
