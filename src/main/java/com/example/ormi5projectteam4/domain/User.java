@@ -40,4 +40,8 @@ public class User {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
+    @OneToOne
+    @JoinColumn(name = "password_question_id")
+    private PasswordQuestion passwordQuestion;
 }

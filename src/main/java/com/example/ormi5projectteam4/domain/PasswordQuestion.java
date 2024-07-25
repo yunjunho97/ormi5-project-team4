@@ -17,4 +17,7 @@ public class PasswordQuestion {
 
     @Column(name = "question")
     private String question;
+
+    @OneToOne(mappedBy = "passwordQuestion")
+    private User user;
 }
