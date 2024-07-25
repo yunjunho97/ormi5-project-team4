@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    margin-top: 234px;
+    margin-left: 837px;
+    width: 246px;
+    height: 69px;
+}
+
+#email {
+    margin-top: 187px;
+    margin-left: 693px;
+    display: flex;
+}
+
+.text-style {
+    font-size: 20px;
+    color: #888888;
+}
+
+input[type=text] {
+    width: 400px;
+    border: 0;
+    /*background-color: aqua;*/
+    margin-left: 20px;
+}
+
+.line-separate {
+    margin-top: 10px;
+    margin-left: 693px;
+    width: 534px;
+    height: 1px;
+    background-color: black;
+}
+
+#password {
+    margin-top: 44px;
+    margin-left: 693px;
+    display: flex;
+}
+
+#find-password {
+    margin-top: 15px;
+    margin-left: 1140px;
+    color: #DBDBDB;
+}
+
+#login {
+    width: 534px;
+    height: 68px;
+    border: 0;
+    margin-top: 59px;
+    margin-left: 693px;
+    background-color: #766CED;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #FFFFFF;
+}
+
+#register-redirect {
+    margin-top: 58px;
+    margin-left: 849px;
+    font-size: 16px;
+    color: #766CED;
+}
