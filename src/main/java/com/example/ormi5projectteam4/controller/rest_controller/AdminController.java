@@ -1,0 +1,68 @@
+package com.example.ormi5projectteam4.controllers.rest_controller;
+
+import com.example.ormi5projectteam4.domain.entity.Notice;
+import com.example.ormi5projectteam4.domain.User;
+import com.example.ormi5projectteam4.domain.dto.NoticeDto;
+import com.example.ormi5projectteam4.domain.dto.UserRoleDto;
+import com.example.ormi5projectteam4.service.AdminService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.sql.Timestamp;
+
+@RestController
+@RequestMapping("/admin")
+public class AdminController {
+    @Autowired
+    private AdminService adminService;
+
+    @PutMapping("/member/{id}")
+    public ResponseEntity<User> changeUserRole(@PathVariable Integer id, @RequestBody UserRoleDto roleDto){
+        User updateUser = adminService.changeUserRole(id, roleDto.getRole());
+        if(updateUser == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(updateUser);
+    }
+
+    @PostMapping("/notice")
+    public ResponseEntity<Notice> createNotice(@RequestBody NoticeDto noticeDto) {
+        Notice notice = new Notice();
+        notice.setUserId(noticeDto.getUserId());
+        notice.setTitle(noticeDto.getTitle());
+        notice.setContent(noticeDto.getContent());
+        notice.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        notice.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+
+        Notice savedNotice = adminService.saveNotice(notice);
+        return ResponseEntity.ok(savedNotice);
+    }
+
+    @PutMapping("/notice/{id}")
+    public ResponseEntity<Notice> updateNotice(@PathVariable Integer id, @RequestBody NoticeDto noticeDto) {
+        Notice notice = adminService.getNoticeById(id);
+        if (notice == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        notice.setTitle(noticeDto.getTitle());
+        notice.setContent(noticeDto.getContent());
+        notice.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+
+        Notice updatedNotice = adminService.saveNotice(notice);
+        return ResponseEntity.ok(updatedNotice);
+    }
+
+    @DeleteMapping("/notice/{id}")
+    public ResponseEntity<Void> deleteNotice(@PathVariable Integer id) {
+        Notice notice = adminService.getNoticeById(id);
+        if (notice == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        adminService.deleteNotice(id);
+        return ResponseEntity.noContent().build();
+    }
+}
