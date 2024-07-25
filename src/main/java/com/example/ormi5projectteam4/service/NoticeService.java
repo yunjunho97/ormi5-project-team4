@@ -1,6 +1,6 @@
 package com.example.ormi5projectteam4.service;
 
-import com.example.ormi5projectteam4.Repository.NoticeRepository;
+import com.example.ormi5projectteam4.repository.NoticeRepository;
 import com.example.ormi5projectteam4.domain.entity.Notice;
 import com.example.ormi5projectteam4.domain.dto.NoticeDto;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.example.ormi5projectteam4.Repository;
+package com.example.ormi5projectteam4.repository;
 
 import com.example.ormi5projectteam4.domain.entity.Notice;
 import com.example.ormi5projectteam4.domain.dto.NoticeDto;
