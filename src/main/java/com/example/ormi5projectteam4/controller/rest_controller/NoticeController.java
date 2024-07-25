@@ -1,7 +1,7 @@
-package com.example.controller;
+package com.example.ormi5projectteam4.controller.rest_controller;
 
-import com.example.domain.NoticeDto;
-import com.example.service.NoticeService;
+import com.example.ormi5projectteam4.domain.dto.NoticeDto;
+import com.example.ormi5projectteam4.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

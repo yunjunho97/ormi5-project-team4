@@ -1,8 +1,8 @@
-package com.example.service;
+package com.example.ormi5projectteam4.service;
 
-import com.example.Repository.NoticeRepository;
-import com.example.domain.Notice;
-import com.example.domain.NoticeDto;
+import com.example.ormi5projectteam4.Repository.NoticeRepository;
+import com.example.ormi5projectteam4.domain.entity.Notice;
+import com.example.ormi5projectteam4.domain.dto.NoticeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

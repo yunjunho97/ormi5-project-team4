@@ -1,5 +1,6 @@
-package com.example.domain;
+package com.example.ormi5projectteam4.domain.dto;
 
+import com.example.ormi5projectteam4.domain.entity.Notice;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
