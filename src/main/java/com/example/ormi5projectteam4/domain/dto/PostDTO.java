@@ -1,11 +1,10 @@
-package com.example.ormi5projectteam4.domain;
+package com.example.ormi5projectteam4.domain.dto;
 
+import com.example.ormi5projectteam4.domain.entity.Post;
 import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
 import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
-import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

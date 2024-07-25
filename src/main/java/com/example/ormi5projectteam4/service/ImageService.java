@@ -1,7 +1,7 @@
 package com.example.ormi5projectteam4.service;
 
-import com.example.ormi5projectteam4.domain.Image;
-import com.example.ormi5projectteam4.domain.ImageDTO;
+import com.example.ormi5projectteam4.domain.entity.Image;
+import com.example.ormi5projectteam4.domain.dto.ImageDTO;
 import com.example.ormi5projectteam4.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.example.ormi5projectteam4.domain;
+package com.example.ormi5projectteam4.domain.entity;
 
 import com.example.ormi5projectteam4.domain.constant.Gender;
 import com.example.ormi5projectteam4.domain.constant.NeuteringStatus;
@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity

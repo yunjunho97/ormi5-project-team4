@@ -1,8 +1,10 @@
 package com.example.ormi5projectteam4.service;
 
-import com.example.ormi5projectteam4.domain.*;
-import com.example.ormi5projectteam4.repository.AnimalRepository;
-import com.example.ormi5projectteam4.repository.ImageRepository;
+import com.example.ormi5projectteam4.domain.dto.ImageDTO;
+import com.example.ormi5projectteam4.domain.entity.Animal;
+import com.example.ormi5projectteam4.domain.entity.Image;
+import com.example.ormi5projectteam4.domain.dto.PostDTO;
+import com.example.ormi5projectteam4.domain.entity.Post;
 import com.example.ormi5projectteam4.repository.PostRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;

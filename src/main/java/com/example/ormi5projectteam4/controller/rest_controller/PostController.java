@@ -1,7 +1,6 @@
-package com.example.ormi5projectteam4.controller;
+package com.example.ormi5projectteam4.controller.rest_controller;
 
-import com.example.ormi5projectteam4.domain.Post;
-import com.example.ormi5projectteam4.domain.PostDTO;
+import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
