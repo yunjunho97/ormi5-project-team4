@@ -50,6 +50,17 @@ public class AdminService {
         return user;
     }
 
+    public Post changePostApproveStatus(Integer id, ApproveStatus approveStatus){
+        Post post = postRepository.findById(id).orElse(null);
+        
+        if(post != null){
+            post.setApproveStatus(approveStatus);
+            postRepository.save(post);
+        }
+
+        return post;
+    }
+
     public Notice saveNotice(Notice notice){
         return noticeRepository.save(notice);
     }
