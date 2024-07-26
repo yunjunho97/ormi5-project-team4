@@ -63,9 +63,8 @@ public class NoticeService {
                 .orElse(false);
     }
 
+    @Transactional(readOnly = true)
     public List<NoticeDto> getLatestNotices() {
-        return noticeRepository.findTop5ByOrderByCreatedAtDesc().stream()
-                .map(NoticeDto::fromEntity)
-                .collect(Collectors.toList());
+        return noticeRepository.findTop5ByOrderByCreatedAtDesc();
     }
 }
