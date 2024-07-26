@@ -29,4 +29,9 @@ public class MainController {
   public String changePassword() {
     return "change-password";
   }
+
+  @GetMapping("/change-password-success")
+  public String changePasswordSuccess() {
+    return "change-password-success";
+  }
 }
