@@ -33,10 +33,6 @@ public class AdminService {
         return postRepository.findByApproveStatus(approveStatus);
     }
 
-    public Post savePost(Post post){
-        return postRepository.save(post);
-    }
-
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
