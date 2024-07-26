@@ -3,9 +3,12 @@ package com.example.ormi5projectteam4.controller.rest_controller;
 import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 @RestController
@@ -18,10 +21,24 @@ public class PostController {
         this.postService = postService;
     }
 
+//    @GetMapping
+//    public ResponseEntity<List<PostDTO>> getAllPosts() {
+//        List<PostDTO> allPost = postService.getAllPost();
+//        return ResponseEntity.ok(allPost);
+//    }
+
     @GetMapping
-    public ResponseEntity<List<PostDTO>> getAllPosts() {
-        List<PostDTO> allPost = postService.getAllPost();
-        return ResponseEntity.ok(allPost);
+    public ResponseEntity<Page<PostDTO>> getAllPosts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<PostDTO> posts = postService.getAllPosts(pageRequest);
+        return ResponseEntity.ok(posts);
+    }
+
+    @GetMapping("/location")
+    public ResponseEntity<Page<PostDTO>> getPostsByFoundAt(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size, @RequestParam String foundLocation){
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<PostDTO> postsByFoundLocation = postService.getPostsByFoundLocation(foundLocation, pageRequest);
+        return ResponseEntity.ok(postsByFoundLocation);
     }
 
     @PostMapping

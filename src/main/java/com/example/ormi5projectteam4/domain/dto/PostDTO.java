@@ -18,8 +18,8 @@ import java.util.stream.Collectors;
 public class PostDTO {
     private Integer id;
     private String title;
-    private String fountAt;
-    private String fountLocation;
+    private String foundAt;
+    private String foundLocation;
     private String detail;
     private String contact;
     private String tempoLocation;
@@ -42,8 +42,8 @@ public class PostDTO {
         return PostDTO.builder()
                 .id(post.getId())
                 .title(post.getTitle())
-                .fountAt(post.getFountAt())
-                .fountLocation(post.getFountLocation())
+                .foundAt(post.getFoundAt())
+                .foundLocation(post.getFoundLocation())
                 .detail(post.getDetail())
                 .contact(post.getContact())
                 .tempoLocation(post.getTempoLocation())

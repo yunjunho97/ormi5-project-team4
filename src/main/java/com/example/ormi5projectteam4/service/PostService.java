@@ -11,6 +11,10 @@ import com.example.ormi5projectteam4.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -33,11 +37,23 @@ public class PostService {
         this.imageService = imageService;
     }
 
-    public List<PostDTO> getAllPost(){
-        List<Post> all = postRepository.findAll();
-        return postRepository.findAll().stream()
-                .map(PostDTO::fromPost)
-                .collect(Collectors.toList());
+//    public List<PostDTO> getAllPost(){
+//        List<Post> all = postRepository.findAll();
+//        return postRepository.findAll().stream()
+//                .map(PostDTO::fromPost)
+//                .collect(Collectors.toList());
+//    }
+
+    public Page<PostDTO> getAllPosts(Pageable pageable) {
+        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
+        Page<Post> posts = postRepository.findAll(pageRequest);
+        return posts.map(PostDTO::fromPost);
+    }
+
+    public Page<PostDTO> getPostsByFoundLocation(String foundLocation, Pageable pageable){
+        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
+        Page<Post> posts = postRepository.findByFoundLocation(foundLocation, pageRequest);
+        return posts.map(PostDTO::fromPost);
     }
 
     public Optional<PostDTO> getPostById(Integer postId) {
@@ -81,7 +97,8 @@ public class PostService {
         Post post = new Post();
         post.setId(postDTO.getId());
         post.setTitle(postDTO.getTitle());
-        post.setFountAt(postDTO.getFountAt());
+        post.setFoundAt(postDTO.getFoundAt());
+        post.setFoundLocation(postDTO.getFoundLocation());
         post.setDetail(postDTO.getDetail());
         post.setContact(postDTO.getContact());
         post.setTempoLocation(postDTO.getTempoLocation());
