@@ -56,10 +56,10 @@ public class NoticeController {
         return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/latest")
-    public ResponseEntity<List<NoticeDto>> getLatestNotices() {
-        List<NoticeDto> latestNotices = noticeService.getLatestNotices();
-        return ResponseEntity.ok(latestNotices);
-    }
+//    @GetMapping("/latest")
+//    public ResponseEntity<List<NoticeDto>> getLatestNotices() {
+//        List<NoticeDto> latestNotices = noticeService.getLatestNotices();
+//        return ResponseEntity.ok(latestNotices);
+//    }
 
 }
