@@ -26,6 +26,12 @@ public class AdminController {
         return ResponseEntity.ok(posts);
     }
 
+    @GetMapping("/post")
+    public ResponseEntity<List<Post>> getAllPosts(@RequestBody ApproveStatus approveStatus){
+        List<Post> posts = adminService.getPostsByApproveStatus(approveStatus);
+        return ResponseEntity.ok(posts);
+    }
+
     @PutMapping("/member/{id}")
     public ResponseEntity<User> changeUserRole(@PathVariable Long id, @RequestBody UserRoleDto roleDto){
         User updateUser = adminService.changeUserRole(id, roleDto.getRole());
