@@ -33,6 +33,10 @@ public class AdminService {
         return postRepository.findByApproveStatus(approveStatus);
     }
 
+    public Post savePost(Post post){
+        return postRepository.save(post);
+    }
+
 
 //    public User changeUserRole(Integer id, Role role){
 //        User user = userRepository.findById(id).orElse(null);
