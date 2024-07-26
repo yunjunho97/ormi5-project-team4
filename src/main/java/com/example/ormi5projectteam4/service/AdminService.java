@@ -37,6 +37,10 @@ public class AdminService {
         return postRepository.save(post);
     }
 
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
+
 
 //    public User changeUserRole(Integer id, Role role){
 //        User user = userRepository.findById(id).orElse(null);
