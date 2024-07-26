@@ -45,14 +45,14 @@ public class AdminService {
         return userRepository.findByEmailContaining(email);
     }
 
-//    public User changeUserRole(Integer id, Role role){
-//        User user = userRepository.findById(id).orElse(null);
-//        if(user != null){
-//            user.setRole(role);
-//            userRepository.save(user);
-//        }
-//        return user;
-//    }
+    public User changeUserRole(Long id, Role role){
+        User user = userRepository.findById(id).orElse(null);
+        if(user != null){
+            user.setRole(role);
+            userRepository.save(user);
+        }
+        return user;
+    }
 
     public Notice saveNotice(Notice notice){
         return noticeRepository.save(notice);
