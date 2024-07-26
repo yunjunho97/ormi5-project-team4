@@ -28,7 +28,7 @@ public class NoticeDto {
                 .content(notice.getContent())
                 .createdAt(notice.getCreatedAt())
                 .updatedAt(notice.getUpdatedAt())
-                .userId(notice.getUserId())
+//                .userId(notice.getUserId())
                 .build();
     }
 
