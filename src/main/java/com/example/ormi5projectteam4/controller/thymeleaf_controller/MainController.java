@@ -24,4 +24,9 @@ public class MainController {
   public String findPassword() {
     return "find-password";
   }
+
+  @GetMapping("/change-password")
+  public String changePassword() {
+    return "change-password";
+  }
 }
