@@ -38,6 +38,12 @@ public class AdminController {
         return ResponseEntity.ok(users);
     }
 
+    @GetMapping("/member")
+    public ResponseEntity<List<User>> searchUserByEmail(@RequestBody String email){
+        List<User> users = adminService.searchUserByEmail(email);
+        return ResponseEntity.ok(users);
+    }
+
     @PutMapping("/member/{id}")
     public ResponseEntity<User> changeUserRole(@PathVariable Long id, @RequestBody UserRoleDto roleDto){
         User updateUser = adminService.changeUserRole(id, roleDto.getRole());
