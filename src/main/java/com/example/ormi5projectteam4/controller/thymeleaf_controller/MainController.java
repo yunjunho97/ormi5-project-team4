@@ -14,4 +14,9 @@ public class MainController {
   public String register() {
     return "register";
   }
+
+  @GetMapping("/register-success")
+  public String registerSuccess() {
+    return "register-success";
+  }
 }
