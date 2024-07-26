@@ -1,6 +1,8 @@
 package com.example.ormi5projectteam4.controller.rest_controller;
 
+import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
 import com.example.ormi5projectteam4.domain.entity.Notice;
+import com.example.ormi5projectteam4.domain.entity.Post;
 import com.example.ormi5projectteam4.domain.entity.User;
 import com.example.ormi5projectteam4.domain.dto.NoticeDto;
 import com.example.ormi5projectteam4.domain.dto.UserRoleDto;
@@ -25,6 +27,16 @@ public class AdminController {
         }
 
         return ResponseEntity.ok(updateUser);
+    }
+
+    @PutMapping("/post/{id}")
+    public ResponseEntity<Post> changePostApproveStatus(@PathVariable Integer id, @RequestBody ApproveStatus approveStatus){
+        Post updatePost = adminService.changePostApproveStatus(id, approveStatus);
+        if(updatePost == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(updatePost);
     }
 
     @PostMapping("/notice")
