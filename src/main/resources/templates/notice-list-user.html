@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항</title>
+</head>
+<body>
+<header>
+    <h1>Happy Tails</h1>
+</header>
+<div class="container">
+    <div class="sidebar">
+        <!--    최근 공지 5개    -->
+        <h2>공지사항</h2>
+        <ul id="recent-notices" class="notice-list">
+            <li th:each="notice : ${latestNotice}">
+                <span th:text="${notice.title}">Title</span>">
+            </li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <h2>All Notices</h2>
+        <form id="delete-form" th:action="@{/admin/notice}" method="get">
+            <table>
+                <thead>
+                <tr>
+                    <th>체크</th>
+                    <th>제목</th>
+                    <th>날짜</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="notice : ${notices}">
+                    <td><input type="checkbox" name="ids" th:value="${notice.id}"></td>
+                    <td th:text="${notice.title}">Title</td>
+                    <td th:text="${notice.createdAt}">Date</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </form>
+        <div class="pagination">
+            <button th:if="${page.hasPrevious()}" th:onclick="'location.href=\'/notices?page=' + ${page.number - 1} + '\'">Previous</button>
+            <button th:if="${page.hasNext()}" th:onclick="'location.href=\'/notices?page=' + ${page.number + 1} + '\'">Next</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
