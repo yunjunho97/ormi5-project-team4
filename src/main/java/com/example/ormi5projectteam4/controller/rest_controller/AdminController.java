@@ -32,6 +32,12 @@ public class AdminController {
         return ResponseEntity.ok(posts);
     }
 
+    @GetMapping("/member")
+    public ResponseEntity<List<User>> getAllUsers(){
+        List<User> users = adminService.getAllUsers();
+        return ResponseEntity.ok(users);
+    }
+
     @PutMapping("/member/{id}")
     public ResponseEntity<User> changeUserRole(@PathVariable Long id, @RequestBody UserRoleDto roleDto){
         User updateUser = adminService.changeUserRole(id, roleDto.getRole());
