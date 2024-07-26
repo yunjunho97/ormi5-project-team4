@@ -12,12 +12,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
     @Autowired
     private AdminService adminService;
+
+    @GetMapping("/post")
+    public ResponseEntity<List<Post>> getAllPosts(){
+        List<Post> posts = adminService.getAllPosts();
+        return ResponseEntity.ok(posts);
+    }
 
     @PutMapping("/member/{id}")
     public ResponseEntity<User> changeUserRole(@PathVariable Long id, @RequestBody UserRoleDto roleDto){
