@@ -45,6 +45,10 @@ public class AdminService {
         return userRepository.save(user);
     }
 
+    public List<User> searchUserByEmail(String email){
+        return userRepository.findByEmailContains(email);
+    }
+
 //    public User changeUserRole(Integer id, Role role){
 //        User user = userRepository.findById(id).orElse(null);
 //        if(user != null){
