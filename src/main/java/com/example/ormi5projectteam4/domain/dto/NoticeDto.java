@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,8 +16,8 @@ public class NoticeDto {
     private Long id;
     private String title;
     private String content;
-    private String createdAt;
-    private String updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private Long userId;
 
     public static NoticeDto fromEntity(Notice notice) {
@@ -23,9 +25,9 @@ public class NoticeDto {
                 .id(notice.getId())
                 .title(notice.getTitle())
                 .content(notice.getContent())
-                .createdAt(notice.getCreatedAt().toString())
-                .updatedAt(notice.getUpdatedAt().toString())
-                .userId(notice.getUserId().getId())
+//                .createdAt(notice.getCreatedAt().toString())
+//                .updatedAt(notice.getUpdatedAt().toString())
+//                .userId(notice.getUserId().getId())
                 .build();
     }
 
@@ -35,8 +37,8 @@ public class NoticeDto {
                 this.title,
                 this.content,
                 this.createdAt,
-                this.updatedAt,
-                this.userId
+                this.updatedAt
+//                this.userId
         );
     }
 }

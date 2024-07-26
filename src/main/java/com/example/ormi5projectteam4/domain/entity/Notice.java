@@ -31,7 +31,7 @@ public class Notice {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    @ManyToOne
-    private User userId;
+//    @ManyToOne
+//    private User userId;
 
 }
