@@ -38,8 +38,8 @@ public class NoticeDto {
                 this.title,
                 this.content,
                 this.createdAt,
-                this.updatedAt,
-                this.userId
+                this.updatedAt
+//                this.userId
         );
     }
 }

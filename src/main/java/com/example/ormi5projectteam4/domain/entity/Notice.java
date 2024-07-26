@@ -31,9 +31,8 @@ public class Notice {
 
     @Column(nullable = false)
     private LocalDateTime updatedAt;
-
-    @ManyToOne
-    @JoinColumn(name = "userId")
-    private User userId;
+  
+//    @ManyToOne
+//    private User userId;
 
 }

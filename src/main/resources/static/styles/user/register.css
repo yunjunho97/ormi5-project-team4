@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    width: 246px;
+    height: 69px;
+    margin-top: 48px;
+    margin-left: 837px;
+}
+
+.text-style {
+    font-size: 20px;
+    color: #666666;
+}
+
+#email-text {
+    margin-top: 156px;
+    margin-left: 693px;
+}
+
+#email {
+    display: flex;
+}
+
+#email > input {
+    width: 400px;
+    height: 25px;
+    border: 0;
+    margin-top: 10px;
+    margin-left: 695px;
+    /*background-color: #766CED;*/
+}
+
+#email > button {
+    width: 132px;
+    height: 51px;
+    border: #766CED 1px solid;
+    border-radius: 100px;
+    margin-left: 15px;
+    font-size: 16px;
+    color: #766CED;
+    background-color: #FFFFFF;
+}
