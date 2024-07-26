@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항</title>
+</head>
+<body>
+<header>
+    <h1>Happy Tails</h1>
+    <!--  공통 헤더   -->
+</header>
+<div class="container">
+    <div class="sidebar">
+        <!--  관리자 메뉴    -->
+    </div>
+    <div class="main-content">
+        <h2>All Notices</h2>
+        <a href="/notices/create">Create New Notice</a>
+        <form id="delete-form" th:action="@{/admin/notice}" method="get">
+            <table>
+                <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Title</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="notice : ${notices}">
+                    <td><input type="checkbox" name="ids" th:value="${notice.id}"></td>
+                    <td th:text="${notice.title}">Title</td>
+                    <td th:text="${notice.createdAt}">Date</td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="submit">글쓰기</button>
+            <button type="submit">삭</button>
+        </form>
+        <div class="pagination">
+            <button th:if="${page.hasPrevious()}" th:onclick="'location.href=\'/notices?page=' + ${page.number - 1} + '\'">Previous</button>
+            <button th:if="${page.hasNext()}" th:onclick="'location.href=\'/notices?page=' + ${page.number + 1} + '\'">Next</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
