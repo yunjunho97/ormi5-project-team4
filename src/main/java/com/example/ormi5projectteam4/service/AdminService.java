@@ -1,9 +1,12 @@
 package com.example.ormi5projectteam4.service;
 
 import com.example.ormi5projectteam4.domain.entity.Notice;
+import com.example.ormi5projectteam4.domain.entity.Post;
 import com.example.ormi5projectteam4.domain.entity.User;
 import com.example.ormi5projectteam4.repository.NoticeRepository;
 //import com.example.ormi5projectteam4.repository.UserRepository;
+import com.example.ormi5projectteam4.repository.PostRepository;
+import com.example.ormi5projectteam4.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.ormi5projectteam4.domain.constant.Role;
@@ -12,8 +15,11 @@ import java.util.List;
 
 @Service
 public class AdminService {
-//    @Autowired
-//    UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PostRepository postRepository;
 
     @Autowired
     NoticeRepository noticeRepository;
