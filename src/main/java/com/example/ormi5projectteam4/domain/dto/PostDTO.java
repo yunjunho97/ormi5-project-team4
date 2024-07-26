@@ -28,6 +28,7 @@ public class PostDTO {
     private AdoptionStatus adoptionStatus;
     private ApproveStatus approveStatus;
     private AnimalDTO animalDTO;
+//    private UserRoleDto userRoleDTO;
     private List<ImageDTO> images;
 
     public static PostDTO fromPost(Post post) {
@@ -37,7 +38,7 @@ public class PostDTO {
                     .map(ImageDTO::fromImage)
                     .collect(Collectors.toList());
         }
-
+        //user 추가
         return PostDTO.builder()
                 .id(post.getId())
                 .title(post.getTitle())

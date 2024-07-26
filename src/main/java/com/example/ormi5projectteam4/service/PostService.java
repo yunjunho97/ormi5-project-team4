@@ -5,7 +5,9 @@ import com.example.ormi5projectteam4.domain.entity.Animal;
 import com.example.ormi5projectteam4.domain.entity.Image;
 import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.domain.entity.Post;
+import com.example.ormi5projectteam4.domain.entity.User;
 import com.example.ormi5projectteam4.repository.PostRepository;
+import com.example.ormi5projectteam4.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +21,14 @@ import java.util.stream.Collectors;
 @Service
 public class PostService {
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
     private final AnimalService animalService;
     private final ImageService imageService;
 
     @Autowired
-    public PostService(PostRepository postRepository, AnimalService animalService, ImageService imageService) {
+    public PostService(PostRepository postRepository, UserRepository userRepository, AnimalService animalService, ImageService imageService) {
         this.postRepository = postRepository;
+        this.userRepository = userRepository;
         this.animalService = animalService;
         this.imageService = imageService;
     }
@@ -50,9 +54,14 @@ public class PostService {
             Image image = imageService.createImage(imageDTO);
             post.addImage(image);
         }
+
+        //UserService 참조로 변경 가능
+//        User user = userRepository.findById(postDTO.getId()).orElseThrow(() -> new EntityNotFoundException("User not found"));
+//        user.addPost(post);
         return PostDTO.fromPost(post);
     }
 
+    //dto 분리 고려
     public Optional<PostDTO> updatePost(Integer postId, PostDTO postDTO) {
         return postRepository.findById(postId).map(o -> {
             o.setAdoptionStatus(postDTO.getAdoptionStatus());
