@@ -18,14 +18,14 @@ public class AdminController {
     private AdminService adminService;
 
     @PutMapping("/member/{id}")
-//    public ResponseEntity<User> changeUserRole(@PathVariable Integer id, @RequestBody UserRoleDto roleDto){
-//        User updateUser = adminService.changeUserRole(id, roleDto.getRole());
-//        if(updateUser == null){
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//        return ResponseEntity.ok(updateUser);
-//    }
+    public ResponseEntity<User> changeUserRole(@PathVariable Long id, @RequestBody UserRoleDto roleDto){
+        User updateUser = adminService.changeUserRole(id, roleDto.getRole());
+        if(updateUser == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(updateUser);
+    }
 
     @PostMapping("/notice")
     public ResponseEntity<Notice> createNotice(@RequestBody NoticeDto noticeDto) {
