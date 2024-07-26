@@ -41,6 +41,9 @@ public class AdminService {
         return userRepository.findAll();
     }
 
+    public User saveUser(User user){
+        return userRepository.save(user);
+    }
 
 //    public User changeUserRole(Integer id, Role role){
 //        User user = userRepository.findById(id).orElse(null);
