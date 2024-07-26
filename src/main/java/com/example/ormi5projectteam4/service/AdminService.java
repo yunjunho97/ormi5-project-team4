@@ -24,6 +24,11 @@ public class AdminService {
     @Autowired
     NoticeRepository noticeRepository;
 
+    public List<Post> getAllPosts(){
+        return postRepository.findAll();
+    }
+
+
 //    public User changeUserRole(Integer id, Role role){
 //        User user = userRepository.findById(id).orElse(null);
 //        if(user != null){
