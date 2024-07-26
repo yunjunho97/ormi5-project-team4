@@ -56,6 +56,8 @@ public class NoticeController {
         return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
+//    사용자 화면에서 처리
+//    // READ: 최신 공지사항 조회
 //    @GetMapping("/latest")
 //    public ResponseEntity<List<NoticeDto>> getLatestNotices() {
 //        List<NoticeDto> latestNotices = noticeService.getLatestNotices();

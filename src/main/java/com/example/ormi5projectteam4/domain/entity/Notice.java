@@ -9,6 +9,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "notices")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,10 +20,10 @@ public class Notice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(name = "content", nullable = false)
     private String content;
 
     @Column(nullable = false)
@@ -30,7 +31,7 @@ public class Notice {
 
     @Column(nullable = false)
     private LocalDateTime updatedAt;
-
+  
 //    @ManyToOne
 //    private User userId;
 

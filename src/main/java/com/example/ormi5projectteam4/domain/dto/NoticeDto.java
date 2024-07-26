@@ -1,6 +1,7 @@
 package com.example.ormi5projectteam4.domain.dto;
 
 import com.example.ormi5projectteam4.domain.entity.Notice;
+import com.example.ormi5projectteam4.domain.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,16 +19,16 @@ public class NoticeDto {
     private String content;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private Long userId;
+    private User userId;
 
     public static NoticeDto fromEntity(Notice notice) {
         return NoticeDto.builder()
                 .id(notice.getId())
                 .title(notice.getTitle())
                 .content(notice.getContent())
-//                .createdAt(notice.getCreatedAt().toString())
-//                .updatedAt(notice.getUpdatedAt().toString())
-//                .userId(notice.getUserId().getId())
+                .createdAt(notice.getCreatedAt())
+                .updatedAt(notice.getUpdatedAt())
+                .userId(notice.getUserId())
                 .build();
     }
 
