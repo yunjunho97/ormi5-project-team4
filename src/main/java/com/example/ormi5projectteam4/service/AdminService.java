@@ -41,10 +41,6 @@ public class AdminService {
         return userRepository.findAll();
     }
 
-    public User saveUser(User user){
-        return userRepository.save(user);
-    }
-
     public List<User> searchUserByEmail(String email){
         return userRepository.findByEmailContaining(email);
     }
