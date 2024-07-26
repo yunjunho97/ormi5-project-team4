@@ -1,5 +1,6 @@
 package com.example.ormi5projectteam4.service;
 
+import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
 import com.example.ormi5projectteam4.domain.entity.Notice;
 import com.example.ormi5projectteam4.domain.entity.Post;
 import com.example.ormi5projectteam4.domain.entity.User;
@@ -26,6 +27,10 @@ public class AdminService {
 
     public List<Post> getAllPosts(){
         return postRepository.findAll();
+    }
+
+    public List<Post> getPostsByApproveStatus(ApproveStatus approveStatus){
+        return postRepository.findByApproveStatus(approveStatus);
     }
 
 
