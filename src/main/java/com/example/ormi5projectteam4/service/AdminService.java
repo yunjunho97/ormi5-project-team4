@@ -46,7 +46,7 @@ public class AdminService {
     }
 
     public List<User> searchUserByEmail(String email){
-        return userRepository.findByEmailContains(email);
+        return userRepository.findByEmailContaining(email);
     }
 
 //    public User changeUserRole(Integer id, Role role){
