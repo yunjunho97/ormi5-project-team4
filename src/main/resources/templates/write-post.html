@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Post</title>
+</head>
+<body>
+<h1>Create New Post</h1>
+<form th:action="@{/create}" method="post">
+    <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+    </div>
+    <div>
+        <label for="foundAt">Found At:</label>
+        <input type="text" id="foundAt" name="foundAt" required>
+    </div>
+    <div>
+        <label for="foundLocation">Found Location:</label>
+        <input type="text" id="foundLocation" name="foundLocation" required>
+    </div>
+    <div>
+        <label for="detail">Detail:</label>
+        <textarea id="detail" name="detail" required></textarea>
+    </div>
+    <div>
+        <label for="contact">Contact:</label>
+        <input type="text" id="contact" name="contact" required>
+    </div>
+    <div>
+        <label for="tempoLocation">Temporary Location:</label>
+        <input type="text" id="tempoLocation" name="tempoLocation" required>
+    </div>
+    <div>
+        <label for="adoptionStatus">Adoption Status:</label>
+        <select id="adoptionStatus" name="adoptionStatus">
+            <option value="AVAILABLE">Available</option>
+            <option value="ADOPTED">Adopted</option>
+            <option value="PENDING">Pending</option>
+        </select>
+    </div>
+    <div>
+        <label for="approveStatus">Approve Status:</label>
+        <select id="approveStatus" name="approveStatus">
+            <option value="APPROVED">Approved</option>
+            <option value="PENDING">Pending</option>
+            <option value="REJECTED">Rejected</option>
+        </select>
+    </div>
+
+    <!-- AnimalDTO -->
+    <h2>Animal Information</h2>
+    <div>
+        <label for="animalName">Name:</label>
+        <input type="text" id="animalName" name="animalDTO.name" required>
+    </div>
+    <div>
+        <label for="animalBreed">Breed:</label>
+        <input type="text" id="animalBreed" name="animalDTO.breed" required>
+    </div>
+    <div>
+        <label for="animalAge">Age:</label>
+        <input type="number" id="animalAge" name="animalDTO.age" required>
+    </div>
+    <div>
+        <label for="animalWeight">Weight:</label>
+        <input type="number" id="animalWeight" name="animalDTO.weight" required>
+    </div>
+    <div>
+        <label for="animalGender">Gender:</label>
+        <select id="animalGender" name="animalDTO.gender">
+            <option value="MALE">Male</option>
+            <option value="FEMALE">Female</option>
+        </select>
+    </div>
+    <div>
+        <label for="animalNeuteringStatus">Neutering Status:</label>
+        <select id="animalNeuteringStatus" name="animalDTO.neuteringStatus">
+            <option value="COMPLETE">Complete</option>
+            <option value="INCOMPLETE">Incomplete</option>
+        </select>
+    </div>
+    <div>
+        <label for="animalSpecies">Species:</label>
+        <input type="text" id="animalSpecies" name="animalDTO.species" required>
+    </div>
+
+    <!-- Images -->
+    <h2>Images</h2>
+    <div id="imageInputs">
+        <div>
+            <label for="image1">Image URL 1:</label>
+            <input type="url" id="image1" name="images[0].imgUrl">
+        </div>
+    </div>
+    <button type="button" onclick="addImageInput()">Add Another Image</button>
+
+    <div>
+        <button type="submit">Create Post</button>
+    </div>
+</form>
+
+<script>
+    let imageCount = 1;
+    function addImageInput() {
+        imageCount++;
+        const newInput = document.createElement('div');
+        newInput.innerHTML = `
+                <label for="image${imageCount}">Image URL ${imageCount}:</label>
+                <input type="url" id="image${imageCount}" name="images[${imageCount-1}].imgUrl">
+            `;
+        document.getElementById('imageInputs').appendChild(newInput);
+    }
+</script>
+</body>
+</html>
