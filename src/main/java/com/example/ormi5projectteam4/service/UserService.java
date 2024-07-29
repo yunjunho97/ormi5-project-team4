@@ -4,6 +4,7 @@ import com.example.ormi5projectteam4.domain.constant.Role;
 import com.example.ormi5projectteam4.domain.dto.EmailDuplicationRequestDto;
 import com.example.ormi5projectteam4.domain.dto.JoinRequestDto;
 import com.example.ormi5projectteam4.domain.dto.UserDto;
+import com.example.ormi5projectteam4.domain.dto.UserNameDuplicationRequestDto;
 import com.example.ormi5projectteam4.domain.entity.PasswordQuestion;
 import com.example.ormi5projectteam4.domain.entity.User;
 import com.example.ormi5projectteam4.repository.PasswordQuestionRepository;
@@ -45,6 +46,11 @@ public class UserService {
   }
 
   /** 닉네임 중복 확인 */
+  public int validateDuplicateUserName(UserNameDuplicationRequestDto userNameDuplicationRequestDto) {
+    List<User> users = userRepository.findByUserName(userNameDuplicationRequestDto.getUserName());
+
+    return users.size();
+  }
 
   /** 비밀번호 찾기 */
 
