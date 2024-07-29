@@ -10,12 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class MyPageService {
 
     private final MyPageRepository myPageRepository;
 
     @Autowired
-    public UserService(MyPageRepository myPageRepository) {
+    public MyPageService(MyPageRepository myPageRepository) {
         this.myPageRepository = myPageRepository;
     }
 
