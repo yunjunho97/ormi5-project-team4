@@ -11,10 +11,9 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserDto {
+public class UserManagementDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String userName;
     private String email;
     private String password;
