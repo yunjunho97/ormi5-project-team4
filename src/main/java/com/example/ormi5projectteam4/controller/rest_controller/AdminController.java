@@ -1,9 +1,9 @@
 package com.example.ormi5projectteam4.controller.rest_controller;
 
 import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
+import com.example.ormi5projectteam4.domain.constant.Role;
+import com.example.ormi5projectteam4.domain.dto.UserManagementDto;
 import com.example.ormi5projectteam4.domain.entity.Post;
-import com.example.ormi5projectteam4.domain.entity.User;
-import com.example.ormi5projectteam4.domain.dto.UserRoleDto;
 import com.example.ormi5projectteam4.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,11 +28,12 @@ public class AdminController {
     public ResponseEntity<List<Post>> getPostsByApproveStatusAndPage(@RequestParam(required = false) ApproveStatus approveStatus, @PathVariable int page){
 
         // 1페이지당 14개의 게시글을 가져옴
-        int startIndex = (page - 1) * 14;
+        final int count = 14;
+        int startIndex = (page - 1) * count;
         List<Post> posts;
 
         if(approveStatus == null){
-            posts = adminService.getAllPosts().stream().skip(startIndex).limit(14).collect(Collectors.toList());
+            posts = adminService.getAllPosts().stream().skip(startIndex).limit(count).collect(Collectors.toList());
         }
         else{
             posts = adminService.getPostsByApproveStatus(approveStatus).stream().skip(startIndex).limit(14).collect(Collectors.toList());
@@ -41,24 +42,27 @@ public class AdminController {
         return ResponseEntity.ok(posts);
     }
 
-    @GetMapping("/member")
-    public ResponseEntity<List<User>> getAllUsers(@RequestParam (required = false) String email){
+    @GetMapping("/member/{page}")
+    public ResponseEntity<List<UserManagementDto>> getAllUsers(@RequestParam (required = false) String email, @PathVariable int page){
 
-        List<User> users;
+        // 1페이지당 17개의 게시글을 가져옴
+        final int count = 17;
+        int startIndex = (page - 1) * count;
+        List<UserManagementDto> users;
 
         if(email == null){
-            users = adminService.getAllUsers();
+            users = adminService.getAllUsers().stream().skip(startIndex).limit(count).collect(Collectors.toList());
         }
         else{
-            users = adminService.searchUserByEmail(email);
+            users = adminService.searchUserByEmail(email).stream().skip(startIndex).limit(count).collect(Collectors.toList());
         }
 
         return ResponseEntity.ok(users);
     }
 
     @PutMapping("/member/{id}")
-    public ResponseEntity<User> changeUserRole(@PathVariable Long id, @RequestBody UserRoleDto roleDto){
-        User updateUser = adminService.changeUserRole(id, roleDto.getRole());
+    public ResponseEntity<UserManagementDto> changeUserRole(@PathVariable Long id, @RequestParam Role role){
+        UserManagementDto updateUser = adminService.changeUserRole(id, role);
         if(updateUser == null){
             return ResponseEntity.notFound().build();
         }
@@ -67,7 +71,7 @@ public class AdminController {
     }
 
     @PutMapping("/post/{id}")
-    public ResponseEntity<Post> changePostApproveStatus(@PathVariable Integer id, @RequestBody ApproveStatus approveStatus){
+    public ResponseEntity<Post> changePostApproveStatus(@PathVariable Integer id, @RequestParam ApproveStatus approveStatus){
         Post updatePost = adminService.changePostApproveStatus(id, approveStatus);
         if(updatePost == null){
             return ResponseEntity.notFound().build();
