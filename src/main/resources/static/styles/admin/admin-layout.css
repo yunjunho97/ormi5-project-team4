@@ -1,0 +1,84 @@
+/* static */
+.background-purple {
+    background-color: #766CED;
+}
+
+.font-foreword {
+    font-size: 12px;
+    color: #766CED;
+}
+
+.font-title {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.font-title-selected {
+    font-weight: 700;
+    font-size: 18px;
+    color: #766CED;
+}
+
+.font-12 {
+    font-size: 12px;
+}
+
+.font-accept {
+    font-size: 12px;
+    color: #F5F4FF;
+}
+
+.font-deny {
+    font-size: 12px;
+    color: #CFCFCF;
+}
+
+/* Header Area */
+.font-header {
+    color: #F5F4FF;
+}
+
+.font-header-username {
+    font-size: 20px;
+    font-weight: 700;
+    color: #F5F4FF;
+}
+
+/* Navigation Area */
+.font-nav-category {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.font-nav-category-selected {
+    font-size: 20px;
+    font-weight: 700;
+    color: #F5F4FF;
+}
+
+.font-nav-title {
+    font-weight: 700;
+}
+
+.background-nav{
+    background-color: #D6D6D6;
+}
+
+/* Board Area */
+.font-board {
+    color: #9B9B9B;
+}
+
+.font-board-role {
+    font-weight: 700;
+    color: #9B9B9B;
+}
+
+.font-board-username {
+    font-size: 24px;
+}
+
+.font-board-small {
+    font-size: 12px;
+    color: #9B9B9B;
+}
