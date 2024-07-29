@@ -1,15 +1,14 @@
 package com.example.ormi5projectteam4.controller.rest_controller;
 
 import com.example.ormi5projectteam4.domain.constant.StatusCode;
-import com.example.ormi5projectteam4.domain.dto.EmailDuplicationRequestDto;
-import com.example.ormi5projectteam4.domain.dto.JoinRequestDto;
-import com.example.ormi5projectteam4.domain.dto.JoinResponseDto;
-import com.example.ormi5projectteam4.domain.dto.UserNameDuplicationRequestDto;
+import com.example.ormi5projectteam4.domain.dto.*;
 import com.example.ormi5projectteam4.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,7 +21,7 @@ public class UserController {
     Long generatedUserId = userService.join(joinRequestDto);
     JoinResponseDto joinResponseDto = new JoinResponseDto(generatedUserId);
 
-    return new ResponseEntity<>(HttpStatus.valueOf(StatusCode.SUCCESS));
+    return new ResponseEntity<>(joinResponseDto, HttpStatus.valueOf(StatusCode.SUCCESS));
   }
 
   @GetMapping("/email-duplication")
@@ -42,7 +41,7 @@ public class UserController {
 
   @GetMapping("/nickname-duplication")
   public ResponseEntity<Void> validateDuplicateUserName(
-          @RequestParam UserNameDuplicationRequestDto userNameDuplicationRequestDto) {
+      @RequestParam UserNameDuplicationRequestDto userNameDuplicationRequestDto) {
     int result = userService.validateDuplicateUserName(userNameDuplicationRequestDto);
     ResponseEntity<Void> response;
 
@@ -53,5 +52,12 @@ public class UserController {
     }
 
     return response;
+  }
+
+  @GetMapping("/password-question")
+  public ResponseEntity<List<PasswordQuestionDto>> getAllPasswordQuestions() {
+    List<PasswordQuestionDto> list = userService.getAllPasswordQuestions();
+
+    return new ResponseEntity<>(list, HttpStatus.valueOf(StatusCode.SUCCESS));
   }
 }

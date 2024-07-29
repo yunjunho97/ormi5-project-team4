@@ -1,10 +1,7 @@
 package com.example.ormi5projectteam4.service;
 
 import com.example.ormi5projectteam4.domain.constant.Role;
-import com.example.ormi5projectteam4.domain.dto.EmailDuplicationRequestDto;
-import com.example.ormi5projectteam4.domain.dto.JoinRequestDto;
-import com.example.ormi5projectteam4.domain.dto.UserDto;
-import com.example.ormi5projectteam4.domain.dto.UserNameDuplicationRequestDto;
+import com.example.ormi5projectteam4.domain.dto.*;
 import com.example.ormi5projectteam4.domain.entity.PasswordQuestion;
 import com.example.ormi5projectteam4.domain.entity.User;
 import com.example.ormi5projectteam4.repository.PasswordQuestionRepository;
@@ -16,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -46,10 +44,18 @@ public class UserService {
   }
 
   /** 닉네임 중복 확인 */
-  public int validateDuplicateUserName(UserNameDuplicationRequestDto userNameDuplicationRequestDto) {
+  public int validateDuplicateUserName(
+      UserNameDuplicationRequestDto userNameDuplicationRequestDto) {
     List<User> users = userRepository.findByUserName(userNameDuplicationRequestDto.getUserName());
 
     return users.size();
+  }
+
+  /** 비밀번호 찾기 질문 리스트 조회 */
+  public List<PasswordQuestionDto> getAllPasswordQuestions() {
+    return passwordQuestionRepository.findAll().stream()
+        .map(UserService::convertToPasswordQuestionDto)
+        .collect(Collectors.toList());
   }
 
   /** 비밀번호 찾기 */
@@ -57,7 +63,19 @@ public class UserService {
   /** 비밀번호 재설정 */
 
   /**
+   * entity -> dto
+   *
+   * @param passwordQuestion
+   * @return PasswordQuestionDto
+   */
+  private static PasswordQuestionDto convertToPasswordQuestionDto(
+      PasswordQuestion passwordQuestion) {
+    return new PasswordQuestionDto(passwordQuestion.getId(), passwordQuestion.getQuestion());
+  }
+
+  /**
    * dto -> entity
+   *
    * @param userDto
    * @return User
    */
@@ -77,12 +95,13 @@ public class UserService {
 
   /**
    * 비밀번호 찾기 질문 id로 검색
+   *
    * @param id
    * @return PasswordQuestion
    */
   private PasswordQuestion findPasswordQuestionById(Long id) {
     return passwordQuestionRepository
-            .findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("비밀번호 찾기 질문을 찾을 수 없습니다."));
+        .findById(id)
+        .orElseThrow(() -> new IllegalArgumentException("비밀번호 찾기 질문을 찾을 수 없습니다."));
   }
 }
