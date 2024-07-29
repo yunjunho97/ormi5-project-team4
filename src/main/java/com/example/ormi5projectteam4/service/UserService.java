@@ -7,7 +7,6 @@ import com.example.ormi5projectteam4.domain.entity.User;
 import com.example.ormi5projectteam4.repository.PasswordQuestionRepository;
 import com.example.ormi5projectteam4.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -75,9 +74,18 @@ public class UserService {
   }
 
   /** 비밀번호 재설정 */
+  public void changePassword(ChangePasswordRequestDto changePasswordRequestDto) {
+    User user =
+        userRepository
+            .findById(changePasswordRequestDto.getUserId())
+            .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+
+    user.setPassword(changePasswordRequestDto.getPassword());
+  }
 
   /**
    * entity -> dto
+   *
    * @param passwordQuestion
    * @return PasswordQuestionDto
    */
@@ -88,6 +96,7 @@ public class UserService {
 
   /**
    * dto -> entity
+   *
    * @param userDto
    * @return User
    */
@@ -107,6 +116,7 @@ public class UserService {
 
   /**
    * entity -> dto
+   *
    * @param user
    * @return UserDto
    */

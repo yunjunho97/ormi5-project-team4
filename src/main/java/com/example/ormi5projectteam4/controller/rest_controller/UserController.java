@@ -68,4 +68,12 @@ public class UserController {
 
     return new ResponseEntity<>(userDto, HttpStatus.valueOf(StatusCode.SUCCESS));
   }
+
+  @PutMapping("/auth/password")
+  public ResponseEntity<Void> changePassword(
+      @RequestBody ChangePasswordRequestDto changePasswordRequestDto) {
+    userService.changePassword(changePasswordRequestDto);
+
+    return new ResponseEntity<>(HttpStatus.valueOf(StatusCode.NO_CONTENT));
+  }
 }
