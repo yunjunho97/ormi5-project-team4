@@ -6,7 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,7 +18,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "user_name")
     private String userName;
@@ -45,4 +47,18 @@ public class User {
     @OneToOne
     @JoinColumn(name = "password_question_id")
     private PasswordQuestion passwordQuestion;
+
+    //추가
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<Post> posts = new ArrayList<>();
+//
+//    public void addPost(Post post) {
+//        posts.add(post);
+//        post.setUser(this);
+//    }
+//
+//    public void removePost(Post post) {
+//        posts.remove(post);
+//        post.setUser(null);
+//    }
 }
