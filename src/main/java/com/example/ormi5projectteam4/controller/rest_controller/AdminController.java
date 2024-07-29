@@ -20,11 +20,11 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @GetMapping("/post")
-    public ResponseEntity<List<Post>> getAllPosts(){
-        List<Post> posts = adminService.getAllPosts();
-        return ResponseEntity.ok(posts);
-    }
+    //@GetMapping("/post")
+    //public ResponseEntity<List<Post>> getAllPosts(){
+    //    List<Post> posts = adminService.getAllPosts();
+    //    return ResponseEntity.ok(posts);
+    //}
 
     @GetMapping("/post")
     public ResponseEntity<List<Post>> getAllPosts(@RequestBody ApproveStatus approveStatus){
@@ -32,27 +32,27 @@ public class AdminController {
         return ResponseEntity.ok(posts);
     }
 
-    @GetMapping("/member")
-    public ResponseEntity<List<User>> getAllUsers(){
-        List<User> users = adminService.getAllUsers();
-        return ResponseEntity.ok(users);
-    }
+    //@GetMapping("/member")
+    //public ResponseEntity<List<User>> getAllUsers(){
+    //    List<User> users = adminService.getAllUsers();
+    //    return ResponseEntity.ok(users);
+    //}
 
-    @GetMapping("/member")
-    public ResponseEntity<List<User>> searchUserByEmail(@RequestBody String email){
-        List<User> users = adminService.searchUserByEmail(email);
-        return ResponseEntity.ok(users);
-    }
+    //@GetMapping("/member")
+    //public ResponseEntity<List<User>> searchUserByEmail(@RequestBody String email){
+    //    List<User> users = adminService.searchUserByEmail(email);
+    //    return ResponseEntity.ok(users);
+    //}
 
-    @PutMapping("/member/{id}")
-    public ResponseEntity<User> changeUserRole(@PathVariable Long id, @RequestBody UserRoleDto roleDto){
-        User updateUser = adminService.changeUserRole(id, roleDto.getRole());
-        if(updateUser == null){
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(updateUser);
-    }
+    //@PutMapping("/member/{id}")
+    //public ResponseEntity<User> changeUserRole(@PathVariable Long id, @RequestBody UserRoleDto roleDto){
+    //    User updateUser = adminService.changeUserRole(id, roleDto.getRole());
+    //    if(updateUser == null){
+    //        return ResponseEntity.notFound().build();
+    //    }
+    //
+    //    return ResponseEntity.ok(updateUser);
+    //}
 
     @PutMapping("/post/{id}")
     public ResponseEntity<Post> changePostApproveStatus(@PathVariable Integer id, @RequestBody ApproveStatus approveStatus){

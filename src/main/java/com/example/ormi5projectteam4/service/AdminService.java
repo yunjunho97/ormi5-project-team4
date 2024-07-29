@@ -7,7 +7,7 @@ import com.example.ormi5projectteam4.domain.entity.User;
 import com.example.ormi5projectteam4.repository.NoticeRepository;
 //import com.example.ormi5projectteam4.repository.UserRepository;
 import com.example.ormi5projectteam4.repository.PostRepository;
-import com.example.ormi5projectteam4.repository.UserRepository;
+//import com.example.ormi5projectteam4.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.ormi5projectteam4.domain.constant.Role;
@@ -16,8 +16,8 @@ import java.util.List;
 
 @Service
 public class AdminService {
-    @Autowired
-    private UserRepository userRepository;
+    //@Autowired
+    //private UserRepository userRepository;
 
     @Autowired
     private PostRepository postRepository;
@@ -33,26 +33,26 @@ public class AdminService {
         return postRepository.findByApproveStatus(approveStatus);
     }
 
-    public List<User> getAllUsers(){
-        return userRepository.findAll();
-    }
+    //public List<User> getAllUsers(){
+    //    return userRepository.findAll();
+    //}
+    //
+    //public List<User> searchUserByEmail(String email){
+    //    return userRepository.findByEmailContaining(email);
+    //}
 
-    public List<User> searchUserByEmail(String email){
-        return userRepository.findByEmailContaining(email);
-    }
-
-    public User changeUserRole(Long id, Role role){
-        User user = userRepository.findById(id).orElse(null);
-        if(user != null){
-            user.setRole(role);
-            userRepository.save(user);
-        }
-        return user;
-    }
+    //public User changeUserRole(Long id, Role role){
+    //    User user = userRepository.findById(id).orElse(null);
+    //    if(user != null){
+    //        user.setRole(role);
+    //        userRepository.save(user);
+    //    }
+    //    return user;
+    //}
 
     public Post changePostApproveStatus(Integer id, ApproveStatus approveStatus){
         Post post = postRepository.findById(id).orElse(null);
-        
+
         if(post != null){
             post.setApproveStatus(approveStatus);
             postRepository.save(post);
