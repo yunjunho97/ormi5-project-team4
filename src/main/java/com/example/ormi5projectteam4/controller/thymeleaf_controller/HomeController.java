@@ -52,8 +52,8 @@ public class HomeController {
         return "read-post";
     }
 
-//    @GetMapping("write")
-//    public String writePost() {
-//        return "write-post";
-//    }
+    @GetMapping("/write")
+    public String writePost() {
+        return "write-post";
+    }
 }
