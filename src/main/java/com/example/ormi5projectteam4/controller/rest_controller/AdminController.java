@@ -64,19 +64,6 @@ public class AdminController {
         return ResponseEntity.ok(updatePost);
     }
 
-    @PostMapping("/notice")
-    public ResponseEntity<Notice> createNotice(@RequestBody NoticeDto noticeDto) {
-        Notice notice = new Notice();
-//        notice.setUserId(noticeDto.getUserId());
-        notice.setTitle(noticeDto.getTitle());
-        notice.setContent(noticeDto.getContent());
-//        notice.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-//        notice.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-
-        Notice savedNotice = adminService.saveNotice(notice);
-        return ResponseEntity.ok(savedNotice);
-    }
-
 //    @PutMapping("/notice/{id}")
 //    public ResponseEntity<Notice> updateNotice(@PathVariable Integer id, @RequestBody NoticeDto noticeDto) {
 //        Notice notice = adminService.getNoticeById(id);
