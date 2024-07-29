@@ -24,8 +24,8 @@ public class Post {
     private Integer id;
 
     private String title;
-    private String fountAt;
-    private String fountLocation;
+    private String foundAt;
+    private String foundLocation;
     private String detail;
     private String contact;
     private String tempoLocation;

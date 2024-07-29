@@ -14,4 +14,24 @@ public class MainController {
   public String register() {
     return "register";
   }
+
+  @GetMapping("/register-success")
+  public String registerSuccess() {
+    return "register-success";
+  }
+
+  @GetMapping("/find-password")
+  public String findPassword() {
+    return "find-password";
+  }
+
+  @GetMapping("/change-password")
+  public String changePassword() {
+    return "change-password";
+  }
+
+  @GetMapping("/change-password-success")
+  public String changePasswordSuccess() {
+    return "change-password-success";
+  }
 }

@@ -5,18 +5,21 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Getter
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "user_name")
     private String userName;
@@ -46,15 +49,17 @@ public class User {
     @JoinColumn(name = "password_question_id")
     private PasswordQuestion passwordQuestion;
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+    //추가
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<Post> posts = new ArrayList<>();
+//
+//    public void addPost(Post post) {
+//        posts.add(post);
+//        post.setUser(this);
+//    }
+//
+//    public void removePost(Post post) {
+//        posts.remove(post);
+//        post.setUser(null);
+//    }
 }
