@@ -81,6 +81,7 @@ public class UserService {
             .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
 
     user.setPassword(changePasswordRequestDto.getPassword());
+    user.setUpdatedAt(LocalDateTime.now());
   }
 
   /**
