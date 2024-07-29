@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,10 +41,11 @@ public class User {
     private Role role;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedAt;
+    @Column(nullable = true)
+    private LocalDateTime updatedAt;
 
     @OneToOne
     @JoinColumn(name = "password_question_id")
