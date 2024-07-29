@@ -25,19 +25,19 @@ public class AdminController {
     }
 
     @GetMapping("/post/{page}")
-    public ResponseEntity<List<Post>> getAllPosts(@PathVariable int page){
+    public ResponseEntity<List<Post>> getPostsByApproveStatusAndPage(@RequestParam(required = false) ApproveStatus approveStatus, @PathVariable int page){
 
-        // 페이지 개념이 포함된 게시글 조회
         // 1페이지당 14개의 게시글을 가져옴
         int startIndex = (page - 1) * 14;
-        List<Post> posts = adminService.getAllPosts().stream().skip(startIndex).limit(14).collect(Collectors.toList());
+        List<Post> posts;
 
-        return ResponseEntity.ok(posts);
-    }
+        if(approveStatus == null){
+            posts = adminService.getAllPosts().stream().skip(startIndex).limit(14).collect(Collectors.toList());
+        }
+        else{
+            posts = adminService.getPostsByApproveStatus(approveStatus).stream().skip(startIndex).limit(14).collect(Collectors.toList());
+        }
 
-    @GetMapping("/post")
-    public ResponseEntity<List<Post>> getAllPosts(@RequestBody ApproveStatus approveStatus){
-        List<Post> posts = adminService.getPostsByApproveStatus(approveStatus);
         return ResponseEntity.ok(posts);
     }
 
