@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    width: 246px;
+    height: 69px;
+    margin-top: 62px;
+    margin-left: 837px;
+}
+
+.check-img {
+    width: 56px;
+    height: 56px;
+    margin-top: 270px;
+    margin-left: 932px;
+}
+
+#register-success-text {
+    margin-top: 19px;
+    margin-left: 827px;
+    color: #766CED;
+    font-size: 25px;
+}
+
+#description {
+    margin-top: 19px;
+    color: #888888;
+    font-size: 20px;
+    text-align: center;
+    line-height: 25px;
+}
+
+button {
+    margin-top: 36px;
+    margin-left: 693px;
+    width: 534px;
+    height: 68px;
+    border: 0;
+    border-radius: 10px;
+    background-color: #766CED;
+    color: #F5F4FF;
+    font-size: 16px;
+}
