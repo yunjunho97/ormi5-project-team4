@@ -1,6 +1,7 @@
 package com.example.ormi5projectteam4.service;
 
 import com.example.ormi5projectteam4.domain.constant.Role;
+import com.example.ormi5projectteam4.domain.dto.EmailDuplicationRequestDto;
 import com.example.ormi5projectteam4.domain.dto.JoinRequestDto;
 import com.example.ormi5projectteam4.domain.dto.UserDto;
 import com.example.ormi5projectteam4.domain.entity.PasswordQuestion;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -36,6 +38,11 @@ public class UserService {
   /** 로그아웃 */
 
   /** 이메일 중복 확인 */
+  public int validateDuplicateEmail(EmailDuplicationRequestDto emailDuplicationRequestDto) {
+    List<User> users = userRepository.findByEmail(emailDuplicationRequestDto.getEmail());
+
+    return users.size();
+  }
 
   /** 닉네임 중복 확인 */
 
