@@ -71,7 +71,7 @@
         </div>
         <div th:if="${not #lists.isEmpty(posts)}">
             <ul class="container">
-                <li th:each="post : ${posts}" class="block">
+                <li th:each="post : ${posts}">
                     <p th:text="${post.title}">Title</p>
                     <p th:text="${post.foundAt}">foundAt</p>
                     <!-- 필요한 다른 필드들을 여기에 추가 -->
