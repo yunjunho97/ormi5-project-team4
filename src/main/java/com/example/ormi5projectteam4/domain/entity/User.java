@@ -45,4 +45,16 @@ public class User {
     @OneToOne
     @JoinColumn(name = "password_question_id")
     private PasswordQuestion passwordQuestion;
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }
