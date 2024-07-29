@@ -42,14 +42,17 @@ public class AdminController {
     }
 
     @GetMapping("/member")
-    public ResponseEntity<List<User>> getAllUsers(){
-        List<User> users = adminService.getAllUsers();
-        return ResponseEntity.ok(users);
-    }
+    public ResponseEntity<List<User>> getAllUsers(@RequestParam (required = false) String email){
 
-    @GetMapping("/member")
-    public ResponseEntity<List<User>> searchUserByEmail(@RequestBody String email){
-        List<User> users = adminService.searchUserByEmail(email);
+        List<User> users;
+
+        if(email == null){
+            users = adminService.getAllUsers();
+        }
+        else{
+            users = adminService.searchUserByEmail(email);
+        }
+
         return ResponseEntity.ok(users);
     }
 
