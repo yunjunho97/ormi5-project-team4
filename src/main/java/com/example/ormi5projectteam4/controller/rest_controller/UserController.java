@@ -60,4 +60,12 @@ public class UserController {
 
     return new ResponseEntity<>(list, HttpStatus.valueOf(StatusCode.SUCCESS));
   }
+
+  @PostMapping("/auth/password-certification")
+  public ResponseEntity<UserDto> findUserForPasswordChange(
+      @RequestBody PasswordCertificationRequestDto passwordCertificationRequestDto) {
+    UserDto userDto = userService.validateUserForPasswordChange(passwordCertificationRequestDto);
+
+    return new ResponseEntity<>(userDto, HttpStatus.valueOf(StatusCode.SUCCESS));
+  }
 }

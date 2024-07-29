@@ -59,12 +59,25 @@ public class UserService {
   }
 
   /** 비밀번호 찾기 */
+  public UserDto validateUserForPasswordChange(
+      PasswordCertificationRequestDto passwordCertificationRequestDto) {
+    PasswordQuestion passwordQuestion =
+        findPasswordQuestionById(passwordCertificationRequestDto.getPasswordQuestionId());
+    String email = passwordCertificationRequestDto.getEmail();
+    String passwordAnswer = passwordCertificationRequestDto.getPasswordAnswer();
+
+    return userRepository
+        .findByEmailAndPasswordQuestionAndPasswordAnswer(email, passwordQuestion, passwordAnswer)
+        .stream()
+        .map(UserService::convertToUserDto)
+        .findFirst()
+        .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+  }
 
   /** 비밀번호 재설정 */
 
   /**
    * entity -> dto
-   *
    * @param passwordQuestion
    * @return PasswordQuestionDto
    */
@@ -75,7 +88,6 @@ public class UserService {
 
   /**
    * dto -> entity
-   *
    * @param userDto
    * @return User
    */
@@ -91,6 +103,21 @@ public class UserService {
     user.setPasswordQuestion(passwordQuestion);
 
     return user;
+  }
+
+  /**
+   * entity -> dto
+   * @param user
+   * @return UserDto
+   */
+  private static UserDto convertToUserDto(User user) {
+    UserDto userDto = new UserDto();
+    userDto.setUserName(user.getUserName());
+    userDto.setEmail(user.getEmail());
+    userDto.setPhone(user.getPhone());
+    userDto.setRole(user.getRole());
+
+    return userDto;
   }
 
   /**
