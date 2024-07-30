@@ -61,7 +61,6 @@ public class HomeController {
     public String createPost(@ModelAttribute PostDTO postDTO, RedirectAttributes redirectAttributes) {
         System.out.println("aaa");
         try {
-            // RestTemplate을 사용하여 API에 POST 요청 보내기
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             HttpEntity<PostDTO> request = new HttpEntity<>(postDTO, headers);
@@ -73,13 +72,11 @@ public class HomeController {
 //                return "redirect:/home"; // 홈 페이지로 리다이렉트
                 return "/write-success";
             } else {
-                // 에러 처리
                 redirectAttributes.addFlashAttribute("error", "Failed to create post. Please try again.");
 //                return "redirect:/posts/create";
                 return "error";
             }
         } catch (Exception e) {
-            // 예외 처리
             redirectAttributes.addFlashAttribute("error", "An error occurred: " + e.getMessage());
 //            return "redirect:/posts/create";
             return "error";

@@ -8,27 +8,27 @@
 <h1>Create New Post</h1>
 <form th:action="@{/create}" method="post">
     <div>
-        <label for="title">Title:</label>
+        <label for="title">제목:</label>
         <input type="text" id="title" name="title" required>
     </div>
     <div>
-        <label for="foundAt">Found At:</label>
+        <label for="foundAt">발견 시기:</label>
         <input type="text" id="foundAt" name="foundAt" required>
     </div>
     <div>
-        <label for="foundLocation">Found Location:</label>
+        <label for="foundLocation">발견 장소:</label>
         <input type="text" id="foundLocation" name="foundLocation" required>
     </div>
     <div>
-        <label for="detail">Detail:</label>
+        <label for="detail">상세:</label>
         <textarea id="detail" name="detail" required></textarea>
     </div>
     <div>
-        <label for="contact">Contact:</label>
+        <label for="contact">연락:</label>
         <input type="text" id="contact" name="contact" required>
     </div>
     <div>
-        <label for="tempoLocation">Temporary Location:</label>
+        <label for="tempoLocation">보호중인 장소:</label>
         <input type="text" id="tempoLocation" name="tempoLocation" required>
     </div>
 <!--    <div>-->
@@ -51,7 +51,7 @@
     <!-- AnimalDTO -->
     <h2>Animal Information</h2>
     <div>
-        <label for="animalName">Name:</label>
+        <label for="animalName">이름:</label>
         <input type="text" id="animalName" name="animalDTO.name" required>
     </div>
     <div>
@@ -59,15 +59,15 @@
         <input type="text" id="animalBreed" name="animalDTO.breed" required>
     </div>
     <div>
-        <label for="animalAge">Age:</label>
+        <label for="animalAge">나이:</label>
         <input type="number" id="animalAge" name="animalDTO.age" required>
     </div>
     <div>
-        <label for="animalWeight">Weight:</label>
+        <label for="animalWeight">무게:</label>
         <input type="number" id="animalWeight" name="animalDTO.weight" required>
     </div>
     <div>
-        <label for="animalGender">Gender:</label>
+        <label for="animalGender">성별:</label>
         <select id="animalGender" name="animalDTO.gender">
             <option value="MALE">Male</option>
             <option value="FEMALE">Female</option>
@@ -81,7 +81,7 @@
 <!--        </select>-->
 <!--    </div>-->
     <div>
-        <label for="animalSpecies">Species:</label>
+        <label for="animalSpecies">종류:</label>
         <select id="animalSpecies" name="animalDTO.species" required>
             <option value="DOG">Dog</option>
             <option value="CAT">Cat</option>
