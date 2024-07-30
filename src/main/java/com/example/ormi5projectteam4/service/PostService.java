@@ -56,6 +56,12 @@ public class PostService {
         return posts.map(PostDTO::fromPost);
     }
 
+    //    public Page<PostDTO> getPostsByApproveStatus(ApproveStatus approveStatus, Pageable pageable){
+//        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
+//        Page<Post> posts = postRepository.findByApproveStatus(approveStatus, pageRequest);
+//        return posts.map(PostDTO::fromPost);
+//    }
+
     public Optional<PostDTO> getPostById(Integer postId) {
         return postRepository.findById(postId).map(PostDTO::fromPost);
     }
@@ -71,9 +77,11 @@ public class PostService {
             post.addImage(image);
         }
 
-        //UserService 참조로 변경 가능
-//        User user = userRepository.findById(postDTO.getId()).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        //user
+//        Long userId = postDTO.getUserInfoDTO().getId();
+//        User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
 //        user.addPost(post);
+
         return PostDTO.fromPost(post);
     }
 
@@ -89,6 +97,12 @@ public class PostService {
     public void deletePost(Integer postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException(""));
         post.getImages().clear();
+
+        //user
+//        Long userId = post.getUser().getId();
+//        User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+//        user.removePost(post); //이 부분 후에 null exception 인가? test 해보기
+
         postRepository.save(post);
         postRepository.deleteById(postId);
     }
