@@ -88,4 +88,12 @@ public class HomeController {
     //수정 요청
 
     //삭제 요청
+    @PostMapping("/delete/{id}")
+    public String deletePost(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        String url = BASE_URL + "/" + id;
+        restTemplate.delete(url);
+        redirectAttributes.addFlashAttribute("message", "Post deleted successfully!");
+        return "redirect:/home";
+    }
+
 }
