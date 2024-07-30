@@ -8,26 +8,27 @@
 <body>
 <header>
     <h1>Happy Tails</h1>
+    <!--  공통 헤더   -->
 </header>
 <div class="container">
     <div class="sidebar">
         <!--    최근 공지 5개    -->
         <h2>공지사항</h2>
         <ul id="recent-notices" class="notice-list">
-            <li th:each="notice : ${latestNotice}">
+            <li th:each="notice : ${recentNotices}">
                 <span th:text="${notice.title}">Title</span>">
             </li>
         </ul>
     </div>
     <div class="main-content">
-        <h2>All Notices</h2>
-        <form id="delete-form" th:action="@{/admin/notice}" method="get">
+        <h2>공지사항</h2>
+        <form id="notice-form" th:action="@{/admin/notice}" method="get">
             <table>
                 <thead>
                 <tr>
-                    <th>체크</th>
+                    <th></th>
                     <th>제목</th>
-                    <th>날짜</th>
+                    <th>작성일</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,8 +42,8 @@
 
         </form>
         <div class="pagination">
-            <button th:if="${page.hasPrevious()}" th:onclick="'location.href=\'/notices?page=' + ${page.number - 1} + '\'">Previous</button>
-            <button th:if="${page.hasNext()}" th:onclick="'location.href=\'/notices?page=' + ${page.number + 1} + '\'">Next</button>
+            <button th:if="${page.hasPrevious()}" th:onclick="'location.href=\'/notices?page=' + ${page.number - 1} + '\'"><</button>
+            <button th:if="${page.hasNext()}" th:onclick="'location.href=\'/notices?page=' + ${page.number + 1} + '\'">></button>
         </div>
     </div>
 </div>

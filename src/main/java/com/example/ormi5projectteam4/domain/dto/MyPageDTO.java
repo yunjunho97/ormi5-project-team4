@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,6 +24,6 @@ public class MyPageDTO {
     private String email;
     private String phone;
     private String postCount;
-
+    private List<PostDTO> posts;
 
 }
