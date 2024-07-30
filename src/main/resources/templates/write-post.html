@@ -100,17 +100,17 @@
     </div>
 </form>
 
-<script>
-    let imageCount = 1;
-    function addImageInput() {
-        imageCount++;
-        const newInput = document.createElement('div');
-        newInput.innerHTML = `
-                <label for="image${imageCount}">Image URL ${imageCount}:</label>
-                <input type="url" id="image${imageCount}" name="images[${imageCount-1}].imgUrl">
-            `;
-        document.getElementById('imageInputs').appendChild(newInput);
-    }
-</script>
+<!--<script>-->
+<!--    let imageCount = 1;-->
+<!--    function addImageInput() {-->
+<!--        imageCount++;-->
+<!--        const newInput = document.createElement('div');-->
+<!--        newInput.innerHTML = `-->
+<!--                <label for="image${imageCount}">Image URL ${imageCount}:</label>-->
+<!--                <input type="url" id="image${imageCount}" name="images[${imageCount-1}].imgUrl">-->
+<!--            `;-->
+<!--        document.getElementById('imageInputs').appendChild(newInput);-->
+<!--    }-->
+<!--</script>-->
 </body>
 </html>

@@ -69,16 +69,19 @@ public class HomeController {
 
             if (response.getStatusCode() == HttpStatus.OK) {
                 redirectAttributes.addFlashAttribute("message", "Post created successfully!");
-                return "redirect:/home"; // 홈 페이지로 리다이렉트
+//                return "redirect:/home"; // 홈 페이지로 리다이렉트
+                return "/write-success";
             } else {
                 // 에러 처리
                 redirectAttributes.addFlashAttribute("error", "Failed to create post. Please try again.");
-                return "redirect:/posts/create";
+//                return "redirect:/posts/create";
+                return "error";
             }
         } catch (Exception e) {
             // 예외 처리
             redirectAttributes.addFlashAttribute("error", "An error occurred: " + e.getMessage());
-            return "redirect:/posts/create";
+//            return "redirect:/posts/create";
+            return "error";
         }
     }
 
