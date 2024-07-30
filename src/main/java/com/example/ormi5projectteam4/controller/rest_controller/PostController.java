@@ -48,7 +48,7 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PostDTO> getPostById(@PathVariable Integer id) {
+    public ResponseEntity<PostDTO> getPostById(@PathVariable Long id) {
         return postService.getPostById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -62,14 +62,14 @@ public class PostController {
 //    }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PostDTO> updatePost(@PathVariable Integer id, @RequestBody ProcessStatus processStatus) {
+    public ResponseEntity<PostDTO> updatePost(@PathVariable Long id, @RequestBody ProcessStatus processStatus) {
         return postService.updatePost(id, processStatus)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePost(@PathVariable Integer id) {
+    public ResponseEntity<Void> deletePost(@PathVariable Long id) {
         postService.deletePost(id);
         return ResponseEntity.noContent().build();
     }

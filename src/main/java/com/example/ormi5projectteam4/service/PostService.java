@@ -65,7 +65,7 @@ public class PostService {
 //        return posts.map(PostDTO::fromPost);
 //    }
 
-    public Optional<PostDTO> getPostById(Integer postId) {
+    public Optional<PostDTO> getPostById(Long postId) {
         return postRepository.findById(postId).map(PostDTO::fromPost);
     }
 
@@ -100,7 +100,7 @@ public class PostService {
 //        });
 //    }
 
-    public Optional<PostDTO> updatePost(Integer postId, ProcessStatus processStatus) {
+    public Optional<PostDTO> updatePost(Long postId, ProcessStatus processStatus) {
         return postRepository.findById(postId).map(o -> {
 //            o.setAdoptionStatus(postDTO.getAdoptionStatus());
             o.setAdoptionStatus(AdoptionStatus.ADOPTED);
@@ -109,7 +109,7 @@ public class PostService {
         });
     }
 
-    public void deletePost(Integer postId) {
+    public void deletePost(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException(""));
         post.getImages().clear();
 

@@ -51,7 +51,7 @@ public class AdminService {
         return userConvertToUserManagementDto(user);
     }
 
-    public Post changePostApproveStatus(Integer id, ApproveStatus approveStatus) {
+    public Post changePostApproveStatus(Long id, ApproveStatus approveStatus) {
         Post post = postRepository.findById(id).orElse(null);
 
         if (post != null) {
@@ -66,7 +66,7 @@ public class AdminService {
         return noticeRepository.save(notice);
     }
 
-    public void deleteNotice(Integer id) {
+    public void deleteNotice(Long id) {
 //        noticeRepository.deleteById(id);
     }
 

@@ -40,7 +40,7 @@ public class HomeController {
     }
 
     @GetMapping("/read-post/{id}")
-    public String readPost(@PathVariable Integer id, Model model) {
+    public String readPost(@PathVariable Long id, Model model) {
         String url = BASE_URL + "/" + id;
         ResponseEntity<PostDTO> response = restTemplate.exchange(
                 url,
@@ -85,7 +85,7 @@ public class HomeController {
 
     //수정 요청
     @PostMapping("/update/{id}")
-    public String updatePost(@PathVariable Integer id, @ModelAttribute ProcessStatus processStatus, RedirectAttributes redirectAttributes) {
+    public String updatePost(@PathVariable Long id, @ModelAttribute ProcessStatus processStatus, RedirectAttributes redirectAttributes) {
         String url = BASE_URL + "/" + id;
         restTemplate.put(url, processStatus);
         redirectAttributes.addFlashAttribute("message", "Post updated successfully!");
@@ -94,7 +94,7 @@ public class HomeController {
 
     //삭제 요청
     @PostMapping("/delete/{id}")
-    public String deletePost(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+    public String deletePost(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         String url = BASE_URL + "/" + id;
         restTemplate.delete(url);
         redirectAttributes.addFlashAttribute("message", "Post deleted successfully!");

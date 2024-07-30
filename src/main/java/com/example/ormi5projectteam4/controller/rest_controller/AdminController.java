@@ -71,7 +71,7 @@ public class AdminController {
     }
 
     @PutMapping("/post/{id}")
-    public ResponseEntity<Post> changePostApproveStatus(@PathVariable Integer id, @RequestParam ApproveStatus approveStatus){
+    public ResponseEntity<Post> changePostApproveStatus(@PathVariable Long id, @RequestParam ApproveStatus approveStatus){
         Post updatePost = adminService.changePostApproveStatus(id, approveStatus);
         if(updatePost == null){
             return ResponseEntity.notFound().build();
