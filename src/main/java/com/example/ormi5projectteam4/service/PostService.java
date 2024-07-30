@@ -1,5 +1,7 @@
 package com.example.ormi5projectteam4.service;
 
+import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
+import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
 import com.example.ormi5projectteam4.domain.dto.ImageDTO;
 import com.example.ormi5projectteam4.domain.entity.Animal;
 import com.example.ormi5projectteam4.domain.entity.Image;
@@ -70,6 +72,8 @@ public class PostService {
     public PostDTO createPost(PostDTO postDTO) {
         Post post = convertToPost(postDTO);
         post.setCreatedAt(LocalDateTime.now());
+        post.setAdoptionStatus(AdoptionStatus.POSTING);
+        post.setApproveStatus(ApproveStatus.PENDING);
         post = postRepository.save(post);
 
         for(ImageDTO imageDTO : postDTO.getImages()) {

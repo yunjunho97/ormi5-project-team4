@@ -1,5 +1,6 @@
 package com.example.ormi5projectteam4.service;
 
+import com.example.ormi5projectteam4.domain.constant.NeuteringStatus;
 import com.example.ormi5projectteam4.domain.entity.Animal;
 import com.example.ormi5projectteam4.domain.dto.AnimalDTO;
 import com.example.ormi5projectteam4.repository.AnimalRepository;
@@ -20,6 +21,7 @@ public class AnimalService {
     public Animal createAnimal(AnimalDTO animalDTO) {
         Animal animal = convertAnimalDTOToAnimal(animalDTO);
         animal.setCreatedAt(LocalDateTime.now());
+        animal.setNeuteringStatus(NeuteringStatus.INCOMPLETE);
         animalRepository.save(animal);
         return animal;
     }

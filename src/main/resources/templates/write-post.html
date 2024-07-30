@@ -31,22 +31,22 @@
         <label for="tempoLocation">Temporary Location:</label>
         <input type="text" id="tempoLocation" name="tempoLocation" required>
     </div>
-    <div>
-        <label for="adoptionStatus">Adoption Status:</label>
-        <select id="adoptionStatus" name="adoptionStatus">
-            <option value="AVAILABLE">Available</option>
-            <option value="ADOPTED">Adopted</option>
-            <option value="PENDING">Pending</option>
-        </select>
-    </div>
-    <div>
-        <label for="approveStatus">Approve Status:</label>
-        <select id="approveStatus" name="approveStatus">
-            <option value="APPROVED">Approved</option>
-            <option value="PENDING">Pending</option>
-            <option value="REJECTED">Rejected</option>
-        </select>
-    </div>
+<!--    <div>-->
+<!--        <label for="adoptionStatus">Adoption Status:</label>-->
+<!--        <select id="adoptionStatus" name="adoptionStatus">-->
+<!--            <option value="AVAILABLE">Available</option>-->
+<!--            <option value="ADOPTED">Adopted</option>-->
+<!--            <option value="PENDING">Pending</option>-->
+<!--        </select>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label for="approveStatus">Approve Status:</label>-->
+<!--        <select id="approveStatus" name="approveStatus">-->
+<!--            <option value="APPROVED">Approved</option>-->
+<!--            <option value="PENDING">Pending</option>-->
+<!--            <option value="REJECTED">Rejected</option>-->
+<!--        </select>-->
+<!--    </div>-->
 
     <!-- AnimalDTO -->
     <h2>Animal Information</h2>
@@ -73,16 +73,20 @@
             <option value="FEMALE">Female</option>
         </select>
     </div>
-    <div>
-        <label for="animalNeuteringStatus">Neutering Status:</label>
-        <select id="animalNeuteringStatus" name="animalDTO.neuteringStatus">
-            <option value="COMPLETE">Complete</option>
-            <option value="INCOMPLETE">Incomplete</option>
-        </select>
-    </div>
+<!--    <div>-->
+<!--        <label for="animalNeuteringStatus">Neutering Status:</label>-->
+<!--        <select id="animalNeuteringStatus" name="animalDTO.neuteringStatus">-->
+<!--            <option value="COMPLETE">Complete</option>-->
+<!--            <option value="INCOMPLETE">Incomplete</option>-->
+<!--        </select>-->
+<!--    </div>-->
     <div>
         <label for="animalSpecies">Species:</label>
-        <input type="text" id="animalSpecies" name="animalDTO.species" required>
+        <select id="animalSpecies" name="animalDTO.species" required>
+            <option value="DOG">Dog</option>
+            <option value="CAT">Cat</option>
+            <option value="ETC">그 외</option>
+        </select>
     </div>
 
     <!-- Images -->
