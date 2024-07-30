@@ -28,7 +28,7 @@ public class AdminController {
     public ResponseEntity<List<Post>> getPostsByApproveStatusAndPage(@RequestParam(required = false) ApproveStatus approveStatus, @PathVariable int page){
 
         // 1페이지당 14개의 게시글을 가져옴
-        final int count = 14;
+        final int count = 6;
         int startIndex = (page - 1) * count;
         List<Post> posts;
 
