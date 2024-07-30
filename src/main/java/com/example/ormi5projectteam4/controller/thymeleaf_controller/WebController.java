@@ -31,7 +31,7 @@ public class WebController {
         return "notice-list-user";
     }
 
-    @GetMapping("/admin/notice")
+    @GetMapping("/manage/notice")
     public String getAdminNotices(Model model) {
         List<NoticeDto> noticePage = noticeService.getAllNotices();
 
