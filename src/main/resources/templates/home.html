@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>home</title>
-    <link rel="stylesheet" th:href="@{/styles/user/home.css}">
+    <link rel="stylesheet" th:href="@{/styles/post/home.css}">
 </head>
 <body>
 <header>
@@ -26,9 +26,10 @@
             <ul class="container">
                 <li th:each="post : ${posts}">
                     <a th:href="@{/read-post/{id}(id=${post.id})}">
-                    <p th:text="${post.title}">Title</p>
-                    <p th:text="${post.foundAt}">foundAt</p>
-                    <!-- 필요한 다른 필드들을 여기에 추가 -->
+                        <p th:text="${post.title}">Title</p>
+                        <p th:text="${post.foundAt}">foundAt</p>
+                        <!-- 필요한 다른 필드들을 여기에 추가 -->
+                    </a>
                 </li>
             </ul>
         </div>

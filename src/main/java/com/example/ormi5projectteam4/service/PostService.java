@@ -3,6 +3,7 @@ package com.example.ormi5projectteam4.service;
 import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
 import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
 import com.example.ormi5projectteam4.domain.dto.ImageDTO;
+import com.example.ormi5projectteam4.domain.dto.ProcessStatus;
 import com.example.ormi5projectteam4.domain.entity.Animal;
 import com.example.ormi5projectteam4.domain.entity.Image;
 import com.example.ormi5projectteam4.domain.dto.PostDTO;
@@ -89,10 +90,20 @@ public class PostService {
         return PostDTO.fromPost(post);
     }
 
-    //dto 분리 고려
-    public Optional<PostDTO> updatePost(Integer postId, PostDTO postDTO) {
+//    //dto 분리 고려
+//    public Optional<PostDTO> updatePost(Integer postId, PostDTO postDTO) {
+//        return postRepository.findById(postId).map(o -> {
+////            o.setAdoptionStatus(postDTO.getAdoptionStatus());
+//            o.setAdoptionStatus(AdoptionStatus.ADOPTED);
+//            o.setUpdatedAt(LocalDateTime.now());
+//            return PostDTO.fromPost(postRepository.save(o));
+//        });
+//    }
+
+    public Optional<PostDTO> updatePost(Integer postId, ProcessStatus processStatus) {
         return postRepository.findById(postId).map(o -> {
-            o.setAdoptionStatus(postDTO.getAdoptionStatus());
+//            o.setAdoptionStatus(postDTO.getAdoptionStatus());
+            o.setAdoptionStatus(AdoptionStatus.ADOPTED);
             o.setUpdatedAt(LocalDateTime.now());
             return PostDTO.fromPost(postRepository.save(o));
         });

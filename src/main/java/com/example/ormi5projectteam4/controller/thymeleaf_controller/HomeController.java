@@ -2,6 +2,7 @@ package com.example.ormi5projectteam4.controller.thymeleaf_controller;
 
 import com.example.ormi5projectteam4.domain.dto.PagedPostsResponse;
 import com.example.ormi5projectteam4.domain.dto.PostDTO;
+import com.example.ormi5projectteam4.domain.dto.ProcessStatus;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 import org.springframework.http.*;
@@ -86,6 +87,13 @@ public class HomeController {
     }
 
     //수정 요청
+    @PostMapping("/update/{id}")
+    public String updatePost(@PathVariable Integer id, @ModelAttribute ProcessStatus processStatus, RedirectAttributes redirectAttributes) {
+        String url = BASE_URL + "/" + id;
+        restTemplate.put(url, processStatus);
+        redirectAttributes.addFlashAttribute("message", "Post updated successfully!");
+        return "redirect:/read-post/" + id;
+    }
 
     //삭제 요청
     @PostMapping("/delete/{id}")
