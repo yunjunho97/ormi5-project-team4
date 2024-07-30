@@ -1,22 +1,30 @@
 package com.example.ormi5projectteam4.service;
 
 import com.example.ormi5projectteam4.domain.dto.MyPageDTO;
+import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.domain.entity.User;
 import com.example.ormi5projectteam4.repository.MyPageRepository;
+import com.example.ormi5projectteam4.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MyPageService {
 
     private final MyPageRepository myPageRepository;
+    private final PostRepository postRepository;
+
+
 
     @Autowired
-    public MyPageService(MyPageRepository myPageRepository) {
+    public MyPageService(MyPageRepository myPageRepository, PostRepository postRepository) {
         this.myPageRepository = myPageRepository;
+        this.postRepository = postRepository;
     }
 
     public MyPageDTO getUserInfo(Long userId) {
@@ -46,4 +54,20 @@ public class MyPageService {
     public void deleteUser(Long userId) {
         myPageRepository.deleteById(userId);
     }
+
+    public List<PostDTO> getPostsByUser(Long userId) {
+        return postRepository.findByUserId(userId).stream()
+                .map(PostDTO::fromPost)
+                .collect(Collectors.toList());
+    }
+
+
+    public PostDTO getPostDetail(Long postId) {
+        return null;
+    }
+
+    public long getPostCountByUser(Long userId) {
+        return postRepository.countByUserId(userId);
+    }
+
 }
