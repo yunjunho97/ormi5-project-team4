@@ -44,8 +44,9 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<PostDTO> createPost(@RequestPart PostDTO postDTO, @RequestPart List<MultipartFile> files) {
-        return ResponseEntity.ok(postService.createPost(postDTO, files));
+    public ResponseEntity<PostDTO> createPost(
+            @RequestPart PostDTO postDTO, @RequestPart MultipartFile file) {
+        return ResponseEntity.ok(postService.createPost(postDTO, file));
     }
 
     @GetMapping("/{id}")
