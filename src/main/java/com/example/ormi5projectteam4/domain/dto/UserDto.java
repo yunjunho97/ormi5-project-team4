@@ -12,6 +12,8 @@ public class UserDto {
         this.role = role;
     }
 
+    private Long id;
+
     private String email;
 
     private String userName;

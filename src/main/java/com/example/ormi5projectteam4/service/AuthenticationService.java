@@ -50,4 +50,8 @@ public class AuthenticationService {
   public boolean hasRole(Role role) {
     return getAuthenticatedUser().map(user -> user.getRole().equals(role)).orElse(false);
   }
+
+  public Optional<UserDto> getUserDto() {
+    return getAuthenticatedUser();
+  }
 }
