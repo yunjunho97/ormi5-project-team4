@@ -33,12 +33,10 @@ public class UserService {
 
   /** 이메일 & 비밀번호로 유저 조회 */
   public UserDto findUserByEmailAndPw(String email, String password) {
-    User user =
-        userRepository.findByEmailAndPassword(email, password).stream()
-            .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
-
-    return convertToUserDto(user);
+    return userRepository.findByEmailAndPassword(email, password).stream()
+        .map(UserService::convertToUserDto)
+        .findFirst()
+        .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
   }
 
   /** 이메일 중복 확인 */

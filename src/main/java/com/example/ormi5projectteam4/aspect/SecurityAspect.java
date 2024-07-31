@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-@RequiredArgsConstructor
 public class SecurityAspect {
 
-  private static AuthenticationService authenticationService;
+  @Autowired
+  private AuthenticationService authenticationService;
 
   @Before("@within(secured) || @annotation(secured)")
   public void checkSecurity(Secured secured) {
@@ -24,14 +24,11 @@ public class SecurityAspect {
       throw new SecurityException("Not authenticated");
     }
 
-    var requiredRoles = secured.roles();
+    var requiredRole = secured.role();
 
     boolean hasRole = false;
-    for (Role role : requiredRoles) {
-      if (authenticationService.hasRole(role)) {
-        hasRole = true;
-        break;
-      }
+    if (authenticationService.hasRole(requiredRole)) {
+      hasRole = true;
     }
 
     if (!hasRole) {

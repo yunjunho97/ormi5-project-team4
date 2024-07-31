@@ -21,7 +21,7 @@ public class AuthController {
 
   /** 로그인 */
   @PostMapping("/login")
-  public ResponseEntity<UserResponseDto> login(LoginRequestDto loginRequestDto) {
+  public ResponseEntity<UserResponseDto> login(@RequestBody LoginRequestDto loginRequestDto) {
     UserResponseDto responseDto;
     try {
       UserDto user =

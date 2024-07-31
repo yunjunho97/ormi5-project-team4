@@ -2,10 +2,7 @@ package com.example.ormi5projectteam4.domain.entity;
 
 import com.example.ormi5projectteam4.domain.constant.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
