@@ -126,6 +126,7 @@ public class UserService {
    */
   private static UserDto convertToUserDto(User user) {
     UserDto userDto = new UserDto();
+    userDto.setId(user.getId());
     userDto.setUserName(user.getUserName());
     userDto.setEmail(user.getEmail());
     userDto.setPhone(user.getPhone());
