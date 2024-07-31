@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class AnimalDTO {
-    private Integer id;
+    private Long id;
     private String name;
     private String breed;
     private Integer age;

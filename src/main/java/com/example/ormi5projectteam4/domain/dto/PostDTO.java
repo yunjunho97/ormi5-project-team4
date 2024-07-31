@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Builder
 public class PostDTO {
-    private Integer id;
+    private Long id;
     private String title;
     private String foundAt;
     private String foundLocation;

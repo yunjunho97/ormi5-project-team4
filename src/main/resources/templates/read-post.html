@@ -7,5 +7,11 @@
 <body>
 <p th:text="${post.title}"></p>
 <p th:text="${post.detail}"></p>
+<form th:action="@{/update/{id}(id=${post.id})}" method="post">
+    <button type="submit" onclick="return confirm('입양이 완료되었습니까?');">입양 완료</button>
+</form>
+<form th:action="@{/delete/{id}(id=${post.id})}" method="post">
+    <button type="submit" onclick="return confirm('삭제 하시겠습니까?');">글삭제</button>
+</form>
 </body>
 </html>

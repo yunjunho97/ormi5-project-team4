@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class ImageDTO {
-    private Integer id;
+    private Long id;
     private String imgUrl;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
