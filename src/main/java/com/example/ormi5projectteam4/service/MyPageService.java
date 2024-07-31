@@ -2,6 +2,7 @@ package com.example.ormi5projectteam4.service;
 
 import com.example.ormi5projectteam4.domain.dto.MyPageDTO;
 import com.example.ormi5projectteam4.domain.dto.PostDTO;
+import com.example.ormi5projectteam4.domain.entity.Post;
 import com.example.ormi5projectteam4.domain.entity.User;
 import com.example.ormi5projectteam4.repository.MyPageRepository;
 import com.example.ormi5projectteam4.repository.PostRepository;
@@ -62,8 +63,15 @@ public class MyPageService {
     }
 
 
-    public PostDTO getPostDetail(Long postId) {
-        return null;
+    public PostDTO getMyPostDetail(Integer postId, Long userId) {
+        Optional<Post> postOptional = postRepository.findById(postId);
+        if (postOptional.isPresent()) {
+            Post post = postOptional.get();
+            if (post.getUserId().equals(userId)) {
+                return PostDTO.fromPost(post);
+            }
+        }
+        return null; // 해당 게시글이 존재하지 않거나 권한이 없는 경우
     }
 
     public long getPostCountByUser(Long userId) {

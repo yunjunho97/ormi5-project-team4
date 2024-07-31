@@ -3,6 +3,7 @@ package com.example.ormi5projectteam4.controller.rest_controller;
 import com.example.ormi5projectteam4.domain.dto.MyPageDTO;
 import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.service.MyPageService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,38 +20,46 @@ public class MyPageController {
         this.myPageService = myPageService;
     }
 
-    @GetMapping("/{userId}")
+
+    @GetMapping("/this/info/{userId}")
     public MyPageDTO getUserInfo(@PathVariable Long userId) {
         return myPageService.getUserInfo(userId);
     }
 
-    @PutMapping("/{userId}")
+    @PutMapping("/this/{userId}")
     public void updateUserInfo(@PathVariable Long userId, @RequestBody MyPageDTO myPageDTO) {
         myPageService.updateUserInfo(userId, myPageDTO);
     }
 
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/this/{userId}")
     public void deleteUser(@PathVariable Long userId) {
         myPageService.deleteUser(userId);
     }
 
-    @GetMapping("/{userId}/posts")
+    @GetMapping("/this/post/{userId}")
     public List<PostDTO> getPostsByUser(@PathVariable Long userId) {
         return myPageService.getPostsByUser(userId);
     }
 
-    @GetMapping("/posts/{postId}")
-    public String getPostDetail(@PathVariable Long postId, Model model) {
-        // 게시글 상세 정보 조회
-        PostDTO post = myPageService.getPostDetail(postId);
+    @GetMapping("/read-post/{postId}")
+   public String getPostDetail(@PathVariable Integer postId, Model model, HttpSession session) {
+        // 세션에서 현재 사용자의 ID를 가져옵니다
+        Long userId = (Long) session.getAttribute("userId");
 
-        if (post == null) {
-            // 게시글이 존재하지 않을 경우 처리
-            return "redirect:/error"; // 에러 페이지로 리다이렉트 혹은 예외 처리
+        if (userId == null) {
+
+            return "redirect:/login";
         }
 
-        // 모델에 게시글 정보 추가
+
+        PostDTO post = myPageService.getMyPostDetail(postId, userId);
+
+        if (post == null) {
+            return "redirect:/error";
+        }
+
+        // 모델에 게시물 정보를 추가합니다
         model.addAttribute("post", post);
-        return "detail"; // detail.html 페이지로 포워딩
+        return "detail"; // detail.html 페이지로 포워딩합니다
     }
 }
