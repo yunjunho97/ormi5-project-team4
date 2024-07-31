@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 @RequiredArgsConstructor
 public class UserService {
   private final UserRepository userRepository;
@@ -36,16 +36,16 @@ public class UserService {
   /** 로그아웃 */
 
   /** 이메일 중복 확인 */
-  public int validateDuplicateEmail(EmailDuplicationRequestDto emailDuplicationRequestDto) {
-    List<User> users = userRepository.findByEmail(emailDuplicationRequestDto.getEmail());
+  public int validateDuplicateEmail(String email) {
+    List<User> users = userRepository.findByEmail(email);
 
     return users.size();
   }
 
   /** 닉네임 중복 확인 */
   public int validateDuplicateUserName(
-      UserNameDuplicationRequestDto userNameDuplicationRequestDto) {
-    List<User> users = userRepository.findByUserName(userNameDuplicationRequestDto.getUserName());
+      String userName) {
+    List<User> users = userRepository.findByUserName(userName);
 
     return users.size();
   }
@@ -58,7 +58,7 @@ public class UserService {
   }
 
   /** 비밀번호 찾기 */
-  public UserDto validateUserForPasswordChange(
+  public UserDto validateUserForPasswordChange (
       PasswordCertificationRequestDto passwordCertificationRequestDto) {
     PasswordQuestion passwordQuestion =
         findPasswordQuestionById(passwordCertificationRequestDto.getPasswordQuestionId());

@@ -47,7 +47,7 @@ public class User {
     @Column(nullable = true)
     private LocalDateTime updatedAt;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "password_question_id")
     private PasswordQuestion passwordQuestion;
 

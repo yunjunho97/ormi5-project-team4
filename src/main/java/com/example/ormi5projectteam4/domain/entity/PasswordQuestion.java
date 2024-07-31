@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -18,6 +21,6 @@ public class PasswordQuestion {
     @Column(name = "question")
     private String question;
 
-    @OneToOne(mappedBy = "passwordQuestion")
-    private User user;
+    @OneToMany(mappedBy = "passwordQuestion")
+    private List<User> users = new ArrayList<>();
 }

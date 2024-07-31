@@ -7,5 +7,6 @@ public class StatusMessage {
     public static final String INVALID_PARAM = "Invalid param";
     public static final String UNAUTHORIZED_USER = "Unauthorized user";
     public static final String FORBIDDEN_USER = "Forbidden user";
+    public static final String NOT_FOUND = "Not found";
     public static final String DUPLICATED_USER = "Duplicated user";
 }
