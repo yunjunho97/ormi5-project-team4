@@ -31,9 +31,13 @@ public class UserService {
     return user.getId();
   }
 
-  /** 로그인 */
-
-  /** 로그아웃 */
+  /** 이메일 & 비밀번호로 유저 조회 */
+  public UserDto findUserByEmailAndPw(String email, String password) {
+    return userRepository.findByEmailAndPassword(email, password).stream()
+        .map(UserService::convertToUserDto)
+        .findFirst()
+        .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+  }
 
   /** 이메일 중복 확인 */
   public int validateDuplicateEmail(String email) {
@@ -43,8 +47,7 @@ public class UserService {
   }
 
   /** 닉네임 중복 확인 */
-  public int validateDuplicateUserName(
-      String userName) {
+  public int validateDuplicateUserName(String userName) {
     List<User> users = userRepository.findByUserName(userName);
 
     return users.size();
@@ -58,7 +61,7 @@ public class UserService {
   }
 
   /** 비밀번호 찾기 */
-  public UserDto validateUserForPasswordChange (
+  public UserDto validateUserForPasswordChange(
       PasswordCertificationRequestDto passwordCertificationRequestDto) {
     PasswordQuestion passwordQuestion =
         findPasswordQuestionById(passwordCertificationRequestDto.getPasswordQuestionId());

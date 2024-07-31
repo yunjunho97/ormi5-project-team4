@@ -2,9 +2,16 @@ package com.example.ormi5projectteam4.domain.dto;
 
 import com.example.ormi5projectteam4.domain.constant.Role;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class UserDto {
+    public UserDto(String email, Role role) {
+        this.email = email;
+        this.role = role;
+    }
+
     private String email;
 
     private String userName;
