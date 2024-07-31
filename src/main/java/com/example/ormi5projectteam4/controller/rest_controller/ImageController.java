@@ -23,7 +23,7 @@ public class ImageController {
     public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) {
         System.out.println("aaa");
         try {
-            String fileUrl = imageService.uploadImage(file);
+            String fileUrl = imageService.uploadImage(file).getImgUrl();
             return ResponseEntity.ok("이미지가 성공적으로 업로드되었습니다. URL: " + fileUrl);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

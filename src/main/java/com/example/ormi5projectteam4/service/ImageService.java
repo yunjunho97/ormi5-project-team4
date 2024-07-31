@@ -31,7 +31,7 @@ public class ImageService {
         return imageRepository.save(image);
     }
 
-    public String uploadImage(MultipartFile file) {
+    public Image uploadImage(MultipartFile file) {
         if (file.isEmpty()) {
             throw new IllegalArgumentException("파일을 선택해주세요.");
         }
@@ -50,10 +50,9 @@ public class ImageService {
             Image image = new Image();
             image.setImgUrl(fileUrl);
             image.setCreatedAt(LocalDateTime.now());
-//            image.setPost(null);
             imageRepository.save(image);
 
-            return fileUrl;
+            return image;
         } catch (IOException e) {
             throw new RuntimeException("이미지 업로드 중 오류가 발생했습니다: " + e.getMessage());
         }

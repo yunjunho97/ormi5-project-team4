@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.print.Pageable;
 import java.util.List;
@@ -43,8 +44,8 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<PostDTO> createPost(@RequestBody PostDTO postDTO) {
-        return ResponseEntity.ok(postService.createPost(postDTO));
+    public ResponseEntity<PostDTO> createPost(@RequestPart PostDTO postDTO, @RequestPart List<MultipartFile> files) {
+        return ResponseEntity.ok(postService.createPost(postDTO, files));
     }
 
     @GetMapping("/{id}")
