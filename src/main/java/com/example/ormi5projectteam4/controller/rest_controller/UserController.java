@@ -18,6 +18,9 @@ import java.util.List;
 public class UserController {
   private final UserService userService;
 
+  /**
+   * 회원가입
+   */
   @PostMapping("/member")
   public ResponseEntity<JoinResponseDto> generateMember(
       @RequestBody JoinRequestDto joinRequestDto) {
@@ -27,6 +30,9 @@ public class UserController {
     return new ResponseEntity<>(joinResponseDto, HttpStatus.valueOf(StatusCode.SUCCESS));
   }
 
+  /**
+   * 이메일 중복확인
+   */
   @GetMapping("/email-duplication")
   public ResponseEntity<String> validateDuplicateUserEmail(@RequestParam String email) {
     int result = userService.validateDuplicateEmail(email);
@@ -43,6 +49,9 @@ public class UserController {
     return response;
   }
 
+  /**
+   * 닉네임 중복확인
+   */
   @GetMapping("/nickname-duplication")
   public ResponseEntity<String> validateDuplicateUserName(@RequestParam String userName) {
     int result = userService.validateDuplicateUserName(userName);
@@ -59,34 +68,13 @@ public class UserController {
     return response;
   }
 
+  /**
+   * 비밀번호 찾기 질문 조회
+   */
   @GetMapping("/password-question")
   public ResponseEntity<List<PasswordQuestionDto>> getAllPasswordQuestions() {
     List<PasswordQuestionDto> list = userService.getAllPasswordQuestions();
 
     return new ResponseEntity<>(list, HttpStatus.valueOf(StatusCode.SUCCESS));
-  }
-
-  @PostMapping("/auth/password-certification")
-  public ResponseEntity<FindUserForPasswordChangeResponseDto> findUserForPasswordChange(
-      @RequestBody PasswordCertificationRequestDto passwordCertificationRequestDto) {
-    FindUserForPasswordChangeResponseDto responseDto;
-
-    try {
-      UserDto userDto = userService.validateUserForPasswordChange(passwordCertificationRequestDto);
-      responseDto = new FindUserForPasswordChangeResponseDto(StatusMessage.SUCCESS, userDto);
-    } catch (IllegalArgumentException e) {
-      responseDto = new FindUserForPasswordChangeResponseDto(e.getMessage());
-      return new ResponseEntity<>(responseDto, HttpStatus.valueOf(StatusCode.NOT_FOUND));
-    }
-
-    return new ResponseEntity<>(responseDto, HttpStatus.valueOf(StatusCode.SUCCESS));
-  }
-
-  @PutMapping("/auth/password")
-  public ResponseEntity<Void> changePassword(
-      @RequestBody ChangePasswordRequestDto changePasswordRequestDto) {
-    userService.changePassword(changePasswordRequestDto);
-
-    return new ResponseEntity<>(HttpStatus.valueOf(StatusCode.NO_CONTENT));
   }
 }
