@@ -63,7 +63,7 @@ public class MyPageService {
     }
 
 
-    public PostDTO getMyPostDetail(Integer postId, Long userId) {
+    public PostDTO getMyPostDetail(Long postId, Long userId) {
         Optional<Post> postOptional = postRepository.findById(postId);
         if (postOptional.isPresent()) {
             Post post = postOptional.get();

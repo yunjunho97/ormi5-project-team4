@@ -42,7 +42,7 @@ public class MyPageController {
     }
 
     @GetMapping("/read-post/{postId}")
-   public String getPostDetail(@PathVariable Integer postId, Model model, HttpSession session) {
+   public String getPostDetail(@PathVariable Long postId, Model model, HttpSession session) {
         // 세션에서 현재 사용자의 ID를 가져옵니다
         Long userId = (Long) session.getAttribute("userId");
 
