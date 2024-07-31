@@ -6,6 +6,7 @@ import com.example.ormi5projectteam4.domain.dto.*;
 import com.example.ormi5projectteam4.service.AuthenticationService;
 import com.example.ormi5projectteam4.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ public class AuthController {
   private final UserService userService;
 
   /** 로그인 */
+  @PostMapping("/login")
   public ResponseEntity<UserResponseDto> login(LoginRequestDto loginRequestDto) {
     UserResponseDto responseDto;
     try {
@@ -34,6 +36,13 @@ public class AuthController {
       responseDto = new UserResponseDto(e.getMessage());
       return new ResponseEntity<>(responseDto, HttpStatus.valueOf(StatusCode.UNAUTHORIZED_USER));
     }
+  }
+
+  /** 로그아웃 */
+  @PostMapping("/logout")
+  public ResponseEntity<Void> logout() {
+    authenticationService.logout();
+    return new ResponseEntity<>(HttpStatus.valueOf(StatusCode.NO_CONTENT));
   }
 
   /** 비밀번호 찾기(유저 검색) */
