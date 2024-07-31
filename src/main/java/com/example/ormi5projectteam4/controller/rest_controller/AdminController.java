@@ -6,6 +6,7 @@ import com.example.ormi5projectteam4.domain.dto.UserManagementDto;
 import com.example.ormi5projectteam4.domain.entity.Post;
 import com.example.ormi5projectteam4.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,41 +20,27 @@ public class AdminController {
     private AdminService adminService;
 
     @GetMapping("/post")
-    public ResponseEntity<List<Post>> getAllPosts(){
-        List<Post> posts = adminService.getAllPosts();
-        return ResponseEntity.ok(posts);
-    }
+    public ResponseEntity<Page<Post>> getPostsByApproveStatusAndPage(
+            @RequestParam(required = false) ApproveStatus approveStatus,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "6") int size) {
 
-    @GetMapping("/post/{page}")
-    public ResponseEntity<List<Post>> getPostsByApproveStatusAndPage(@RequestParam(required = false) ApproveStatus approveStatus, @PathVariable int page){
-
-        // 1페이지당 14개의 게시글을 가져옴
-        final int count = 14;
-        int startIndex = (page - 1) * count;
-        List<Post> posts;
-
-        if(approveStatus == null){
-            posts = adminService.getAllPosts().stream().skip(startIndex).limit(count).collect(Collectors.toList());
-        }
-        else{
-            posts = adminService.getPostsByApproveStatus(approveStatus).stream().skip(startIndex).limit(14).collect(Collectors.toList());
-        }
+        Page<Post> posts = adminService.getPostsByApproveStatus(approveStatus, page, size);
 
         return ResponseEntity.ok(posts);
     }
 
     @GetMapping("/member/{page}")
-    public ResponseEntity<List<UserManagementDto>> getAllUsers(@RequestParam (required = false) String email, @PathVariable int page){
+    public ResponseEntity<List<UserManagementDto>> getAllUsers(@RequestParam(required = false) String email, @PathVariable int page) {
 
         // 1페이지당 17개의 게시글을 가져옴
         final int count = 17;
         int startIndex = (page - 1) * count;
         List<UserManagementDto> users;
 
-        if(email == null){
+        if (email == null) {
             users = adminService.getAllUsers().stream().skip(startIndex).limit(count).collect(Collectors.toList());
-        }
-        else{
+        } else {
             users = adminService.searchUserByEmail(email).stream().skip(startIndex).limit(count).collect(Collectors.toList());
         }
 
@@ -61,9 +48,9 @@ public class AdminController {
     }
 
     @PutMapping("/member/{id}")
-    public ResponseEntity<UserManagementDto> changeUserRole(@PathVariable Long id, @RequestParam Role role){
+    public ResponseEntity<UserManagementDto> changeUserRole(@PathVariable Long id, @RequestParam Role role) {
         UserManagementDto updateUser = adminService.changeUserRole(id, role);
-        if(updateUser == null){
+        if (updateUser == null) {
             return ResponseEntity.notFound().build();
         }
 
@@ -71,9 +58,9 @@ public class AdminController {
     }
 
     @PutMapping("/post/{id}")
-    public ResponseEntity<Post> changePostApproveStatus(@PathVariable Integer id, @RequestParam ApproveStatus approveStatus){
+    public ResponseEntity<Post> changePostApproveStatus(@PathVariable Integer id, @RequestParam ApproveStatus approveStatus) {
         Post updatePost = adminService.changePostApproveStatus(id, approveStatus);
-        if(updatePost == null){
+        if (updatePost == null) {
             return ResponseEntity.notFound().build();
         }
 

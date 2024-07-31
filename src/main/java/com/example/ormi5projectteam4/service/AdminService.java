@@ -9,6 +9,9 @@ import com.example.ormi5projectteam4.repository.NoticeRepository;
 import com.example.ormi5projectteam4.repository.PostRepository;
 import com.example.ormi5projectteam4.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.example.ormi5projectteam4.domain.constant.Role;
 
@@ -26,12 +29,14 @@ public class AdminService {
     @Autowired
     NoticeRepository noticeRepository;
 
-    public List<Post> getAllPosts() {
-        return postRepository.findAll();
-    }
+    public Page<Post> getPostsByApproveStatus(ApproveStatus approveStatus, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
 
-    public List<Post> getPostsByApproveStatus(ApproveStatus approveStatus) {
-        return postRepository.findByApproveStatus(approveStatus);
+        if (approveStatus == null) {
+            return postRepository.findAll(pageable);
+        } else {
+            return postRepository.findByApproveStatus(approveStatus, pageable);
+        }
     }
 
     public List<UserManagementDto> getAllUsers() {
@@ -77,7 +82,7 @@ public class AdminService {
         return noticeRepository.findAll();
     }
 
-    private UserManagementDto userConvertToUserManagementDto(User user){
+    private UserManagementDto userConvertToUserManagementDto(User user) {
         UserManagementDto userManagementDto = new UserManagementDto();
         userManagementDto.setEmail(user.getEmail());
         userManagementDto.setPhone(user.getPhone());
