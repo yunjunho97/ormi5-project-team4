@@ -25,6 +25,8 @@ public class NoticeService {
     @Transactional
     public NoticeDto createNotice(NoticeDto noticeDto) {
         Notice notice = noticeDto.toEntity();
+        notice.setCreatedAt(LocalDateTime.now());
+        notice.setUpdatedAt(LocalDateTime.now());
         Notice savedNotice = noticeRepository.save(notice);
         return NoticeDto.fromEntity(savedNotice);
     }
@@ -65,6 +67,8 @@ public class NoticeService {
 
     @Transactional(readOnly = true)
     public List<NoticeDto> getLatestNotices() {
-        return noticeRepository.findTop5ByOrderByCreatedAtDesc();
+        return noticeRepository.findTop5ByOrderByCreatedAtDesc().stream()
+                .map(NoticeDto::fromEntity)
+                .collect(Collectors.toList());
     }
 }

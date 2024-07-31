@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin/notice")
 public class NoticeController {
     private final NoticeService noticeService;
 
@@ -20,21 +19,21 @@ public class NoticeController {
     }
 
     // CREATE: 새 공지사항 추가
-    @PostMapping
+    @PostMapping("/admin/notice")
     public ResponseEntity<NoticeDto> createNotice(@RequestBody NoticeDto noticeDto) {
         NoticeDto createdNotice = noticeService.createNotice(noticeDto);
         return new ResponseEntity<>(createdNotice, HttpStatus.CREATED);
     }
 
     // READ: 모든 공지사항 조회
-    @GetMapping
+    @GetMapping("/admin/notice")
     public ResponseEntity<List<NoticeDto>> getAllNotices() {
         List<NoticeDto> notices = noticeService.getAllNotices();
         return ResponseEntity.ok(notices);
     }
 
     // READ: 특정 ID의 공지사항 조회
-    @GetMapping("/{id}")
+    @GetMapping("/admin/notice/{id}")
     public ResponseEntity<NoticeDto> getNoticeById(@PathVariable Long id) {
         return noticeService.getNoticeById(id)
                 .map(ResponseEntity::ok)
@@ -42,7 +41,7 @@ public class NoticeController {
     }
 
     // UPDATE: 공지사항 정보 업데이트
-    @PutMapping("/{id}")
+    @PutMapping("/admin/notice/{id}")
     public ResponseEntity<NoticeDto> updateNotice(@PathVariable Long id, @RequestBody NoticeDto noticeDto) {
         return noticeService.updateNotice(id, noticeDto)
                 .map(ResponseEntity::ok)
@@ -50,18 +49,18 @@ public class NoticeController {
     }
 
     // DELETE: 공지사항 삭제
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/notice/{id}")
     public ResponseEntity<Void> deleteNotice(@PathVariable Long id) {
         boolean deleted = noticeService.deleteNotice(id);
         return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
-//    사용자 화면에서 처리
-//    // READ: 최신 공지사항 조회
-//    @GetMapping("/latest")
-//    public ResponseEntity<List<NoticeDto>> getLatestNotices() {
-//        List<NoticeDto> latestNotices = noticeService.getLatestNotices();
-//        return ResponseEntity.ok(latestNotices);
-//    }
+    // 사용자 화면에서 처리
+    // READ: 최신 공지사항 조회
+    @GetMapping("/notice")
+    public ResponseEntity<List<NoticeDto>> getLatestNotices() {
+        List<NoticeDto> latestNotices = noticeService.getLatestNotices();
+        return ResponseEntity.ok(latestNotices);
+    }
 
 }
