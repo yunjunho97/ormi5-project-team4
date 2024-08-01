@@ -71,16 +71,17 @@ public class PostService {
     }
 
     @Transactional
-    public PostDTO createPost(PostDTO postDTO, MultipartFile file) {
+    public PostDTO createPost(PostDTO postDTO, List<MultipartFile> files) {
         Post post = convertToPost(postDTO);
         post.setCreatedAt(LocalDateTime.now());
         post.setAdoptionStatus(AdoptionStatus.POSTING);
         post.setApproveStatus(ApproveStatus.PENDING);
         post = postRepository.save(post);
 
-
-        Image image = imageService.uploadImage(file);
-        post.addImage(image);
+        for(MultipartFile file : files) {
+            Image image = imageService.uploadImage(file);
+            post.addImage(image);
+        }
 
 
         //user

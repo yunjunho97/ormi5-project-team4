@@ -26,6 +26,8 @@
             <ul class="container">
                 <li th:each="post : ${posts}">
                     <a th:href="@{/read-post/{id}(id=${post.id})}">
+<!--                        <p th:text="${post.getImages()[0].getImgUrl()}">aaa</p>-->
+                        <img class="img-size" th:src="@{{url}(url=${post.getImages()[0].getImgUrl()})}" alt="">
                         <p th:text="${post.title}">Title</p>
                         <p th:text="${post.foundAt}">foundAt</p>
                         <!-- 필드추가 -->
