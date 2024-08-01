@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항</title>
+</head>
+<body>
+<header>
+    <h1>Happy Tails</h1>
+    <!--  공통 헤더   -->
+</header>
+<div class="container">
+    <div class="sidebar">
+        <!--    최근 공지 5개    -->
+        <h2>공지사항</h2>
+        <ul id="recent-notices" class="notice-list">
+            <li th:each="notices : ${recentNotices}">
+                <span th:text="${notices.title}">Title</span>">
+            </li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <p th:text="${notice.title}">Title</p>
+        <p th:text="${notice.createdAt}">Date</p>
+        <p th:text="${notice.content}">Content</p>
+    </div>
+</div>
+</body>
+</html>
