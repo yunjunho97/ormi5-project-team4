@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
 }
 
 header {
@@ -97,7 +96,7 @@ main {
 }
 
 .pagination a:hover {
-    background-color: #f0f0f0;
+    background-color: #ffffff;
 }
 
 .pagination a.active {
