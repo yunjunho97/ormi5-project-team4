@@ -63,7 +63,7 @@ public class HomeController {
 
     @PostMapping("/create")
     public String createPost(@ModelAttribute PostDTO postDTO,
-                             @RequestParam("file") MultipartFile file,
+                             @RequestParam("files") List<MultipartFile> files,
                              RedirectAttributes redirectAttributes) {
         try {
             HttpHeaders headers = new HttpHeaders();
@@ -71,12 +71,14 @@ public class HomeController {
 
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
             body.add("postDTO", postDTO);
-            body.add("file", new ByteArrayResource(file.getBytes()) {
-                @Override
-                public String getFilename() {
-                    return file.getOriginalFilename();
-                }
-            });
+            for(MultipartFile file : files) {
+                body.add("files", new ByteArrayResource(file.getBytes()) {
+                    @Override
+                    public String getFilename() {
+                        return file.getOriginalFilename();
+                    }
+                });
+            }
 
             HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
