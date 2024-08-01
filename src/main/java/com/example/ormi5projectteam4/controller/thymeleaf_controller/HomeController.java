@@ -4,12 +4,16 @@ import com.example.ormi5projectteam4.domain.dto.PagedPostsResponse;
 import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.domain.dto.ProcessStatus;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.data.domain.Page;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
@@ -58,28 +62,41 @@ public class HomeController {
     }
 
     @PostMapping("/create")
-    public String createPost(@ModelAttribute PostDTO postDTO, RedirectAttributes redirectAttributes) {
-        System.out.println("aaa");
+    public String createPost(@ModelAttribute PostDTO postDTO,
+                             @RequestParam("file") MultipartFile file,
+                             RedirectAttributes redirectAttributes) {
         try {
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity<PostDTO> request = new HttpEntity<>(postDTO, headers);
+            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-            ResponseEntity<PostDTO> response = restTemplate.postForEntity(BASE_URL, request, PostDTO.class);
+            MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+            body.add("postDTO", postDTO);
+            body.add("file", new ByteArrayResource(file.getBytes()) {
+                @Override
+                public String getFilename() {
+                    return file.getOriginalFilename();
+                }
+            });
+
+            HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+            ResponseEntity<PostDTO> response = restTemplate.exchange(
+                    BASE_URL,
+                    HttpMethod.POST,
+                    requestEntity,
+                    PostDTO.class
+            );
 
             if (response.getStatusCode() == HttpStatus.OK) {
                 redirectAttributes.addFlashAttribute("message", "Post created successfully!");
-//                return "redirect:/home"; // 홈 페이지로 리다이렉트
-                return "/write-success";
+                return "redirect:/home";
             } else {
                 redirectAttributes.addFlashAttribute("error", "Failed to create post. Please try again.");
-//                return "redirect:/posts/create";
-                return "error";
+                return "redirect:/write";
             }
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "An error occurred: " + e.getMessage());
-//            return "redirect:/posts/create";
-            return "error";
+            return "redirect:/write";
         }
     }
 

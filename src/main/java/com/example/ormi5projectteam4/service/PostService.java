@@ -19,6 +19,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -70,17 +71,17 @@ public class PostService {
     }
 
     @Transactional
-    public PostDTO createPost(PostDTO postDTO) {
+    public PostDTO createPost(PostDTO postDTO, MultipartFile file) {
         Post post = convertToPost(postDTO);
         post.setCreatedAt(LocalDateTime.now());
         post.setAdoptionStatus(AdoptionStatus.POSTING);
         post.setApproveStatus(ApproveStatus.PENDING);
         post = postRepository.save(post);
 
-        for(ImageDTO imageDTO : postDTO.getImages()) {
-            Image image = imageService.createImage(imageDTO);
-            post.addImage(image);
-        }
+
+        Image image = imageService.uploadImage(file);
+        post.addImage(image);
+
 
         //user
 //        Long userId = postDTO.getUserInfoDTO().getId();

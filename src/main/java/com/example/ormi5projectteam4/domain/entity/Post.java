@@ -31,7 +31,7 @@ public class Post {
     private String tempoLocation;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private Long userId;
+//    private Long userId;
 
     @Enumerated(EnumType.STRING)
     private AdoptionStatus adoptionStatus;
