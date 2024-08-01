@@ -2,7 +2,6 @@ package com.example.ormi5projectteam4.service;
 
 import com.example.ormi5projectteam4.domain.dto.MyPageDTO;
 import com.example.ormi5projectteam4.domain.dto.PostDTO;
-import com.example.ormi5projectteam4.domain.entity.Post;
 import com.example.ormi5projectteam4.domain.entity.User;
 import com.example.ormi5projectteam4.repository.MyPageRepository;
 import com.example.ormi5projectteam4.repository.PostRepository;
@@ -28,27 +27,27 @@ public class MyPageService {
         this.postRepository = postRepository;
     }
 
-    public MyPageDTO getUserInfo(Long userId) {
-        Optional<User> userOptional = myPageRepository.findById(userId);
-        return userOptional.map(user -> {
-            MyPageDTO myPageDTO = new MyPageDTO();
-            myPageDTO.setId(user.getId());
-            myPageDTO.setUserName(user.getUserName());
-            myPageDTO.setEmail(user.getEmail());
-            myPageDTO.setPhone(user.getPhone());
-            myPageDTO.setCreatedAt(user.getCreatedAt());
-            myPageDTO.setUpdatedAt(user.getUpdatedAt());
-            return myPageDTO;
-        }).orElse(null);
+    public Optional<MyPageDTO> getUserInfo(Long userId) {
+        return myPageRepository.findById(userId)
+                .map(user -> {
+                    MyPageDTO myPageDTO = new MyPageDTO();
+                    myPageDTO.setId(user.getId());
+                    myPageDTO.setUserName(user.getUserName());
+                    myPageDTO.setEmail(user.getEmail());
+                    myPageDTO.setPhone(user.getPhone());
+                    myPageDTO.setCreatedAt(user.getCreatedAt());
+                    myPageDTO.setUpdatedAt(user.getUpdatedAt());
+                    return myPageDTO;
+                });
     }
 
     @Transactional
     public void updateUserInfo(Long userId, MyPageDTO myPageDTO) {
-        myPageRepository.findById(userId).ifPresent(user -> {
-            user.setUserName(myPageDTO.getUserName());
-            user.setEmail(myPageDTO.getEmail());
-            user.setPhone(myPageDTO.getPhone());
-        });
+        User user = myPageRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        user.setUserName(myPageDTO.getUserName());
+        user.setEmail(myPageDTO.getEmail());
+        user.setPhone(myPageDTO.getPhone());
     }
 
     @Transactional
@@ -62,20 +61,14 @@ public class MyPageService {
                 .collect(Collectors.toList());
     }
 
-
-    public PostDTO getMyPostDetail(Long postId, Long userId) {
-        Optional<Post> postOptional = postRepository.findById(postId);
-        if (postOptional.isPresent()) {
-            Post post = postOptional.get();
-            if (post.getUser().getId().equals(userId)) {
-                return PostDTO.fromPost(post);
-            }
-        }
-        return null; // 해당 게시글이 존재하지 않거나 권한이 없는 경우
+    public Optional<PostDTO> getMyPostDetail(Long postId, Long userId) {
+        return postRepository.findById(postId)
+                .filter(post -> post.getUser().getId().equals(userId))
+                .map(PostDTO::fromPost);
     }
 
     public long getPostCountByUser(Long userId) {
         return postRepository.countByUserId(userId);
     }
-
 }
+

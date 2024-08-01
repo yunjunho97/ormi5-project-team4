@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -23,7 +22,7 @@ public class MyPageDTO {
     private LocalDateTime updatedAt;
     private String email;
     private String phone;
-    private String postCount;
+    private Long postCount;
     private List<PostDTO> posts;
 
 }
