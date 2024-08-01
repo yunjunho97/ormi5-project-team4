@@ -9,6 +9,7 @@
             height: 200px;
             border: 2px dashed #ccc;
             border-radius: 20px;
+            font-family: Arial;
             text-align: center;
             padding: 20px;
             margin: 20px 0;
@@ -21,6 +22,7 @@
 <body>
 <h1>Create New Post</h1>
 <form th:action="@{/create}" method="post" enctype="multipart/form-data">
+    <!-- 기존 입력 필드들 유지 -->
     <div>
         <label for="title">제목:</label>
         <input type="text" id="title" name="title" required>
@@ -78,26 +80,25 @@
         </select>
     </div>
 
-<!--    <div>-->
-<!--        <label for="file">Image File:</label>-->
-<!--        <input type="file" id="file" name="file" accept="image/*" required>-->
-<!--    </div>-->
+    <!-- 드래그 앤 드롭 영역 수정 -->
     <div id="drop-zone">
         드래그 앤 드롭으로 이미지를 올려주세요<br>
         또는<br>
-        <input type="file" id="file" name="file" accept="image/*" style="display:none;">
-        <button type="button" onclick="document.getElementById('file').click()">파일 선택</button>
+        <input type="file" id="files" name="files" accept="image/*" multiple style="display:none;">
+        <button type="button" onclick="document.getElementById('files').click()">파일 선택</button>
     </div>
-    <div id="file-name"></div>
+    <div id="file-names"></div>
 
     <div>
         <button type="submit">Create Post</button>
     </div>
 </form>
+
 <script>
     const dropZone = document.getElementById('drop-zone');
-    const fileInput = document.getElementById('file');
-    const fileName = document.getElementById('file-name');
+    const fileInput = document.getElementById('files');
+    const fileNames = document.getElementById('file-names');
+    let selectedFiles = [];
 
     dropZone.addEventListener('dragover', (e) => {
         e.preventDefault();
@@ -112,16 +113,15 @@
         e.preventDefault();
         dropZone.classList.remove('dragover');
         fileInput.files = e.dataTransfer.files;
-        updateFileName();
+        updateFileNames();
     });
 
-    fileInput.addEventListener('change', updateFileName);
+    fileInput.addEventListener('change', updateFileNames);
 
-    function updateFileName() {
-        if (fileInput.files.length > 0) {
-            fileName.textContent = `선택된 파일: ${fileInput.files[0].name}`;
-        } else {
-            fileName.textContent = '';
+    function updateFileNames() {
+        fileNames.innerHTML = '';
+        for (let i = 0; i < fileInput.files.length; i++) {
+            fileNames.innerHTML += `<p>선택된 파일 ${i+1}: ${fileInput.files[i].name}</p>`;
         }
     }
 </script>
