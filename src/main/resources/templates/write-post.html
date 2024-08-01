@@ -106,7 +106,7 @@
     const dropZone = document.getElementById('drop-zone');
     const fileInput = document.getElementById('files');
     const fileNames = document.getElementById('file-names');
-    let selectedFiles = [];
+    let selectedFiles = new DataTransfer();
 
     dropZone.addEventListener('dragover', (e) => {
         e.preventDefault();
@@ -120,11 +120,20 @@
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
         dropZone.classList.remove('dragover');
-        fileInput.files = e.dataTransfer.files;
-        updateFileNames();
+        addFiles(e.dataTransfer.files);
     });
 
-    fileInput.addEventListener('change', updateFileNames);
+    fileInput.addEventListener('change', (e) => {
+        addFiles(e.target.files);
+    });
+
+    function addFiles(newFiles) {
+        for (let file of newFiles) {
+            selectedFiles.items.add(file);
+        }
+        fileInput.files = selectedFiles.files;
+        updateFileNames();
+    }
 
     function updateFileNames() {
         fileNames.innerHTML = '';
@@ -133,6 +142,5 @@
         }
     }
 </script>
-
 </body>
 </html>

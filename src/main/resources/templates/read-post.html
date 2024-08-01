@@ -50,6 +50,11 @@
         <div>
             <p th:text="${post.detail}"></p>
         </div>
+        <div>
+            <th th:each="image : ${post.getImages()}">
+                <img class="img-size" th:src="@{{url}(url=${image.getImgUrl()})}">
+            </th>
+        </div>
     </div>
 </div>
 <form th:action="@{/delete/{id}(id=${post.id})}" method="post">
