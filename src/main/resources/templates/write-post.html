@@ -3,6 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Create New Post</title>
+    <style>
+        #drop-zone {
+            width: 300px;
+            height: 200px;
+            border: 2px dashed #ccc;
+            border-radius: 20px;
+            text-align: center;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        #drop-zone.dragover {
+            background-color: #e1e1e1;
+        }
+    </style>
 </head>
 <body>
 <h1>Create New Post</h1>
@@ -64,15 +78,53 @@
         </select>
     </div>
 
-    <div>
-        <label for="file">Image File:</label>
-        <input type="file" id="file" name="file" accept="image/*" required>
+<!--    <div>-->
+<!--        <label for="file">Image File:</label>-->
+<!--        <input type="file" id="file" name="file" accept="image/*" required>-->
+<!--    </div>-->
+    <div id="drop-zone">
+        드래그 앤 드롭으로 이미지를 올려주세요<br>
+        또는<br>
+        <input type="file" id="file" name="file" accept="image/*" style="display:none;">
+        <button type="button" onclick="document.getElementById('file').click()">파일 선택</button>
     </div>
+    <div id="file-name"></div>
 
     <div>
         <button type="submit">Create Post</button>
     </div>
 </form>
+<script>
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file');
+    const fileName = document.getElementById('file-name');
+
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        fileInput.files = e.dataTransfer.files;
+        updateFileName();
+    });
+
+    fileInput.addEventListener('change', updateFileName);
+
+    function updateFileName() {
+        if (fileInput.files.length > 0) {
+            fileName.textContent = `선택된 파일: ${fileInput.files[0].name}`;
+        } else {
+            fileName.textContent = '';
+        }
+    }
+</script>
 
 </body>
 </html>
