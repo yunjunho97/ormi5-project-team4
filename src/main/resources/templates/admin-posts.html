@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/styles/admin/admin-base.css}">
+    <link rel="stylesheet" th:href="@{/styles/admin/admin-component.css}">
     <link rel="stylesheet" th:href="@{/styles/admin/admin-layout.css}">
     <script th:src="@{/js/admin-page.js}" defer></script>
 </head>
@@ -31,60 +32,91 @@
         </section>
     </header>
     <main>
-        <nav>
+        <nav class="container-admin-nav">
             <ul>
-                <li class="font-nav-category-selected">
-                    관리자 페이지
-                    <div>
+                <li id='admin-nav-manage' class="padding-top-13 background-purple">
+                    <p class="text-align-center font-nav-category-selected padding-bottom-15">관리자 페이지</p>
+                    <div class="padding-top-19 padding-bottom-13 background-color-default">
                         <ul>
                             <li>
                                 <p class="font-nav-title">
                                     공지 관리
                                 </p>
-                                <p>
+                                <p class="font-nav-description">
                                     공지 관리 페이지
                                 </p>
+                                <img src="/images/admin-nav-line.svg" alt="" class="line-nav">
                             </li>
                             <li>
                                 <p class="font-nav-title">
                                     게시물 관리
                                 </p>
-                                <p>
+                                <p class="font-nav-description">
                                     게시물 관리 페이지
                                 </p>
+                                <img src="/images/admin-nav-line.svg" alt="" class="line-nav">
                             </li>
                             <li>
                                 <p class="font-nav-title">
                                     사용자 관리
                                 </p>
-                                <p>
+                                <p class="font-nav-description margin-bottom-0">
                                     사용자 관리 페이지
                                 </p>
                             </li>
                         </ul>
                     </div>
                 </li>
-                <li class="font-nav-category-selected">
+                <li class="font-nav-category frame-nav-normal background-nav text-align-center">
                     공지사항
                 </li>
-                <li class="font-nav-category-selected">
-                    진행중인 공고
+                <li class="frame-nav-normal background-nav text-align-center">
+                    <a id="adoption-posting" class="font-nav-category">진행중인 공고</a>
                 </li>
-                <li class="font-nav-category-selected">
-                    완료된 공고
+                <li class="frame-nav-normal background-nav text-align-center">
+                    <a id="adoption-adopted" class="font-nav-category">완료된 공고</a>
                 </li>
             </ul>
         </nav>
         <article class="article-post">
             <div>
-                <ul id="post-list">
+                <div class="container margin-bottom-4">
+                    <div class="container gap-22">
+                        <p id="board-username" class="font-board-username">닉네임</p>
+                        <p class="font-board-userinfo-small">관리자</p>
+                    </div>
+                    <div class="container">
+                        <p id="board-user-createdAt" class="font-board-userinfo-small">2021.01.12</p>
+                        <p class="font-board-userinfo-small">가입</p>
+                    </div>
+                </div>
+                <div class="container margin-bottom-13">
+                    <div class="container gap-17">
+                        <p id="board-user-phone" class="font-board-userinfo">010-1234-5678</p>
+                        <p id="board-user-email" class="font-board-userinfo">dlfgkrltlfgek@naver.com</p>
+                    </div>
+                    <p class="font-board-role">관리자</p>
+                </div>
+                <img src="/images/admin-board-topline.svg" alt="" class="board-topline">
+                <div class="container-board">
+                    <ul id="post-list" class="container-posts">
 
-                </ul>
-            </div>
-            <div class="post-page">
-                <ul id="post-pages">
+                    </ul>
+                </div>
+                <img src="/images/admin-board-bottomline.svg" alt="" class="board-bottomline">
+                <div class="container">
+                    <div class="container gap-15">
+                        <input id="check-all" type="checkbox" class="checkbox-all">
+                        <label for="check-all" class="font-page">전체선택</label>
+                    </div>
+                    <ul id="post-pages">
 
-                </ul>
+                    </ul>
+                    <div class="container gap-4">
+                        <a class="button-apply container flex-center">승인</a>
+                        <a class="button-deny container flex-center">거절</a>
+                    </div>
+                </div>
             </div>
         </article>
     </main>

@@ -3,7 +3,7 @@
     background-color: #766CED;
 }
 
-.font-foreword {
+.font-forward {
     font-size: 12px;
     color: #766CED;
 }
@@ -58,6 +58,23 @@
 
 .font-nav-title {
     font-weight: 700;
+    padding-left: 39px;
+    margin-bottom: 5px;
+}
+
+.font-nav-description {
+    padding-left: 39px;
+    margin-bottom: 9px;
+}
+
+.frame-nav-normal {
+    padding-top: 13px;
+    padding-bottom: 13px;
+}
+
+.line-nav{
+    padding-left: 21px;
+    vertical-align: top;
 }
 
 .background-nav {
@@ -69,6 +86,16 @@
     color: #9B9B9B;
 }
 
+.font-board-userinfo {
+    font-weight: 400;
+    color: #9B9B9B;
+}
+
+.font-board-userinfo-small {
+    font-weight: 400;
+    color: #C3C3C3;
+}
+
 .font-board-role {
     font-weight: 700;
     color: #9B9B9B;
@@ -78,22 +105,43 @@
     font-size: 24px;
 }
 
-.font-board-small {
-    font-size: 12px;
-    color: #9B9B9B;
+.board-topline {
+    margin-bottom: 40px;
+}
+
+.board-bottomline {
+    margin-bottom: 17px;
 }
 
 .article-post {
     padding-top: 14px;
-    display: flex;
     justify-content: center;
+    display: flex;
+}
+
+.article-post > div {
+    width: 724px;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-board {
+    margin-bottom: 25px;
 }
 
 .container-posts {
-
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
 }
 
 /* Page Area */
+#post-pages {
+    display: flex;
+    justify-content: center;
+    gap: 20px
+}
+
 .font-page {
     font-size: 12px;
 }
@@ -101,4 +149,103 @@
 .font-page-selected {
     font-size: 14px;
     color: #000000;
+}
+
+.checkbox-all {
+    color: #D9D9D9;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+}
+
+.button-apply {
+    font-size: 12px;
+    width: 60px;
+    height: 28px;
+    border-radius: 4px;
+    color: #F5F4FF;
+    background-color: #766CED;
+}
+
+.button-deny {
+    font-size: 12px;
+    width: 60px;
+    height: 28px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #CFCFCF;
+}
+
+/* etc */
+.background-color-default {
+    background-color: #F5F4FF;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.padding-top-13 {
+    padding-top: 13px;
+}
+
+.padding-top-19 {
+    padding-top: 19px;
+}
+
+.padding-bottom-13 {
+    padding-bottom: 13px;
+}
+
+.padding-bottom-15 {
+    padding-bottom: 15px;
+}
+
+.margin-bottom-0 {
+    margin-bottom: 0;
+}
+
+.margin-bottom-3 {
+    margin-bottom: 3px;
+}
+
+.margin-bottom-4 {
+    margin-bottom: 4px;
+}
+
+.margin-bottom-5 {
+    margin-bottom: 5px;
+}
+
+.margin-bottom-7 {
+    margin-bottom: 7px;
+}
+
+.margin-bottom-9 {
+    margin-bottom: 9px;
+}
+
+.margin-bottom-13 {
+    margin-bottom: 13px;
+}
+
+.gap-4 {
+    gap: 4px;
+}
+
+.gap-15 {
+    gap: 15px
+}
+
+.gap-17 {
+    gap: 17px;
+}
+
+.gap-22 {
+    gap: 22px;
+}
+
+.flex-center {
+    justify-content: center;
 }

@@ -1,10 +1,48 @@
 const URL = "http://localhost:8080";
 document.addEventListener("DOMContentLoaded", function() {
+    const previousPageId = getPageId() - 1;
     const pageId = getPageId();
-    const approveStatus = getApproveStatus();
+    const nextPageId = getPageId() + 1;
+
+    let approveStatus = '';
+    if(getApproveStatus() !== ''){
+        approveStatus = `&approvestatus=${getApproveStatus()}`;
+    }
+
+    // url 설정
+    const fetchURL = URL + `/admin/post?&page=${getPageId()}` + approveStatus;
+    const previousPageURL = URL + `/manage/posts?&page=${previousPageId}` + approveStatus;
+    const nextPageURL = URL + `/manage/posts?&page=${nextPageId}` + approveStatus;
+
+    // nav 필터링 관련
+    const postingFilter = document.querySelector('#adoption-posting');
+    const adoptedFilter = document.querySelector('#adoption-adopted');
+
+    switch(getApproveStatus()){
+        case 'POSTING':
+            postingFilter.href = URL + `/manage/posts?&page=${getPageId()}`;
+            adoptedFilter.href = URL + `/manage/posts?&page=${getPageId()}&approvestatus=ADOPTED`;
+            break;
+        case 'ADOPTED':
+            postingFilter.href = URL + `/manage/posts?&page=${getPageId()}&approvestatus=POSTING`;
+            adoptedFilter.href = URL + `/manage/posts?&page=${getPageId()}`;
+            break;
+        default:
+            postingFilter.href = URL + `/manage/posts?&page=${getPageId()}&approvestatus=POSTING`;
+            adoptedFilter.href = URL + `/manage/posts?&page=${getPageId()}&approvestatus=ADOPTED`;
+            break;
+    }
+
+    // 유저 정보 받아오기
+    fetch(fetchURL)
+        .then(response => response.json())
+        .then(data => {
+            // todo: 로그인 정보 연동
+        })
+        .catch(error => console.error('Error:', error));
 
     // 게시글 받아오기
-    fetch(`/admin/post?&page=0`)
+    fetch(fetchURL)
         .then(response => response.json())
         .then(data => {
             const postList = document.getElementById('post-list');
@@ -17,11 +55,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 input.type = 'checkbox';
                 input.className = 'checkbox';
                 const img = document.createElement('img');
+                // todo : db연결
+                img.src = '/images/animal-test-img.svg'
                 img.alt = '이미지';
+                img.className = 'margin-bottom-7'
                 const status = document.createElement("p");
                 status.textContent = getResponseForAdoptionStatus(post.adoptionStatus);
+                status.className = 'font-forward margin-bottom-3'
                 const title = document.createElement('a');
-                // todo : title.href = 'http://localhost:8080/'
+                title.href = URL + `/read-post/${post.id}`;
                 title.textContent = post.title;
 
                 div.appendChild(input);
@@ -44,8 +86,8 @@ document.addEventListener("DOMContentLoaded", function() {
             const previousPageImg = document.createElement('img');
             previousPageImg.src = '/images/page-previous.svg';
             previousPageImg.alt = '이전 페이지'
-            if (!(pageId === '1')) {
-                goPreviousPage.href = URL + `/manage/posts/` + (parseInt(pageId) - 1).toString();
+            if (!(pageId === 0)) {
+                goPreviousPage.href = previousPageURL;
             }
 
             goPreviousPage.appendChild(previousPageImg);
@@ -53,17 +95,17 @@ document.addEventListener("DOMContentLoaded", function() {
             itemList.appendChild(goPreviousPage);
 
             // 페이지 생성
-            for (let i = 0; i < numOfLists; i++) {
+            for (let i = getPageStartNumber(getPageId(), numOfLists); i <= getPageEndNumber(getPageId(), numOfLists); i++) {
                 const li = document.createElement('li');
                 const pageElement = document.createElement(
-                    pageId === (i + 1).toString() ? 'p' : 'a'
+                    pageId === i ? 'p' : 'a'
                 )
-                pageElement.textContent = (i + 1).toString();
+                pageElement.textContent = i.toString();
                 if (pageElement.tagName.toLowerCase() === 'p') {
                     pageElement.className = 'font-page-selected';
                 } else {
                     pageElement.className = 'font-page';
-                    pageElement.href = URL + `/manage/posts/` + (i + 1).toString();
+                    pageElement.href = URL + `/manage/posts?&page=${i}` + approveStatus;
                 }
 
                 li.appendChild(pageElement);
@@ -76,8 +118,8 @@ document.addEventListener("DOMContentLoaded", function() {
             const nextPageImg = document.createElement('img');
             nextPageImg.src = '/images/page-next.svg';
             nextPageImg.alt = '다음 페이지'
-            if (!(pageId === numOfLists.toString())) {
-                goNextPage.href = URL + `/manage/posts/` + (parseInt(pageId) + 1).toString();
+            if (!(pageId === numOfLists - 1)) {
+                goNextPage.href = nextPageURL;
             }
 
             goNextPage.appendChild(nextPageImg);
@@ -109,5 +151,13 @@ function getPageId() {
 }
 
 function getApproveStatus() {
-    return getUrlParameter('approveStatus') || '';
+    return getUrlParameter('approvestatus') || '';
+}
+
+function getPageStartNumber(page, pageSize){
+    return page <= 5 ? 1 : page >= pageSize - 4 ? pageSize - 8 : page - 4;
+}
+
+function getPageEndNumber(page, pageSize){
+    return page <= 5 ? 9 : page >= pageSize - 4 ? pageSize : page + 4;
 }
