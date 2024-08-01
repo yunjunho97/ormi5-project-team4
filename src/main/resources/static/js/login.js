@@ -1,4 +1,4 @@
-const URL = `http://localhost:8080`
+import {URL, API_LOGIN, HOME} from "./constant.js";
 
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -11,7 +11,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
         password: password
     };
 
-    fetch(URL + '/auth/login', {
+    fetch(URL + API_LOGIN, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -22,7 +22,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
         .then(data => {
             console.log('Success:', data);
             if(data.userDto !== null){
-                window.location.href = URL + '/home' // home 화면으로 이동
+                window.location.href = URL + HOME // home 화면으로 이동
             }
         })
         .catch((error) => {

@@ -1,4 +1,5 @@
-const URL = "http://localhost:8080";
+import {URL, MANAGE_POST, READ_POST} from "./constant.js";
+
 document.addEventListener("DOMContentLoaded", function() {
     const previousPageId = getPageId() - 1;
     const pageId = getPageId();
@@ -11,8 +12,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // url 설정
     const fetchURL = URL + `/admin/post?&page=${getPageId()}` + approveStatus;
-    const previousPageURL = URL + `/manage/posts?&page=${previousPageId}` + approveStatus;
-    const nextPageURL = URL + `/manage/posts?&page=${nextPageId}` + approveStatus;
+    const previousPageURL = URL + MANAGE_POST + `?&page=${previousPageId}` + approveStatus;
+    const nextPageURL = URL + + MANAGE_POST + `?&page=${nextPageId}` + approveStatus;
 
     // nav 필터링 관련
     const postingFilter = document.querySelector('#adoption-posting');
@@ -20,16 +21,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
     switch(getApproveStatus()){
         case 'POSTING':
-            postingFilter.href = URL + `/manage/posts?&page=${getPageId()}`;
-            adoptedFilter.href = URL + `/manage/posts?&page=${getPageId()}&approvestatus=ADOPTED`;
+            postingFilter.href = URL + MANAGE_POST + `?&page=${getPageId()}`;
+            adoptedFilter.href = URL + MANAGE_POST + `?&page=${getPageId()}&approvestatus=ADOPTED`;
             break;
         case 'ADOPTED':
-            postingFilter.href = URL + `/manage/posts?&page=${getPageId()}&approvestatus=POSTING`;
-            adoptedFilter.href = URL + `/manage/posts?&page=${getPageId()}`;
+            postingFilter.href = URL + MANAGE_POST + `?&page=${getPageId()}&approvestatus=POSTING`;
+            adoptedFilter.href = URL + MANAGE_POST + `?&page=${getPageId()}`;
             break;
         default:
-            postingFilter.href = URL + `/manage/posts?&page=${getPageId()}&approvestatus=POSTING`;
-            adoptedFilter.href = URL + `/manage/posts?&page=${getPageId()}&approvestatus=ADOPTED`;
+            postingFilter.href = URL + MANAGE_POST + `?&page=${getPageId()}&approvestatus=POSTING`;
+            adoptedFilter.href = URL + MANAGE_POST + `?&page=${getPageId()}&approvestatus=ADOPTED`;
             break;
     }
 
@@ -63,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 status.textContent = getResponseForAdoptionStatus(post.adoptionStatus);
                 status.className = 'font-forward margin-bottom-3'
                 const title = document.createElement('a');
-                title.href = URL + `/read-post/${post.id}`;
+                title.href = URL + READ_POST + `${post.id}`;
                 title.textContent = post.title;
 
                 div.appendChild(input);
@@ -105,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     pageElement.className = 'font-page-selected';
                 } else {
                     pageElement.className = 'font-page';
-                    pageElement.href = URL + `/manage/posts?&page=${i}` + approveStatus;
+                    pageElement.href = URL + MANAGE_POST + `?&page=${i}` + approveStatus;
                 }
 
                 li.appendChild(pageElement);
