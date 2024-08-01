@@ -46,9 +46,9 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Image> images = new ArrayList<>();
 
-//    @ManyToOne
-//    @JoinColumn(name = "userId")
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
 
     public void addImage(Image image) {
         images.add(image);

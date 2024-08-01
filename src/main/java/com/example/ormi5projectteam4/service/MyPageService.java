@@ -67,7 +67,7 @@ public class MyPageService {
         Optional<Post> postOptional = postRepository.findById(postId);
         if (postOptional.isPresent()) {
             Post post = postOptional.get();
-            if (post.getUserId().equals(userId)) {
+            if (post.getUser().getId().equals(userId)) {
                 return PostDTO.fromPost(post);
             }
         }
