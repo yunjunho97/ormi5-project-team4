@@ -30,6 +30,7 @@ public class AdminController {
     return ResponseEntity.ok(posts);
   }
 
+  @Secured(role = Role.ADMIN)
   @GetMapping("/member/{page}")
   public ResponseEntity<List<UserManagementDto>> getAllUsers(
       @RequestParam(required = false) String email, @PathVariable int page) {
@@ -56,6 +57,7 @@ public class AdminController {
     return ResponseEntity.ok(users);
   }
 
+  @Secured(role = Role.ADMIN)
   @PutMapping("/member/{id}")
   public ResponseEntity<UserManagementDto> changeUserRole(
       @PathVariable Long id, @RequestParam Role role) {
@@ -67,6 +69,7 @@ public class AdminController {
     return ResponseEntity.ok(updateUser);
   }
 
+  @Secured(role = Role.ADMIN)
   @PutMapping("/post/{id}")
   public ResponseEntity<Post> changePostApproveStatus(
       @PathVariable Long id, @RequestParam ApproveStatus approveStatus) {
