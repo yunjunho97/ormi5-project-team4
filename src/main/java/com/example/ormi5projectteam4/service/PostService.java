@@ -113,15 +113,22 @@ public class PostService {
 
     public void deletePost(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException(""));
-        post.getImages().clear();
+        List<Image> images = post.getImages();
+
+        for(Image image : images) {
+            imageService.deleteImageFile(image.getImgUrl());
+        }
+
+//        post.getImages().clear();
 
         //user
 //        Long userId = post.getUser().getId();
 //        User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
 //        user.removePost(post); //이 부분 후에 null exception 인가? test 해보기
 
-        postRepository.save(post);
-        postRepository.deleteById(postId);
+//        postRepository.save(post);
+        postRepository.delete(post);
+//        postRepository.deleteById(postId);
     }
 
     private Post convertToPost(PostDTO postDTO) {
