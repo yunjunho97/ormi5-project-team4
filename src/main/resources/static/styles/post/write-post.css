@@ -2,10 +2,10 @@ body {
     background-color: #f0f0f0;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* 수정: 중앙 정렬 대신 상단 정렬 */
+    align-items: flex-start;
     height: 100vh;
     margin: 0;
-    padding: 20px; /* 수정: padding 추가 */
+    padding: 20px;
     box-sizing: border-box;
 }
 .form-container {
@@ -13,8 +13,8 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%; /* 수정: 화면 크기에 맞추기 위해 width를 100%로 설정 */
-    max-width: 400px; /* 수정: 최대 너비를 설정 */
+    width: 100%;
+    max-width: 400px;
 }
 .form-group {
     margin-bottom: 15px;

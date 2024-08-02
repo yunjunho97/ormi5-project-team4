@@ -31,7 +31,6 @@ public class Post {
     private String tempoLocation;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-//    private Long userId;
 
     @Enumerated(EnumType.STRING)
     private AdoptionStatus adoptionStatus;
@@ -55,10 +54,3 @@ public class Post {
         image.setPost(this);
     }
 }
-//enum AdoptionStatus {
-//    POSTING, PROCEEDING, ADOPTED
-//}
-//
-//enum ApproveStatus {
-//    PENDING, APPROVED, DENIED
-//}

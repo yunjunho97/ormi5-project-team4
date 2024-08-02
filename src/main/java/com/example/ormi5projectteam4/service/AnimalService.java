@@ -21,7 +21,6 @@ public class AnimalService {
     public Animal createAnimal(AnimalDTO animalDTO) {
         Animal animal = convertAnimalDTOToAnimal(animalDTO);
         animal.setCreatedAt(LocalDateTime.now());
-//        animal.setNeuteringStatus(NeuteringStatus.INCOMPLETE);
         animalRepository.save(animal);
         return animal;
     }

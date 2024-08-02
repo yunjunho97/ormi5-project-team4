@@ -38,14 +38,3 @@ public class Animal {
     @Enumerated(EnumType.STRING)
     private Species species;
 }
-//enum Gender {
-//    MALE, FEMALE
-//}
-
-//enum NeuteringStatus {
-//    COMPLETE, INCOMPLETE, UNKNOWN
-//}
-//
-//enum Species {
-//    DOG, CAT, ETC
-//}

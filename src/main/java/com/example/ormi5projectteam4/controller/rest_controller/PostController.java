@@ -23,12 +23,6 @@ public class PostController {
         this.postService = postService;
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<PostDTO>> getAllPosts() {
-//        List<PostDTO> allPost = postService.getAllPost();
-//        return ResponseEntity.ok(allPost);
-//    }
-
     @GetMapping
     public ResponseEntity<Page<PostDTO>> getAllPosts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -55,13 +49,6 @@ public class PostController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
-//    @PutMapping("/{id}")
-//    public ResponseEntity<PostDTO> updatePost(@PathVariable Integer id, @RequestBody PostDTO postDTO) {
-//        return postService.updatePost(id, postDTO)
-//                .map(ResponseEntity::ok)
-//                .orElse(ResponseEntity.notFound().build());
-//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<PostDTO> updatePost(@PathVariable Long id, @RequestBody ProcessStatus processStatus) {
