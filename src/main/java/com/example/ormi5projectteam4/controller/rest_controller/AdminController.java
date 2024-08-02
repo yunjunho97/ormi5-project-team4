@@ -1,6 +1,7 @@
 package com.example.ormi5projectteam4.controller.rest_controller;
 
 import com.example.ormi5projectteam4.annotation.Secured;
+import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
 import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
 import com.example.ormi5projectteam4.domain.constant.Role;
 import com.example.ormi5projectteam4.domain.dto.UserManagementDto;
@@ -21,11 +22,12 @@ public class AdminController {
 
   @Secured(role = Role.ADMIN)
   @GetMapping("/post")
-  public ResponseEntity<Page<Post>> getPostsByApproveStatusAndPage(
-      @RequestParam(required = false) ApproveStatus approveStatus,
-      @RequestParam(defaultValue = "0") int page,
-      @RequestParam(defaultValue = "6") int size) {
-    Page<Post> posts = adminService.getPostsByApproveStatus(approveStatus, page, size);
+  public ResponseEntity<Page<Post>> getPostsByConditions(
+          @RequestParam(required = false) ApproveStatus approveStatus,
+          @RequestParam(required = false) AdoptionStatus adoptionStatus,
+          @RequestParam(defaultValue = "0") int page,
+          @RequestParam(defaultValue = "6") int size) {
+    Page<Post> posts = adminService.getPostsByConditions(approveStatus, adoptionStatus, page, size);
 
     return ResponseEntity.ok(posts);
   }

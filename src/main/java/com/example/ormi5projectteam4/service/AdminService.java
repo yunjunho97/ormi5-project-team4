@@ -1,5 +1,6 @@
 package com.example.ormi5projectteam4.service;
 
+import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
 import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
 import com.example.ormi5projectteam4.domain.dto.UserManagementDto;
 import com.example.ormi5projectteam4.domain.entity.Notice;
@@ -29,13 +30,17 @@ public class AdminService {
     @Autowired
     NoticeRepository noticeRepository;
 
-    public Page<Post> getPostsByApproveStatus(ApproveStatus approveStatus, int page, int size) {
+    public Page<Post> getPostsByConditions(ApproveStatus approveStatus, AdoptionStatus adoptionStatus, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
 
-        if (approveStatus == null) {
-            return postRepository.findAll(pageable);
-        } else {
+        if (approveStatus != null && adoptionStatus != null) {
+            return postRepository.findByApproveStatusAndAdoptionStatus(approveStatus, adoptionStatus, pageable);
+        } else if (approveStatus != null) {
             return postRepository.findByApproveStatus(approveStatus, pageable);
+        } else if (adoptionStatus != null) {
+            return postRepository.findByAdoptionStatus(adoptionStatus, pageable);
+        } else {
+            return postRepository.findAll(pageable);
         }
     }
 
