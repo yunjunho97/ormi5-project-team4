@@ -47,9 +47,15 @@ public class PostService {
         return posts.map(PostDTO::fromPost);
     }
 
+//    public Page<PostDTO> getPostsByFoundLocation(String foundLocation, Pageable pageable){
+//        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
+//        Page<Post> posts = postRepository.findByFoundLocation(foundLocation, pageRequest);
+//        return posts.map(PostDTO::fromPost);
+//    }
+
     public Page<PostDTO> getPostsByFoundLocation(String foundLocation, Pageable pageable){
         PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
-        Page<Post> posts = postRepository.findByFoundLocation(foundLocation, pageRequest);
+        Page<Post> posts = postRepository.findByFoundLocationContains(foundLocation, pageRequest);
         return posts.map(PostDTO::fromPost);
     }
 

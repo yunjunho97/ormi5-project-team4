@@ -45,6 +45,13 @@
         </span>
         <a th:if="${currentPage < totalPages - 1}" th:href="@{/home(page=${currentPage + 1})}"> > </a>
     </div>
+
+    <form action="#" th:action="@{/home/location}" method="get">
+        <label for="foundLocation">Enter Location:</label>
+        <input type="text" id="foundLocation" name="foundLocation" required>
+        <button type="submit">Search</button>
+    </form>
+
 </main>
 
 <div th:if="${#lists.isEmpty(posts)}">

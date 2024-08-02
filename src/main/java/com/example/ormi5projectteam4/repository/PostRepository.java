@@ -22,4 +22,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     long countByUserId(Long userId);
 
     Page<Post> findByAdoptionStatus(AdoptionStatus adoptionStatus, Pageable pageable);
+
+    Page<Post> findByFoundLocationContains(String foundLocation, Pageable pageable);
 }

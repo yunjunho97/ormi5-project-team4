@@ -1,5 +1,6 @@
 package com.example.ormi5projectteam4.controller.rest_controller;
 
+import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
 import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.domain.dto.ProcessStatus;
 import com.example.ormi5projectteam4.service.PostService;
@@ -26,7 +27,14 @@ public class PostController {
     @GetMapping
     public ResponseEntity<Page<PostDTO>> getAllPosts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
-        Page<PostDTO> posts = postService.getAllPosts(pageRequest);
+        Page<PostDTO> posts = postService.getAllPosts(pageRequest); //나중에 승인된 게시물만으로 변경
+        return ResponseEntity.ok(posts);
+    }
+
+    @GetMapping("/proceed")
+    public ResponseEntity<Page<PostDTO>> getProceedPosts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<PostDTO> posts = postService.getPostsByAdoptionStatus(AdoptionStatus.POSTING, pageRequest);
         return ResponseEntity.ok(posts);
     }
 
