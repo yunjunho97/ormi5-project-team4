@@ -1,5 +1,6 @@
 package com.example.ormi5projectteam4.repository;
 
+import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
 import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
 import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.domain.entity.Post;
@@ -19,4 +20,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findByUserId(Long userId);
 
     long countByUserId(Long userId);
+
+    Page<Post> findByAdoptionStatus(AdoptionStatus adoptionStatus, Pageable pageable);
 }

@@ -53,11 +53,17 @@ public class PostService {
         return posts.map(PostDTO::fromPost);
     }
 
-    //    public Page<PostDTO> getPostsByApproveStatus(ApproveStatus approveStatus, Pageable pageable){
-//        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
-//        Page<Post> posts = postRepository.findByApproveStatus(approveStatus, pageRequest);
-//        return posts.map(PostDTO::fromPost);
-//    }
+    public Page<PostDTO> getPostsByApproveStatus(ApproveStatus approveStatus, Pageable pageable){
+        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
+        Page<Post> posts = postRepository.findByApproveStatus(approveStatus, pageRequest);
+        return posts.map(PostDTO::fromPost);
+    }
+
+    public Page<PostDTO> getPostsByAdoptionStatus(AdoptionStatus adoptionStatus, Pageable pageable){
+        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
+        Page<Post> posts = postRepository.findByAdoptionStatus(adoptionStatus, pageRequest);
+        return posts.map(PostDTO::fromPost);
+    }
 
     public Optional<PostDTO> getPostById(Long postId) {
         return postRepository.findById(postId).map(PostDTO::fromPost);
