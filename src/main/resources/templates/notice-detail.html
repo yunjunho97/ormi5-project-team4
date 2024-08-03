@@ -20,10 +20,10 @@
             </li>
         </ul>
     </div>
-    <div class="main-content">
-        <p th:text="${notice.title}">Title</p>
-        <p th:text="${notice.createdAt}">Date</p>
-        <p th:text="${notice.content}">Content</p>
+    <div class="main-content" th:object="${notice}">
+        <p th:text="*{title}">Title</p>
+        <p th:text="*{createdAt}">Date</p>
+        <p th:text="*{content}">Content</p>
     </div>
 </div>
 </body>
