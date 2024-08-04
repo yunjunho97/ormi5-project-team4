@@ -1,4 +1,7 @@
-import {URL, API_NOTICE, HOME, NOTICE_LIST} from './constant.js'
+import {URL, API_NOTICE, HOME, NOTICE_LIST} from './constant.js';
+import {
+    setNavigationFilter, setNavigationCategoryStyle
+} from './utils.js';
 
 document.addEventListener("DOMContentLoaded", function () {
     const nav = document.querySelector('#nav');
@@ -39,22 +42,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
 
                 const postingFilter = document.createElement('li');
-                postingFilter.className = 'container-nav-category'; // todo: 게시글 상태 필터링
                 const postingPortal = document.createElement('a');
                 postingPortal.href = URL + HOME; // todo: 게시글 상태 필터링
                 postingPortal.textContent = '진행중인 공고';
-                postingPortal.className = 'adoption-posting';
-                postingPortal.className = 'font-nav-category';
                 postingFilter.appendChild(postingPortal);
 
                 const adoptedFilter = document.createElement('li');
-                adoptedFilter.className = 'container-nav-category'; // todo: 게시글 상태 필터링
                 const adoptedPortal = document.createElement('a');
-                adoptedPortal.href = URL + HOME; // todo: 게시글 상태 필터링
                 adoptedPortal.textContent = '완료된 공고';
-                adoptedPortal.id = 'adoption-adopted';
-                adoptedPortal.className = 'font-nav-category'
                 adoptedFilter.appendChild(adoptedPortal);
+
+                setNavigationCategoryStyle(postingFilter, postingPortal, adoptedFilter, adoptedPortal);
+                setNavigationFilter(postingPortal, adoptedPortal);
 
                 noticeContentsArea.appendChild(noticeContentsList);
 

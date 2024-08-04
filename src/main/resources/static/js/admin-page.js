@@ -5,8 +5,12 @@ import {
     PAGE_ID,
     APPROVE_STATUS,
     ADOPTION_STATUS,
-    API_ADMIN_GET_POSTS, PAGE_ID_PREVIOUS, PAGE_ID_NEXT, getPageStartNumber, getPageEndNumber
+    API_ADMIN_GET_POSTS, PAGE_ID_PREVIOUS, PAGE_ID_NEXT
 } from "./constant.js";
+
+import{
+    getPageStartNumber, getPageEndNumber
+} from "./utils.js";
 
 document.addEventListener("DOMContentLoaded", function() {
     let approveStatus = '';
@@ -22,25 +26,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const fetchURL = URL + API_ADMIN_GET_POSTS + `?&page=${PAGE_ID}` + approveStatus;
     const previousPageURL = URL + MANAGE_POST + `?&page=${PAGE_ID_PREVIOUS}` + approveStatus;
     const nextPageURL = URL + + MANAGE_POST + `?&page=${PAGE_ID_NEXT}` + approveStatus;
-
-    // nav 필터링 관련
-    const postingFilter = document.querySelector('#adoption-posting');
-    const adoptedFilter = document.querySelector('#adoption-adopted');
-
-    switch(APPROVE_STATUS){
-        case 'POSTING':
-            postingFilter.href = URL + MANAGE_POST + `?&page=${PAGE_ID}`;
-            adoptedFilter.href = URL + MANAGE_POST + `?&page=${PAGE_ID}&approvestatus=ADOPTED`;
-            break;
-        case 'ADOPTED':
-            postingFilter.href = URL + MANAGE_POST + `?&page=${PAGE_ID}&approvestatus=POSTING`;
-            adoptedFilter.href = URL + MANAGE_POST + `?&page=${PAGE_ID}`;
-            break;
-        default:
-            postingFilter.href = URL + MANAGE_POST + `?&page=${PAGE_ID}&approvestatus=POSTING`;
-            adoptedFilter.href = URL + MANAGE_POST + `?&page=${PAGE_ID}&approvestatus=ADOPTED`;
-            break;
-    }
 
     // 유저 정보 받아오기
     fetch(fetchURL)

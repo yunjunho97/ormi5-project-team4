@@ -3,8 +3,12 @@ import {
     API_NOTICE,
     HOME,
     ADMIN_PAGE,
-    ADMIN_NOTICE, ADMIN_USER, setNavigationFilter, setNavigationCategoryStyle, NOTICE_LIST
+    ADMIN_NOTICE, ADMIN_USER, NOTICE_LIST
 } from './constant.js'
+
+import {
+    setNavigationFilter, setNavigationCategoryStyle
+} from './utils.js';
 
 document.addEventListener("DOMContentLoaded", function () {
     const nav = document.querySelector('#nav-admin');
@@ -29,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 manageNoticeTitle.className = 'font-nav-title';
                 manageNoticeTitle.textContent = '공지 관리';
                 const manageNoticeDescription = document.createElement('a');
-                manageNoticeDescription.href =  URL + ADMIN_NOTICE;
+                manageNoticeDescription.href = URL + ADMIN_NOTICE;
                 manageNoticeDescription.textContent = '공지 관리 페이지';
                 manageNoticeLi.appendChild(manageNoticeTitle);
                 manageNoticeLi.appendChild(manageNoticeDescription);
