@@ -60,6 +60,21 @@ export function setNavigationCategoryStyle(postingCategoryObj, postingObj, adopt
     }
 }
 
+export function getImgSrc(data){
+    let imgSrc;
+    try{
+        if (!data || !data.images || !data.images[0] || !data.images[0].imgUrl) {
+            throw new Error("Image data is not available");
+        }
+        imgSrc = data.images[0].imgUrl;
+    }
+    catch(e){
+        imgSrc = '/images/animal-test-img.svg';
+    }
+
+    return imgSrc;
+}
+
 // function 영역
 function getUrlParameter(name) {
     const urlParams = new URLSearchParams(window.location.search);

@@ -4,6 +4,7 @@ import com.example.ormi5projectteam4.annotation.Secured;
 import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
 import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
 import com.example.ormi5projectteam4.domain.constant.Role;
+import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.domain.dto.UserManagementDto;
 import com.example.ormi5projectteam4.domain.entity.Post;
 import com.example.ormi5projectteam4.service.AdminService;
@@ -13,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/admin")
@@ -22,12 +22,12 @@ public class AdminController {
 
   @Secured(role = Role.ADMIN)
   @GetMapping("/post")
-  public ResponseEntity<Page<Post>> getPostsByConditions(
+  public ResponseEntity<Page<PostDTO>> getPostsByConditions(
           @RequestParam(required = false) ApproveStatus approveStatus,
           @RequestParam(required = false) AdoptionStatus adoptionStatus,
           @RequestParam(defaultValue = "0") int page,
           @RequestParam(defaultValue = "6") int size) {
-    Page<Post> posts = adminService.getPostsByConditions(approveStatus, adoptionStatus, page, size);
+    Page<PostDTO> posts = adminService.getPostsByConditions(approveStatus, adoptionStatus, page, size);
 
     return ResponseEntity.ok(posts);
   }
@@ -47,13 +47,13 @@ public class AdminController {
           adminService.getAllUsers().stream()
               .skip(startIndex)
               .limit(count)
-              .collect(Collectors.toList());
+              .toList();
     } else {
       users =
           adminService.searchUserByEmail(email).stream()
               .skip(startIndex)
               .limit(count)
-              .collect(Collectors.toList());
+              .toList();
     }
 
     return ResponseEntity.ok(users);
@@ -73,40 +73,13 @@ public class AdminController {
 
   @Secured(role = Role.ADMIN)
   @PutMapping("/post/{id}")
-  public ResponseEntity<Post> changePostApproveStatus(
+  public ResponseEntity<PostDTO> changePostApproveStatus(
       @PathVariable Long id, @RequestParam ApproveStatus approveStatus) {
-    Post updatePost = adminService.changePostApproveStatus(id, approveStatus);
+    PostDTO updatePost = adminService.changePostApproveStatus(id, approveStatus);
     if (updatePost == null) {
       return ResponseEntity.notFound().build();
     }
 
     return ResponseEntity.ok(updatePost);
   }
-
-  //    @PutMapping("/notice/{id}")
-  //    public ResponseEntity<Notice> updateNotice(@PathVariable Integer id, @RequestBody NoticeDto
-  // noticeDto) {
-  //        Notice notice = adminService.getNoticeById(id);
-  //        if (notice == null) {
-  //            return ResponseEntity.notFound().build();
-  //        }
-  //
-  //        notice.setTitle(noticeDto.getTitle());
-  //        notice.setContent(noticeDto.getContent());
-  //        notice.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-  //
-  //        Notice updatedNotice = adminService.saveNotice(notice);
-  //        return ResponseEntity.ok(updatedNotice);
-  //    }
-
-  //    @DeleteMapping("/notice/{id}")
-  //    public ResponseEntity<Void> deleteNotice(@PathVariable Integer id) {
-  //        Notice notice = adminService.getNoticeById(id);
-  //        if (notice == null) {
-  //            return ResponseEntity.notFound().build();
-  //        }
-  //
-  //        adminService.deleteNotice(id);
-  //        return ResponseEntity.noContent().build();
-  //    }
 }

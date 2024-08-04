@@ -8,8 +8,8 @@ import {
     API_ADMIN_GET_POSTS, PAGE_ID_PREVIOUS, PAGE_ID_NEXT
 } from "./constant.js";
 
-import{
-    getPageStartNumber, getPageEndNumber
+import {
+    getPageStartNumber, getPageEndNumber, getResponseForAdoptionStatus, getImgSrc
 } from "./utils.js";
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -23,17 +23,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // url 설정
-    const fetchURL = URL + API_ADMIN_GET_POSTS + `?&page=${PAGE_ID}` + approveStatus;
-    const previousPageURL = URL + MANAGE_POST + `?&page=${PAGE_ID_PREVIOUS}` + approveStatus;
-    const nextPageURL = URL + + MANAGE_POST + `?&page=${PAGE_ID_NEXT}` + approveStatus;
-
-    // 유저 정보 받아오기
-    fetch(fetchURL)
-        .then(response => response.json())
-        .then(data => {
-            // todo: 로그인 정보 연동
-        })
-        .catch(error => console.error('Error:', error));
+    const fetchURL = URL + API_ADMIN_GET_POSTS + `?&page=${PAGE_ID}` + approveStatus + adoptionStatus;
+    const previousPageURL = URL + MANAGE_POST + `?&page=${PAGE_ID_PREVIOUS}` + approveStatus + adoptionStatus;
+    const nextPageURL = URL + + MANAGE_POST + `?&page=${PAGE_ID_NEXT}` + approveStatus + adoptionStatus;
 
     // 게시글 받아오기
     fetch(fetchURL)
@@ -49,8 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 input.type = 'checkbox';
                 input.className = 'checkbox';
                 const img = document.createElement('img');
-                // todo : db연결
-                img.src = '/images/animal-test-img.svg'
+                img.src = getImgSrc(post);
                 img.alt = '이미지';
                 img.className = 'margin-bottom-7'
                 const status = document.createElement("p");

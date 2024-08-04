@@ -29,8 +29,10 @@
 }
 
 .image-container img {
-    width: 100%;
+    width: 221px;
+    height: 221px;
     border-radius: 8px;
+    object-fit: cover;
 }
 
 .checkbox {
