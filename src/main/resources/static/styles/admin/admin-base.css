@@ -27,28 +27,6 @@ body * {
     background-color: initial;
 }
 
-header {
-    background-color: #766CED;
-
-    height: 130px;
-
-    padding-left: 100px;
-    padding-right: 100px;
-    margin-bottom: 146px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header * {
-    background-color: initial;
-
-    padding-left: initial;
-    padding-right: initial;
-    display: initial;
-}
-
 main {
     padding-left: 100px;
     padding-right: 100px;

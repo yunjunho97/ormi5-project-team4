@@ -33,43 +33,6 @@
     color: #CFCFCF;
 }
 
-/* Navigation Area */
-.font-nav-category {
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.font-nav-category-selected {
-    font-size: 20px;
-    font-weight: 700;
-    color: #F5F4FF;
-}
-
-.font-nav-title {
-    font-weight: 700;
-    padding-left: 39px;
-    margin-bottom: 5px;
-}
-
-.font-nav-description {
-    padding-left: 39px;
-    margin-bottom: 9px;
-}
-
-.frame-nav-normal {
-    padding-top: 13px;
-    padding-bottom: 13px;
-}
-
-.line-nav {
-    padding-left: 21px;
-    vertical-align: top;
-}
-
-.background-nav {
-    background-color: #D6D6D6;
-}
-
 /* Board Area */
 .font-board {
     color: #9B9B9B;

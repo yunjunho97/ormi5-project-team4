@@ -12,6 +12,8 @@ export const MANAGE_POST = '/manage/posts';
 export const READ_POST = '/read-post/'; // pathVariable 이 항상 있음
 export const MY_PAGE = '/this/info';
 export const ADMIN_PAGE = '/manage/posts';
+export const ADMIN_NOTICE = '/manage/notice';
+export const ADMIN_USER = '/manage/member';
 export const NOTICE_LIST = '/notice-list';
 
 // Parameter 영역
@@ -23,7 +25,7 @@ export const ADOPTION_STATUS = getAdoptionStatus();
 
 // export Function 영역
 export function getResponseForAdoptionStatus(adoptionStatus) {
-    switch(adoptionStatus) {
+    switch (adoptionStatus) {
         case 'POSTING':
             return '[ 진행중인 공고 ]';
         case 'PROCEEDING':
@@ -33,12 +35,52 @@ export function getResponseForAdoptionStatus(adoptionStatus) {
     }
 }
 
-export function getPageStartNumber(page, pageSize){
+export function getPageStartNumber(page, pageSize) {
     return page <= 5 ? 1 : page >= pageSize - 4 ? pageSize - 8 : page - 4;
 }
 
-export function getPageEndNumber(page, pageSize){
+export function getPageEndNumber(page, pageSize) {
     return page <= 5 ? 9 : page >= pageSize - 4 ? pageSize : page + 4;
+}
+
+export function setNavigationFilter(postingObj, adoptedObj) {
+    switch (ADOPTION_STATUS) {
+        case 'POSTING':
+            postingObj.href = URL + HOME + `?&page=${PAGE_ID}`;
+            adoptedObj.href = URL + HOME + `?&page=${PAGE_ID}&adoptionstatus=ADOPTED`;
+            break;
+        case 'ADOPTED':
+            postingObj.href = URL + HOME + `?&page=${PAGE_ID}&adoptionstatus=POSTING`;
+            adoptedObj.href = URL + HOME + `?&page=${PAGE_ID}`;
+            break;
+        default:
+            postingObj.href = URL + HOME + `?&page=${PAGE_ID}&adoptionstatus=POSTING`;
+            adoptedObj.href = URL + HOME + `?&page=${PAGE_ID}&adoptionstatus=ADOPTED`;
+            break;
+    }
+}
+
+export function setNavigationCategoryStyle(postingCategoryObj, postingObj, adoptedCategoryObj, adoptedObj) {
+    switch (ADOPTION_STATUS) {
+        case 'POSTING':
+            postingCategoryObj.className = 'container-nav-category-selected';
+            postingObj.className = 'font-nav-category-selected';
+            adoptedCategoryObj.className = 'container-nav-category';
+            adoptedObj.className = 'font-nav-category'
+            break;
+        case 'ADOPTED':
+            postingCategoryObj.className = 'container-nav-category';
+            postingObj.className = 'font-nav-category';
+            adoptedCategoryObj.className = 'container-nav-category-selected';
+            adoptedObj.className = 'font-nav-category-selected'
+            break;
+        default:
+            postingCategoryObj.className = 'container-nav-category';
+            postingObj.className = 'font-nav-category';
+            adoptedCategoryObj.className = 'container-nav-category';
+            adoptedObj.className = 'font-nav-category'
+            break;
+    }
 }
 
 // function 영역
@@ -49,13 +91,13 @@ function getUrlParameter(name) {
 
 function getPageId() {
     const pageParam = getUrlParameter('page');
-    return (isNaN(pageParam) || pageParam == null) ? 0 : parseInt(pageParam, 10);
+    return (isNaN(pageParam) || pageParam === '') ? 0 : parseInt(pageParam, 10);
 }
 
 function getApproveStatus() {
     return getUrlParameter('approvestatus') || '';
 }
 
-function getAdoptionStatus(){
+function getAdoptionStatus() {
     return getUrlParameter('adoptionstatus') || '';
 }

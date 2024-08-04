@@ -10,9 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
             if (Array.isArray(data)) {
                 const noticeHead = document.createElement('li');
                 const noticeTitle = document.createElement('a');
-                    noticeTitle.href = URL + NOTICE_LIST;
-                    noticeTitle.className = 'font-nav-category-selected container-nav-category-selected';
-                    noticeTitle.textContent = '공지사항';
+                noticeTitle.href = URL + NOTICE_LIST;
+                noticeTitle.className = 'font-nav-category-selected container-nav-category-selected';
+                noticeTitle.textContent = '공지사항';
                 const noticeContentsArea = document.createElement('div');
                 const noticeContentsList = document.createElement('ul');
 
@@ -39,22 +39,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
 
                 const postingFilter = document.createElement('li');
-                    postingFilter.className = 'container-nav-category'; // todo: 게시글 상태 필터링
+                postingFilter.className = 'container-nav-category'; // todo: 게시글 상태 필터링
                 const postingPortal = document.createElement('a');
-                    postingPortal.href = URL + HOME;
-                    postingPortal.textContent = '진행중인 공고'; // todo: 게시글 상태 필터링
-                    postingPortal.className = 'adoption-posting';
-                    postingPortal.className = 'font-nav-category';
-                    postingFilter.appendChild(postingPortal);
+                postingPortal.href = URL + HOME; // todo: 게시글 상태 필터링
+                postingPortal.textContent = '진행중인 공고';
+                postingPortal.className = 'adoption-posting';
+                postingPortal.className = 'font-nav-category';
+                postingFilter.appendChild(postingPortal);
 
                 const adoptedFilter = document.createElement('li');
-                    adoptedFilter.className = 'container-nav-category'; // todo: 게시글 상태 필터링
+                adoptedFilter.className = 'container-nav-category'; // todo: 게시글 상태 필터링
                 const adoptedPortal = document.createElement('a');
-                    adoptedPortal.href = URL + HOME;
-                    adoptedPortal.textContent = '완료된 공고'; // todo: 게시글 상태 필터링
-                    adoptedPortal.id = 'adoption-adopted';
-                    adoptedPortal.className = 'font-nav-category'
-                    adoptedFilter.appendChild(adoptedPortal);
+                adoptedPortal.href = URL + HOME; // todo: 게시글 상태 필터링
+                adoptedPortal.textContent = '완료된 공고';
+                adoptedPortal.id = 'adoption-adopted';
+                adoptedPortal.className = 'font-nav-category'
+                adoptedFilter.appendChild(adoptedPortal);
 
                 noticeContentsArea.appendChild(noticeContentsList);
 

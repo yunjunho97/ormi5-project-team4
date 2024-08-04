@@ -7,77 +7,13 @@
     <link rel="stylesheet" th:href="@{/styles/admin/admin-component.css}">
     <link rel="stylesheet" th:href="@{/styles/admin/admin-layout.css}">
     <link rel="stylesheet" th:href="@{/styles/shared/header.css}">
+    <link rel="stylesheet" th:href="@{/styles/shared/navigation.css}">
+    <script type="module" th:src="@{/js/navigation-admin.js}"></script>
 </head>
 <body>
-<header>
-    <img src="" alt="이미지">
-    <section>
-        <p class="container">
-            <span class="font-header-username">
-                닉네임
-            </span>
-            <span class="font-header">
-                    님 환영합니다
-            </span>
-        </p>
-        <a id="header-logout" href="" class="font-header">
-            로그아웃
-        </a>
-        <a id="header-admin" href="http://localhost:8080/manage" class="font-header">
-            관리자 페이지
-        </a>
-        <a id="header-mypage" href="" class="font-header">
-            마이페이지
-        </a>
-    </section>
-</header>
+<header id="header"></header>
 <main>
-    <nav class="container-admin-nav">
-        <ul>
-            <li id='admin-nav-manage' class="padding-top-13 background-purple">
-                <p class="text-align-center font-nav-category-selected padding-bottom-15">관리자 페이지</p>
-                <div class="padding-top-19 padding-bottom-13 background-color-default">
-                    <ul>
-                        <li>
-                            <p class="font-nav-title">
-                                공지 관리
-                            </p>
-                            <p class="font-nav-description">
-                                공지 관리 페이지
-                            </p>
-                            <img src="/images/admin-nav-line.svg" alt="" class="line-nav">
-                        </li>
-                        <li>
-                            <p class="font-nav-title">
-                                게시물 관리
-                            </p>
-                            <p class="font-nav-description">
-                                게시물 관리 페이지
-                            </p>
-                            <img src="/images/admin-nav-line.svg" alt="" class="line-nav">
-                        </li>
-                        <li>
-                            <p class="font-nav-title">
-                                사용자 관리
-                            </p>
-                            <p class="font-nav-description margin-bottom-0">
-                                사용자 관리 페이지
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li class="font-nav-category frame-nav-normal background-nav text-align-center">
-                공지사항
-            </li>
-            <li class="frame-nav-normal background-nav text-align-center">
-                <a id="adoption-posting" class="font-nav-category">진행중인 공고</a>
-            </li>
-            <li class="frame-nav-normal background-nav text-align-center">
-                <a id="adoption-adopted" class="font-nav-category">완료된 공고</a>
-            </li>
-        </ul>
-    </nav>
+    <nav id="nav-admin"></nav>
     <article class="article-post">
         <div>
             <!-- userInfo Area -->
