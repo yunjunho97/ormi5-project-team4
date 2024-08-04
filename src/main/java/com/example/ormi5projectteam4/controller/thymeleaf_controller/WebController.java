@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -21,7 +22,7 @@ public class WebController {
     private final RestTemplate restTemplate = new RestTemplate();
     private static final String BASE_URL = "http://localhost:8080";
 
-    @GetMapping("/notice-list")
+    @GetMapping("/notice")
     public String getNotices(@RequestParam(defaultValue = "1") int page, Model model) {
         String url = BASE_URL + "?page=" + page;
         ResponseEntity<List<NoticeDto>> response = restTemplate.exchange(
@@ -31,10 +32,9 @@ public class WebController {
                 new ParameterizedTypeReference<>() {}
         );
         List<NoticeDto> noticePage = response.getBody();
-        List<NoticeDto> recentNotices = noticePage.subList(0, 5);
 
         model.addAttribute("notices", noticePage);
-        model.addAttribute("recentNotices", recentNotices);
+        model.addAttribute("recentNotices", Objects.requireNonNull(noticePage).subList(0, 5));
 
         return "notice-list-user";
     }
@@ -66,8 +66,9 @@ public class WebController {
                 null,
                 NoticeDto.class
         );
+        NoticeDto notice = response.getBody();
 
-        Optional<NoticeDto> notice = Optional.ofNullable(response.getBody());
+        // Optional<NoticeDto> notice = Optional.ofNullable(response.getBody());
         String recentNoticesUrl = BASE_URL + "/recent";
         ResponseEntity<List<NoticeDto>> recentNoticesResponse = restTemplate.exchange(
                 recentNoticesUrl,
@@ -81,6 +82,7 @@ public class WebController {
         model.addAttribute("notice", notice);
         model.addAttribute("recentNotices", recentNotices);
 
-        return "notice";
+        return "notice-detail";
     }
+
 }
