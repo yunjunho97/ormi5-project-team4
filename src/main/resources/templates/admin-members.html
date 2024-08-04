@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/styles/admin/admin-base.css}">
     <link rel="stylesheet" th:href="@{/styles/admin/admin-component.css}">
     <link rel="stylesheet" th:href="@{/styles/admin/admin-layout.css}">
+    <link rel="stylesheet" th:href="@{/styles/shared/header.css}">
 </head>
 <body>
 <header>
@@ -19,13 +20,13 @@
                     님 환영합니다
             </span>
         </p>
-        <a href="" class="font-header">
+        <a id="header-logout" href="" class="font-header">
             로그아웃
         </a>
-        <a href="http://localhost:8080/manage" class="font-header">
+        <a id="header-admin" href="http://localhost:8080/manage" class="font-header">
             관리자 페이지
         </a>
-        <a href="" class="font-header">
+        <a id="header-mypage" href="" class="font-header">
             마이페이지
         </a>
     </section>
@@ -97,24 +98,12 @@
                 </div>
                 <p class="font-board-role">관리자</p>
             </div>
-            <img src="/images/admin-board-topline.svg" alt="" class="board-topline">
-            <div class="container">
-                <div class="container gap-15">
-                    <input id="check-all" type="checkbox" class="checkbox-all">
-                    <label for="check-all" class="font-page">전체선택</label>
-                </div>
-                <ul id="post-pages">
 
-                </ul>
-                <div class="container gap-4">
-                    <a class="button-apply container flex-center">승인</a>
-                    <a class="button-deny container flex-center">거절</a>
-                </div>
-            </div>
+            <img src="/images/admin-board-topline.svg" alt="" class="board-topline margin-bottom-0">
 
             <!-- Member Info Area -->
-            <table>
-                <thead>
+            <table class="margin-bottom-18">
+                <thead class="height-35 table-line-bottom">
                     <tr>
                         <th></th>
                         <th>닉네임</th>
@@ -124,19 +113,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>닉네임</td>
+                <tr class="height-35 table-line-bottom">
+                    <td><input type="checkbox" class="checkbox-all"></td>
+                    <td class="member-username">닉네임</td>
                     <td>dkwlsWkdlfgkrltfgek@naver.com</td>
-                    <td>010-1234-5678</td>
-                    <td class="status-normal">일반유저</td>
+                    <td class="member-phone">010-1234-5678</td>
+                    <td class="member-status-normal">일반유저</td>
                 </tr>
-                <tr>
+                <tr class="height-35 table-line-bottom">
                     <td><input type="checkbox"></td>
-                    <td>닉네임</td>
+                    <td class="member-username">닉네임</td>
                     <td>dkwlsWkdlfgkrltfgek@naver.com</td>
-                    <td>010-1234-5678</td>
-                    <td class="status-banned">차단유저</td>
+                    <td class="member-phone">010-1234-5678</td>
+                    <td class="member-status-banned">차단유저</td>
                 </tr>
                 </tbody>
             </table>
@@ -151,8 +140,8 @@
 
                 </ul>
                 <div class="container gap-4">
-                    <a class="button-apply container flex-center">승인</a>
-                    <a class="button-deny container flex-center">거절</a>
+                    <a class="button-apply container flex-center">차단</a>
+                    <a class="button-deny container flex-center">일반</a>
                 </div>
             </div>
         </div>

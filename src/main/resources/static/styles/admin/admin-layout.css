@@ -33,17 +33,6 @@
     color: #CFCFCF;
 }
 
-/* Header Area */
-.font-header {
-    color: #F5F4FF;
-}
-
-.font-header-username {
-    font-size: 20px;
-    font-weight: 700;
-    color: #F5F4FF;
-}
-
 /* Navigation Area */
 .font-nav-category {
     font-size: 20px;
@@ -72,7 +61,7 @@
     padding-bottom: 13px;
 }
 
-.line-nav{
+.line-nav {
     padding-left: 21px;
     vertical-align: top;
 }
@@ -151,13 +140,6 @@
     color: #000000;
 }
 
-.checkbox-all {
-    color: #D9D9D9;
-    width: 16px;
-    height: 16px;
-    border-radius: 3px;
-}
-
 .button-apply {
     font-size: 12px;
     width: 60px;
@@ -175,6 +157,36 @@
     border-width: 1px;
     border-style: solid;
     border-color: #CFCFCF;
+}
+
+/* Member Area */
+.member-username {
+    font-size: 12px;
+    color: #766CED;
+    text-align: center;
+}
+
+.member-phone {
+    font-size: 12px;
+    color: #9B9B9B;
+    text-align: center;
+}
+
+.member-status-normal {
+    font-size: 12px;
+    color: #9B9B9B;
+    text-align: center;
+}
+
+.member-status-banned {
+    font-size: 12px;
+    color: #766CED;
+    text-align: center;
+}
+
+/* table */
+.table-line-bottom {
+    border-bottom: 1px solid #D9D9D9;
 }
 
 /* etc */
@@ -230,6 +242,10 @@
     margin-bottom: 13px;
 }
 
+.margin-bottom-18 {
+    margin-bottom: 18px;
+}
+
 .gap-4 {
     gap: 4px;
 }
@@ -248,4 +264,8 @@
 
 .flex-center {
     justify-content: center;
+}
+
+.height-35 {
+    height: 35px;
 }
