@@ -9,11 +9,11 @@ document.addEventListener("DOMContentLoaded", function () {
         logo.src = ''; // todo: 로고 이미지 제작
         logo.alt = '로고';
 
-    const usernameContainer = document.createElement('p');
-    const username = document.createElement('span');
+    const userContainer = document.createElement('div');
+    const username = document.createElement('p');
         username.className = 'font-header-username';
         username.textContent = '닉네임'; // todo: 유저 이름 받아오기
-    const welcomeText = document.createElement('span');
+    const welcomeText = document.createElement('p');
         welcomeText.className = 'font-header';
         welcomeText.textContent = ' 님 환영합니다';
 
@@ -30,10 +30,10 @@ document.addEventListener("DOMContentLoaded", function () {
         myPage.className = 'font-header';
         myPage.textContent = '마이페이지';
 
-    usernameContainer.appendChild(username);
-    usernameContainer.appendChild(welcomeText);
+    userContainer.appendChild(username);
+    userContainer.appendChild(welcomeText);
 
-    section.appendChild(usernameContainer);
+    section.appendChild(userContainer);
     section.appendChild(logout);
     section.appendChild(adminPage) // todo: 관리자일 경우 판단
     section.appendChild(myPage);
