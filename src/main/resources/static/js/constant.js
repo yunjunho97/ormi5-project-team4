@@ -21,6 +21,7 @@ export const ADMIN_PAGE = '/manage/posts';
 export const ADMIN_NOTICE = '/manage/notice';
 export const ADMIN_USER = '/manage/member';
 export const NOTICE_LIST = '/notice-list';
+export const READ_NOTICE = '/read-notice';
 
 // Parameter 영역
 export const PAGE_ID = getPageId();

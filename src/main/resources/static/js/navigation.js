@@ -1,4 +1,4 @@
-import {URL, API_NOTICE, HOME, NOTICE_LIST} from './constant.js';
+import {URL, API_NOTICE, HOME, NOTICE_LIST, READ_POST, READ_NOTICE} from './constant.js';
 import {
     setNavigationFilter, setNavigationCategoryStyle, getMyInfo
 } from './utils.js';
@@ -24,12 +24,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 const textLength = 11;
 
                 recentNotices.forEach((item, index) => {
+                    const itemURL = URL + READ_NOTICE + '/' + item.id;
                     const li = document.createElement('li');
                     const title = document.createElement('a');
                     title.className = 'font-nav-title';
                     title.textContent = truncateText(item.title, textLength);
+                    title.href = itemURL;
                     const description = document.createElement('a');
                     description.textContent = truncateText(item.content, textLength);
+                    description.href = itemURL;
 
                     // 아래 구분선 처리
                     if (index !== recentNotices.length - 1) {
