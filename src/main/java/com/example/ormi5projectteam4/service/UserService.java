@@ -39,6 +39,11 @@ public class UserService {
         .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
   }
 
+  /** 회원탈퇴 */
+  public void deleteUserById(Long id) {
+    userRepository.deleteById(id);
+  }
+
   /** 이메일 중복 확인 */
   public int validateDuplicateEmail(String email) {
     List<User> users = userRepository.findByEmail(email);
