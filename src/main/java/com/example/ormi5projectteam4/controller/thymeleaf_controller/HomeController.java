@@ -4,6 +4,7 @@ import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
 import com.example.ormi5projectteam4.domain.dto.PagedPostsResponse;
 import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.domain.dto.ProcessStatus;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.data.domain.Page;
@@ -25,6 +26,11 @@ import java.util.List;
 public class HomeController {
     private final RestTemplate restTemplate = new RestTemplate();
     private static final String BASE_URL = "http://localhost:8080/post";
+    private final HttpSession session;
+
+    public HomeController(HttpSession session) {
+        this.session = session;
+    }
 
     @GetMapping("/home")
     public String home(@RequestParam(defaultValue = "0") int page, Model model, @RequestParam(required = false) AdoptionStatus adoptionstatus) {
@@ -89,6 +95,8 @@ public class HomeController {
                              RedirectAttributes redirectAttributes) {
         try {
             HttpHeaders headers = new HttpHeaders();
+            String sessionId = session.getId();
+            headers.add("Cookie", "JSESSIONID=" + sessionId);
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
