@@ -23,6 +23,15 @@ export function getResponseForUserRole(role) {
     }
 }
 
+export function getResponseForUserRoleAdmin(role){
+    switch (role) {
+        case 'ACTIVE':
+            return { text: '일반유저', className: 'member-status-normal' };
+        case 'INACTIVE':
+            return { text: '차단유저', className: 'member-status-banned' };
+    }
+}
+
 export function calculatePagination(totalPages, currentPage, maxDisplayPages = 9) {
     if (totalPages <= maxDisplayPages) {
         return { startPage: 0, endPage: totalPages };
@@ -199,4 +208,8 @@ export function getDateFormat(timestamp) {
     const day = String(date.getDate()).padStart(2, '0');
 
     return `${year}.${month}.${day}`;
+}
+
+export function getEmail() {
+    return getUrlParameter('email') || '';
 }

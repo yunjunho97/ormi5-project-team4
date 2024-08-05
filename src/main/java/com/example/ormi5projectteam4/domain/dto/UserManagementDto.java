@@ -13,8 +13,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 public class UserManagementDto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String userName;
     private String email;
     private String password;

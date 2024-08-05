@@ -1,6 +1,6 @@
 import {
     getAdoptionStatus,
-    getApproveStatus, getMyInfo,
+    getApproveStatus, getEmail, getMyInfo,
     getPageId,
 
 } from "./utils.js"
@@ -9,9 +9,11 @@ import {
 export const API_LOGIN = "/auth/login";
 export const API_LOGOUT = '/auth/logout';
 export const API_NOTICE = '/notice';
-export const API_ADMIN_GET_POSTS = "/admin/post";
-export const API_MY_INFO = "/auth/this";
-export const API_SET_APPROVE_STATUS = "/admin/post";
+export const API_ADMIN_GET_POSTS = '/admin/post';
+export const API_ADMIN_GET_USERS = '/admin/member';
+export const API_ADMIN_PUT_USER_ROLE = '/admin/member';
+export const API_MY_INFO = '/auth/this';
+export const API_SET_APPROVE_STATUS = '/admin/post';
 
 // 페이지 영역
 export const HOME = '/home';
@@ -30,6 +32,7 @@ export const PAGE_ID_PREVIOUS = PAGE_ID - 1;
 export const PAGE_ID_NEXT = PAGE_ID + 1;
 export const APPROVE_STATUS = getApproveStatus();
 export const ADOPTION_STATUS = getAdoptionStatus();
+export const EMAIL = getEmail();
 
 // Constants
 export const URL = "http://localhost:8080";

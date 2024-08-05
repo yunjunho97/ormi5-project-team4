@@ -49,9 +49,9 @@ public class AdminService {
         Pageable pageable = PageRequest.of(page, size);
 
         if (email == null) {
-            return userRepository.findAll(pageable).map(this::userConvertToUserManagementDto);
+            return userRepository.findByRoleNot(Role.ADMIN, pageable).map(this::userConvertToUserManagementDto);
         } else {
-            return userRepository.findByEmailContaining(email, pageable).map(this::userConvertToUserManagementDto);
+            return userRepository.findByEmailContainingAndRoleNot(email, Role.ADMIN, pageable).map(this::userConvertToUserManagementDto);
         }
     }
 
@@ -79,7 +79,9 @@ public class AdminService {
 
     private UserManagementDto userConvertToUserManagementDto(User user) {
         UserManagementDto userManagementDto = new UserManagementDto();
+        userManagementDto.setId(user.getId());
         userManagementDto.setEmail(user.getEmail());
+        userManagementDto.setUserName(user.getUserName());
         userManagementDto.setPhone(user.getPhone());
         userManagementDto.setRole(user.getRole());
         userManagementDto.setPassword(user.getPassword());

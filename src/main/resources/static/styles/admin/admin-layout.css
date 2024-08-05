@@ -94,6 +94,12 @@
     gap: 20px
 }
 
+#member-pages {
+    display: flex;
+    justify-content: center;
+    gap: 20px
+}
+
 .font-page {
     font-size: 12px;
 }

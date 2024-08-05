@@ -31,7 +31,7 @@ public class AdminController {
 
   @Secured(role = Role.ADMIN)
   @GetMapping("/member")
-  public ResponseEntity<Page<UserManagementDto>> getAllUsers(
+  public ResponseEntity<Page<UserManagementDto>> getUsersByConditions(
       @RequestParam(required = false) String email,
       @RequestParam (defaultValue = "0") int page,
       @RequestParam(defaultValue = "17") int size) {
