@@ -14,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Controller
 public class WebController {
@@ -22,7 +21,7 @@ public class WebController {
     private final RestTemplate restTemplate = new RestTemplate();
     private static final String BASE_URL = "http://localhost:8080";
 
-    @GetMapping("/notice")
+    @GetMapping("/notice-list")
     public String getNotices(@RequestParam(defaultValue = "1") int page, Model model) {
         String url = BASE_URL + "?page=" + page;
         ResponseEntity<List<NoticeDto>> response = restTemplate.exchange(
