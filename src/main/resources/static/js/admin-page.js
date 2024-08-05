@@ -5,11 +5,11 @@ import {
     PAGE_ID,
     APPROVE_STATUS,
     ADOPTION_STATUS,
-    API_ADMIN_GET_POSTS, PAGE_ID_PREVIOUS, PAGE_ID_NEXT
+    API_ADMIN_GET_POSTS, PAGE_ID_PREVIOUS, PAGE_ID_NEXT, API_MY_INFO, MY_INFO
 } from "./constant.js";
 
 import {
-    getPageStartNumber, getPageEndNumber, getResponseForAdoptionStatus, getImgSrc
+    getPageStartNumber, getPageEndNumber, getResponseForAdoptionStatus, getImgSrc, getResponseForUserRole, getDateFormat
 } from "./utils.js";
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -26,6 +26,22 @@ document.addEventListener("DOMContentLoaded", function() {
     const fetchURL = URL + API_ADMIN_GET_POSTS + `?&page=${PAGE_ID}` + approveStatus + adoptionStatus;
     const previousPageURL = URL + MANAGE_POST + `?&page=${PAGE_ID_PREVIOUS}` + approveStatus + adoptionStatus;
     const nextPageURL = URL + + MANAGE_POST + `?&page=${PAGE_ID_NEXT}` + approveStatus + adoptionStatus;
+
+    // 유저 정보 데이터 세팅
+    MY_INFO.then(info => {
+        const username = document.querySelector('#board-username');
+        username.textContent = info.userName;
+        const role = document.querySelector('#board-user-role');
+        role.textContent = getResponseForUserRole(info.role)
+        const registerDate = document.querySelector('#board-user-createdAt');
+        registerDate.textContent = getDateFormat(info.createdAt);
+        const registerDescription = document.querySelector('#board-user-created-description');
+        registerDescription.innerHTML = '&nbsp;가입';
+        const userPhone = document.querySelector('#board-user-phone');
+        userPhone.textContent = info.phone;
+        const userEmail = document.querySelector('#board-user-email');
+        userEmail.textContent = info.email;
+    }).catch(error => console.error('Error:', error));
 
     // 게시글 받아오기
     fetch(fetchURL)

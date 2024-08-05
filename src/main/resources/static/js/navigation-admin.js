@@ -7,7 +7,7 @@ import {
 } from './constant.js'
 
 import {
-    setNavigationFilter, setNavigationCategoryStyle
+    setNavigationFilter, setNavigationCategoryStyle, setAdminNavigationInfo
 } from './utils.js';
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -61,27 +61,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 manageUserLi.appendChild(manageUserTitle);
                 manageUserLi.appendChild(manageUserDescription);
 
-                const noticeContainer = document.createElement('li');
-                noticeContainer.className = 'container-nav-category-selected';
-                const noticePortal = document.createElement('a');
-                noticePortal.href = URL + NOTICE_LIST;
-                noticePortal.className = 'font-nav-category-selected';
-                noticePortal.textContent = '공지사항';
-                noticeContainer.appendChild(noticePortal);
+                const pendingFilter = document.createElement('li');
+                pendingFilter.className = 'container-nav-category-selected';
+                const pendingPortal = document.createElement('a');
+                pendingPortal.href = URL + NOTICE_LIST;
+                pendingPortal.textContent = '대기중인 공고';
+                pendingFilter.appendChild(pendingPortal);
 
-                const postingFilter = document.createElement('li');
-                const postingPortal = document.createElement('a');
-                postingPortal.href = URL + HOME; // todo: 게시글 상태 필터링
-                postingPortal.textContent = '진행중인 공고';
-                postingFilter.appendChild(postingPortal);
+                const approvedFilter = document.createElement('li');
+                const approvedPortal = document.createElement('a');
+                approvedPortal.href = URL + HOME; // todo: 게시글 상태 필터링
+                approvedPortal.textContent = '승인된 공고';
+                approvedFilter.appendChild(approvedPortal);
 
-                const adoptedFilter = document.createElement('li');
-                const adoptedPortal = document.createElement('a');
-                adoptedPortal.textContent = '완료된 공고';
-                adoptedFilter.appendChild(adoptedPortal);
+                const deniedFilter = document.createElement('li');
+                const deniedPortal = document.createElement('a');
+                deniedPortal.textContent = '거절된 공고';
+                deniedFilter.appendChild(deniedPortal);
 
-                setNavigationCategoryStyle(postingFilter, postingPortal, adoptedFilter, adoptedPortal);
-                setNavigationFilter(postingPortal, adoptedPortal);
+                setAdminNavigationInfo(
+                    pendingFilter, pendingPortal,
+                    approvedFilter, approvedPortal,
+                    deniedFilter, deniedPortal);
 
                 adminContentsList.appendChild(manageNoticeLi);
                 adminContentsList.appendChild(managePostLi);
@@ -94,9 +95,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 ul.appendChild(adminHead);
-                ul.appendChild(noticeContainer)
-                ul.appendChild(postingFilter);
-                ul.appendChild(adoptedFilter);
+                ul.appendChild(pendingFilter)
+                ul.appendChild(approvedFilter);
+                ul.appendChild(deniedFilter);
 
                 nav.appendChild(ul);
             } else {

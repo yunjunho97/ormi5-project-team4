@@ -1,6 +1,6 @@
-import {URL, API_NOTICE, HOME, NOTICE_LIST} from './constant.js';
+import {URL, API_NOTICE, HOME, NOTICE_LIST, READ_POST, READ_NOTICE} from './constant.js';
 import {
-    setNavigationFilter, setNavigationCategoryStyle
+    setNavigationFilter, setNavigationCategoryStyle, getMyInfo
 } from './utils.js';
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -24,12 +24,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 const textLength = 11;
 
                 recentNotices.forEach((item, index) => {
+                    const itemURL = URL + READ_NOTICE + '/' + item.id;
                     const li = document.createElement('li');
                     const title = document.createElement('a');
                     title.className = 'font-nav-title';
                     title.textContent = truncateText(item.title, textLength);
+                    title.href = itemURL;
                     const description = document.createElement('a');
                     description.textContent = truncateText(item.content, textLength);
+                    description.href = itemURL;
 
                     // 아래 구분선 처리
                     if (index !== recentNotices.length - 1) {
@@ -41,29 +44,36 @@ document.addEventListener("DOMContentLoaded", function () {
                     noticeContentsList.appendChild(li);
                 });
 
-                const postingFilter = document.createElement('li');
-                const postingPortal = document.createElement('a');
-                postingPortal.href = URL + HOME; // todo: 게시글 상태 필터링
-                postingPortal.textContent = '진행중인 공고';
-                postingFilter.appendChild(postingPortal);
-
-                const adoptedFilter = document.createElement('li');
-                const adoptedPortal = document.createElement('a');
-                adoptedPortal.textContent = '완료된 공고';
-                adoptedFilter.appendChild(adoptedPortal);
-
-                setNavigationCategoryStyle(postingFilter, postingPortal, adoptedFilter, adoptedPortal);
-                setNavigationFilter(postingPortal, adoptedPortal);
-
                 noticeContentsArea.appendChild(noticeContentsList);
 
                 noticeHead.appendChild(noticeTitle);
                 noticeHead.appendChild(noticeContentsArea);
 
-
                 ul.appendChild(noticeHead);
-                ul.appendChild(postingFilter);
-                ul.appendChild(adoptedFilter);
+
+                const postingFilter = document.createElement('li');
+                const postingPortal = document.createElement('a');
+                const adoptedFilter = document.createElement('li');
+                const adoptedPortal = document.createElement('a');
+                getMyInfo().then(data => {
+                    if (data.role !== 'INACTIVE') {
+
+                        postingPortal.href = URL + HOME; // todo: 게시글 상태 필터링
+                        postingPortal.textContent = '진행중인 공고';
+                        postingFilter.appendChild(postingPortal);
+
+                        adoptedPortal.textContent = '완료된 공고';
+                        adoptedFilter.appendChild(adoptedPortal);
+
+                        setNavigationCategoryStyle(postingFilter, postingPortal, adoptedFilter, adoptedPortal);
+                        setNavigationFilter(postingPortal, adoptedPortal);
+
+                        ul.appendChild(postingFilter);
+                        ul.appendChild(adoptedFilter);
+                    }
+                }).catch(error => {
+                    console.error('error: ', error)
+                });
 
                 nav.appendChild(ul);
             } else {
