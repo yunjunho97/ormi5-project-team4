@@ -6,14 +6,11 @@ import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
 import com.example.ormi5projectteam4.domain.constant.Role;
 import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.domain.dto.UserManagementDto;
-import com.example.ormi5projectteam4.domain.entity.Post;
 import com.example.ormi5projectteam4.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
@@ -33,28 +30,13 @@ public class AdminController {
   }
 
   @Secured(role = Role.ADMIN)
-  @GetMapping("/member/{page}")
-  public ResponseEntity<List<UserManagementDto>> getAllUsers(
-      @RequestParam(required = false) String email, @PathVariable int page) {
+  @GetMapping("/member")
+  public ResponseEntity<Page<UserManagementDto>> getAllUsers(
+      @RequestParam(required = false) String email,
+      @RequestParam (defaultValue = "0") int page,
+      @RequestParam(defaultValue = "17") int size) {
 
-    // 1페이지당 17개의 게시글을 가져옴
-    final int count = 17;
-    int startIndex = (page - 1) * count;
-    List<UserManagementDto> users;
-
-    if (email == null) {
-      users =
-          adminService.getAllUsers().stream()
-              .skip(startIndex)
-              .limit(count)
-              .toList();
-    } else {
-      users =
-          adminService.searchUserByEmail(email).stream()
-              .skip(startIndex)
-              .limit(count)
-              .toList();
-    }
+    Page<UserManagementDto> users = adminService.getUsersByConditions(email, page, size);
 
     return ResponseEntity.ok(users);
   }
