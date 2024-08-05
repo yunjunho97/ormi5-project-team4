@@ -11,6 +11,7 @@ export const API_LOGOUT = '/auth/logout';
 export const API_NOTICE = '/notice';
 export const API_ADMIN_GET_POSTS = "/admin/post";
 export const API_MY_INFO = "/auth/this";
+export const API_SET_APPROVE_STATUS = "/admin/post";
 
 // 페이지 영역
 export const HOME = '/home';

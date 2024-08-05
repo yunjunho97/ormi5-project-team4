@@ -5,7 +5,7 @@ import {
     PAGE_ID,
     APPROVE_STATUS,
     ADOPTION_STATUS,
-    API_ADMIN_GET_POSTS, PAGE_ID_PREVIOUS, PAGE_ID_NEXT, API_MY_INFO, MY_INFO
+    API_ADMIN_GET_POSTS, PAGE_ID_PREVIOUS, PAGE_ID_NEXT, API_MY_INFO, MY_INFO, API_SET_APPROVE_STATUS
 } from "./constant.js";
 
 import {
@@ -16,20 +16,20 @@ import {
     calculatePagination
 } from "./utils.js";
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     let approveStatus = '';
-    if(APPROVE_STATUS !== ''){
+    if (APPROVE_STATUS !== '') {
         approveStatus = `&approveStatus=${APPROVE_STATUS}`;
     }
     let adoptionStatus = '';
-    if(ADOPTION_STATUS !== ''){
+    if (ADOPTION_STATUS !== '') {
         adoptionStatus = `&adoptionStatus=${ADOPTION_STATUS}`
     }
 
     // url 설정
     const fetchURL = URL + API_ADMIN_GET_POSTS + `?page=${PAGE_ID}` + approveStatus + adoptionStatus;
     const previousPageURL = URL + MANAGE_POST + `?page=${PAGE_ID}` + approveStatus + adoptionStatus;
-    const nextPageURL = URL + + MANAGE_POST + `?page=${PAGE_ID}` + approveStatus + adoptionStatus;
+    const nextPageURL = URL + +MANAGE_POST + `?page=${PAGE_ID}` + approveStatus + adoptionStatus;
 
     // 유저 정보 데이터 세팅
     MY_INFO.then(info => {
@@ -59,7 +59,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 div.className = 'image-container'
                 const input = document.createElement('input');
                 input.type = 'checkbox';
-                input.className = 'checkbox';
+                input.className = 'checkbox item-checkbox';
+                input.id = post.id;
                 const img = document.createElement('img');
                 img.src = getImgSrc(post);
                 img.alt = '이미지';
@@ -133,4 +134,52 @@ document.addEventListener("DOMContentLoaded", function() {
             itemList.appendChild(goNextPage);
         })
         .catch(error => console.error('Error:', error));
+
+    // 전체 선택 이벤트 리스너
+    const selectAllCheckbox = document.querySelector('#check-all');
+    if (selectAllCheckbox) {
+        selectAllCheckbox.addEventListener('click', function () {
+            toggleAllCheckboxes(this);
+        });
+    }
+
+    // 게시글 상태 변경 버튼 이벤트 리스너
+    const setPostApprovedButton = document.querySelector('#post-approved');
+    if (setPostApprovedButton) {
+        setPostApprovedButton.addEventListener('click', function () {
+            processSelectedItems('APPROVED');
+        });
+    }
+    const setPostDeniedButton = document.querySelector('#post-denied');
+    if (setPostDeniedButton) {
+        setPostDeniedButton.addEventListener('click', function () {
+            processSelectedItems('DENIED');
+        });
+    }
 });
+
+function toggleAllCheckboxes(source) {
+    const checkboxes = document.querySelectorAll('.item-checkbox');
+    checkboxes.forEach(checkbox => checkbox.checked = source.checked);
+}
+
+function processSelectedItems(mode) {
+    let successCount = 0;
+    let failCount = 0;
+    const posts = document.querySelectorAll('.item-checkbox');
+    posts.forEach(post=>{
+        if(post.checked){
+            fetch(URL + API_SET_APPROVE_STATUS + '/' + post.id + '?approveStatus=' + mode, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+                .then(response => response.json())
+                .then(data => console.log('Success:', data))
+                .catch(error => console.error('Error:', error));
+        }
+    });
+
+    alert(`요청을 성공적으로 수행했습니다.`);
+}

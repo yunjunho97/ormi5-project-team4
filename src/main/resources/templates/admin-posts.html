@@ -44,15 +44,15 @@
                 <img src="/images/admin-board-bottomline.svg" alt="" class="board-bottomline">
                 <div class="container">
                     <div class="container gap-15">
-                        <input id="check-all" type="checkbox" class="checkbox-all">
+                        <input id="check-all" type="checkbox" class="checkbox-all" onclick="toggleAllCheckboxes(this)">
                         <label for="check-all" class="font-page">전체선택</label>
                     </div>
                     <ul id="post-pages">
 
                     </ul>
                     <div class="container gap-4">
-                        <a class="button-apply container flex-center">승인</a>
-                        <a class="button-deny container flex-center">거절</a>
+                        <button id="post-approved" class="button-apply container flex-center">승인</button>
+                        <button id="post-denied" class="button-deny container flex-center">거절</button>
                     </div>
                 </div>
             </div>

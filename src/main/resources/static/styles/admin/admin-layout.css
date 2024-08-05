@@ -108,6 +108,7 @@
     width: 60px;
     height: 28px;
     border-radius: 4px;
+    border: none;
     color: #F5F4FF;
     background-color: #766CED;
 }
