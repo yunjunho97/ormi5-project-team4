@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/styles/shared/header.css}">
+    <link rel="stylesheet" th:href="@{/styles/shared/navigation.css}">
+    <script type="module" th:src="@{/js/header.js}"></script>
+    <script type="module" th:src="@{/js/admin-page.js}"></script>
+    <script type="module" th:src="@{/js/navigation-admin.js}"></script>
     <title>공지사항</title>
 </head>
 <body>
-<header>
-    <h1>Happy Tails</h1>
-    <!--  공통 헤더   -->
-</header>
-<div class="container">
-    <div class="sidebar">
-        <!--  관리자 메뉴    -->
-    </div>
+<header id="header"></header>
+<main>
+    <div id="nav-admin"></div>
     <div class="main-content">
         <h2>All Notices</h2>
         <form id="admin-form" th:action="@{/admin/notice}" method="get">
@@ -36,11 +36,7 @@
             <button type="button" th:onclick="@{/write-notice.html}">글쓰기</button>
             <button type="submit">삭제</button>
         </form>
-        <div class="pagination">
-<!--            <button th:if="${page.hasPrevious()}" th:onclick="'location.href=\'/notices?page=' + ${page.number - 1} + '\'"><</button>-->
-<!--            <button th:if="${page.hasNext()}" th:onclick="'location.href=\'/notices?page=' + ${page.number + 1} + '\'">></button>-->
-        </div>
     </div>
-</div>
+</main>
 </body>
 </html>
