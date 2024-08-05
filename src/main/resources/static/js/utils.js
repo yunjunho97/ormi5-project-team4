@@ -1,5 +1,5 @@
 // export Function 영역
-import {ADOPTION_STATUS, URL, HOME, PAGE_ID, API_NOTICE, API_MY_INFO} from "./constant.js";
+import {ADOPTION_STATUS, URL, HOME, PAGE_ID, API_NOTICE, API_MY_INFO, APPROVE_STATUS, ADMIN_PAGE} from "./constant.js";
 
 export function getResponseForAdoptionStatus(adoptionStatus) {
     switch (adoptionStatus) {
@@ -28,6 +28,74 @@ export function getPageStartNumber(page, pageSize) {
 
 export function getPageEndNumber(page, pageSize) {
     return page <= 5 ? 9 : page >= pageSize - 4 ? pageSize : page + 4;
+}
+
+export function setAdminNavigationInfo(
+        pendingCategoryObj, pendingObj,approveCategoryObj, approvedObj){
+    setAdminNavigationFilter(pendingObj, approvedObj);
+    setAdminNavigationCategoryStyle(pendingCategoryObj, pendingObj,approveCategoryObj, approvedObj);
+}
+
+function setAdminNavigationFilter(pendingObj, approvedObj){
+    switch (APPROVE_STATUS) {
+        case 'PENDING':
+            pendingObj.href = URL + ADMIN_PAGE + `?&page=0`;
+            approvedObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=APPROVED`;
+            // deniedObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=DENIED`;
+            break;
+        case 'APPROVED':
+            pendingObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=PENDING`;
+            approvedObj.href = URL + ADMIN_PAGE + `?&page=0`;
+            // deniedObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=DENIED`;
+            break;
+        // case 'DENIED':
+        //     pendingObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=PENDING`;
+        //     approvedObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=APPROVED`;
+        //     deniedObj.href = URL + ADMIN_PAGE + `?&page=0`;
+        //     break;
+        default:
+            pendingObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=PENDING`;
+            approvedObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=APPROVED`;
+            // deniedObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=DENIED`;
+            break;
+    }
+}
+
+function setAdminNavigationCategoryStyle(
+    pendingCategoryObj, pendingObj,approveCategoryObj, approvedObj){
+    switch (APPROVE_STATUS) {
+        case 'PENDING':
+            pendingCategoryObj.className = 'container-nav-category-selected';
+            pendingObj.className = 'font-nav-category-selected';
+            approveCategoryObj.className = 'container-nav-category';
+            approvedObj.className = 'font-nav-category';
+            // deniedCategoryObj.className = 'container-nav-category';
+            // deniedObj.className = 'font-nav-category';
+            break;
+        case 'APPROVED':
+            pendingCategoryObj.className = 'container-nav-category';
+            pendingObj.className = 'font-nav-category';
+            approveCategoryObj.className = 'container-nav-category-selected';
+            approvedObj.className = 'font-nav-category-selected';
+            // deniedCategoryObj.className = 'container-nav-category';
+            // deniedObj.className = 'font-nav-category'
+            break;
+        // case 'DENIED':
+        //     pendingCategoryObj.className = 'container-nav-category';
+        //     pendingObj.className = 'font-nav-category';
+        //     approveCategoryObj.className = 'container-nav-category';
+        //     approvedObj.className = 'font-nav-category';
+        //     deniedCategoryObj.className = 'container-nav-category-selected';
+        //     deniedObj.className = 'font-nav-category-selected';
+        //     break;
+        default:
+            pendingCategoryObj.className = 'container-nav-category';
+            pendingObj.className = 'font-nav-category';
+            approveCategoryObj.className = 'container-nav-category';
+            approvedObj.className = 'font-nav-category';
+            // deniedCategoryObj.className = 'container-nav-category';
+            // deniedObj.className = 'font-nav-category'
+    }
 }
 
 export function setNavigationFilter(postingObj, adoptedObj) {
