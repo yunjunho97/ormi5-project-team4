@@ -5,6 +5,7 @@ import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
 import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 public class PostDTO {
     private Long id;
     private String title;
-    private String foundAt;
+    private LocalDate foundAt;
     private String foundLocation;
     private String detail;
     private String contact;

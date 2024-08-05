@@ -39,7 +39,7 @@
 <!--                        <p th:text="${post.getImages()[0].getImgUrl()}">aaa</p>-->
                         <img class="img-size" th:src="@{{url}(url=${post.getImages()[0].getImgUrl()})}" alt="">
                         <p th:text="${post.title}">Title</p>
-                        <p th:text="${post.foundAt}">foundAt</p>
+                        <p th:text="${post.foundLocation}">foundAt</p>
                         <!-- 필드추가 -->
                     </a>
                 </li>
