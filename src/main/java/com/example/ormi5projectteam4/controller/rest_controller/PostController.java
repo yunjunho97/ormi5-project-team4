@@ -3,6 +3,8 @@ package com.example.ormi5projectteam4.controller.rest_controller;
 import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
 import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.domain.dto.ProcessStatus;
+import com.example.ormi5projectteam4.domain.dto.UserDto;
+import com.example.ormi5projectteam4.service.AuthenticationService;
 import com.example.ormi5projectteam4.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,10 +20,12 @@ import java.util.List;
 @RequestMapping("/post")
 public class PostController {
     private final PostService postService;
+    private final AuthenticationService authenticationService;
 
     @Autowired
-    public PostController(PostService postService) {
+    public PostController(PostService postService, AuthenticationService authenticationService) {
         this.postService = postService;
+        this.authenticationService = authenticationService;
     }
 
     @GetMapping
@@ -33,9 +37,9 @@ public class PostController {
 
     //+approve
     @GetMapping("/proceed")
-    public ResponseEntity<Page<PostDTO>> getProceedPosts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size) {
+    public ResponseEntity<Page<PostDTO>> getProceedPosts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size, @RequestParam AdoptionStatus adoptionstatus) {
         PageRequest pageRequest = PageRequest.of(page, size);
-        Page<PostDTO> posts = postService.getPostsByAdoptionStatus(AdoptionStatus.POSTING, pageRequest);
+        Page<PostDTO> posts = postService.getPostsByAdoptionStatus(adoptionstatus, pageRequest);
         return ResponseEntity.ok(posts);
     }
 
@@ -50,6 +54,9 @@ public class PostController {
     @PostMapping
     public ResponseEntity<PostDTO> createPost(
             @RequestPart PostDTO postDTO, @RequestPart List<MultipartFile> files) {
+        UserDto userDto = authenticationService.getUserDto()
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        postDTO.setUserId(userDto.getId());
         return ResponseEntity.ok(postService.createPost(postDTO, files));
     }
 
@@ -62,14 +69,18 @@ public class PostController {
 
     @PutMapping("/{id}")
     public ResponseEntity<PostDTO> updatePost(@PathVariable Long id, @RequestBody ProcessStatus processStatus) {
-        return postService.updatePost(id, processStatus)
+        UserDto userDto = authenticationService.getUserDto()
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return postService.updatePost(id, userDto, processStatus)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePost(@PathVariable Long id) {
-        postService.deletePost(id);
+        UserDto userDto = authenticationService.getUserDto()
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        postService.deletePost(id, userDto);
         return ResponseEntity.noContent().build();
     }
 }

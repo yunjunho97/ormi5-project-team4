@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -69,5 +71,13 @@ public class AuthController {
     userService.changePassword(changePasswordRequestDto);
 
     return new ResponseEntity<>(HttpStatus.valueOf(StatusCode.NO_CONTENT));
+  }
+
+  /** 로그인 한 유저 본인 정보 반환 */
+  @GetMapping("/this")
+  public ResponseEntity<UserDto> getCurrentUserDto(){
+    UserDto userDto = authenticationService.getUserDto()
+            .orElseThrow(() -> new RuntimeException("No authenticated user found"));
+    return ResponseEntity.ok(userDto);
   }
 }

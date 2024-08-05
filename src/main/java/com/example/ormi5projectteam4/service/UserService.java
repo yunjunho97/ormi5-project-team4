@@ -131,6 +131,7 @@ public class UserService {
     userDto.setEmail(user.getEmail());
     userDto.setPhone(user.getPhone());
     userDto.setRole(user.getRole());
+    userDto.setCreatedAt(user.getCreatedAt());
 
     return userDto;
   }

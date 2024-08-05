@@ -26,4 +26,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     long countByUserId(Long userId);
 
     Page<Post> findByFoundLocationContains(String foundLocation, Pageable pageable);
+
+    Page<Post> findByApproveStatusAndFoundLocationContains(ApproveStatus approveStatus, String foundLocation, Pageable pageable);
+
 }
