@@ -4,6 +4,8 @@ import com.example.ormi5projectteam4.domain.constant.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 public class UserDto {
@@ -27,4 +29,6 @@ public class UserDto {
     private String phone;
 
     private Role role;
+
+    private LocalDateTime createdAt;
 }
