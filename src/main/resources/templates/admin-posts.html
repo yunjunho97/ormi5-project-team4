@@ -9,31 +9,11 @@
     <link rel="stylesheet" th:href="@{/styles/shared/header.css}">
     <link rel="stylesheet" th:href="@{/styles/shared/navigation.css}">
     <script type="module" th:src="@{/js/admin-page.js}"></script>
+    <script type="module" th:src="@{/js/header-admin.js}"></script>
     <script type="module" th:src="@{/js/navigation-admin.js}"></script>
 </head>
 <body>
-    <header>
-        <img src="" alt="이미지">
-        <section>
-            <p>
-                <span class="font-header-username">
-                    닉네임
-                </span>
-                <span class="font-header">
-                    님 환영합니다
-                </span>
-            </p>
-            <p class="font-header">
-                로그아웃
-            </p>
-            <p class="font-header">
-                관리자 페이지
-            </p>
-            <p class="font-header">
-                마이페이지
-            </p>
-        </section>
-    </header>
+    <header id="header-admin"></header>
     <main>
         <nav id="nav-admin"></nav>
         <article class="article-post">

@@ -8,10 +8,11 @@
     <link rel="stylesheet" th:href="@{/styles/admin/admin-layout.css}">
     <link rel="stylesheet" th:href="@{/styles/shared/header.css}">
     <link rel="stylesheet" th:href="@{/styles/shared/navigation.css}">
+    <script type="module" th:src="@{/js/header-admin.js}"></script>
     <script type="module" th:src="@{/js/navigation-admin.js}"></script>
 </head>
 <body>
-<header id="header"></header>
+<header id="header-admin"></header>
 <main>
     <nav id="nav-admin"></nav>
     <article class="article-post">
@@ -40,13 +41,13 @@
             <!-- Member Info Area -->
             <table class="margin-bottom-18">
                 <thead class="height-35 table-line-bottom">
-                    <tr>
-                        <th></th>
-                        <th>닉네임</th>
-                        <th>이메일</th>
-                        <th>휴대폰 번호</th>
-                        <th>상태</th>
-                    </tr>
+                <tr>
+                    <th></th>
+                    <th>닉네임</th>
+                    <th>이메일</th>
+                    <th>휴대폰 번호</th>
+                    <th>상태</th>
+                </tr>
                 </thead>
                 <tbody>
                 <tr class="height-35 table-line-bottom">
