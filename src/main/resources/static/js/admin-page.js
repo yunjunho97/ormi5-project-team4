@@ -15,17 +15,17 @@ import {
 document.addEventListener("DOMContentLoaded", function() {
     let approveStatus = '';
     if(APPROVE_STATUS !== ''){
-        approveStatus = `&approvestatus=${APPROVE_STATUS}`;
+        approveStatus = `&approveStatus=${APPROVE_STATUS}`;
     }
     let adoptionStatus = '';
     if(ADOPTION_STATUS !== ''){
-        adoptionStatus = `&adoptionstatus=${ADOPTION_STATUS}`
+        adoptionStatus = `&adoptionStatus=${ADOPTION_STATUS}`
     }
 
     // url 설정
-    const fetchURL = URL + API_ADMIN_GET_POSTS + `?&page=${PAGE_ID}` + approveStatus + adoptionStatus;
-    const previousPageURL = URL + MANAGE_POST + `?&page=${PAGE_ID_PREVIOUS}` + approveStatus + adoptionStatus;
-    const nextPageURL = URL + + MANAGE_POST + `?&page=${PAGE_ID_NEXT}` + approveStatus + adoptionStatus;
+    const fetchURL = URL + API_ADMIN_GET_POSTS + `?page=0` + approveStatus + adoptionStatus;
+    const previousPageURL = URL + MANAGE_POST + `?page=0` + approveStatus + adoptionStatus;
+    const nextPageURL = URL + + MANAGE_POST + `?page=0` + approveStatus + adoptionStatus;
 
     // 유저 정보 데이터 세팅
     MY_INFO.then(info => {
