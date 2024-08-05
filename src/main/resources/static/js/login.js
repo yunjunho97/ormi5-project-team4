@@ -1,4 +1,4 @@
-document.getElementById('login-form').addEventListener('submit', function(event) {
+document.getElementById('login-form').addEventListener('submit', function (event) {
     event.preventDefault();
 
     const email = document.getElementById('login-email').value;
@@ -19,7 +19,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
-            if(data.userDto !== null){
+            if (data.userDto !== null) {
                 window.location.href = 'http://localhost:8080/home' // home 화면으로 이동
             }
         })

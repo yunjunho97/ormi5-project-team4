@@ -11,6 +11,12 @@
 <img src="https://velog.velcdn.com/images/elma98/post/d92fcb5e-f47a-42bf-a730-4011ab654fcb/image.png" alt="" class="check-img">
 <p id="register-success-text">회원가입이 완료되었습니다</p>
 <p id="description">반려동물이 내 소중한 가족이 될 때까지 Happy Tails가 노력하겠습니다<br>앞으로의 활동을 응원합니다!</p>
-<button>로그인</button>
+<button id="login-redirect-btn">로그인</button>
+<script>
+    const button = document.getElementById('login-redirect-btn');
+    button.addEventListener('click', () => {
+        window.location.href = 'http://localhost:8080';
+    });
+</script>
 </body>
 </html>
