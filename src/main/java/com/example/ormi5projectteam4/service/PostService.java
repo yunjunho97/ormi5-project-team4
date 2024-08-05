@@ -99,7 +99,7 @@ public class PostService {
 
     public Optional<PostDTO> updatePost(Long postId, ProcessStatus processStatus) {
         return postRepository.findById(postId).map(o -> {
-            o.setAdoptionStatus(AdoptionStatus.ADOPTED);
+            o.setAdoptionStatus(processStatus.getAdoptionStatus());
             o.setUpdatedAt(LocalDateTime.now());
             return PostDTO.fromPost(postRepository.save(o));
         });
