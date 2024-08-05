@@ -52,15 +52,16 @@
                 <p th:text="'몸무게:  ' + ${post.getAnimalDTO().getWeight()}"></p>
                 <p th:text="'중성화 여부:  ' + ${post.getAnimalDTO().getNeuteringStatus()}"></p>
                 <div class="status">
-                    <p>공고 상태 변경</p>
-                    <p th:text="${post.getAdoptionStatus()}"></p>
+<!--                    <p>공고 상태 변경</p>-->
+<!--                    <p th:text="${post.getAdoptionStatus()}"></p>-->
                     <form id="updateForm" th:action="@{/update/{id}(id=${post.id})}" method="post">
                         <div>
-                            <label for="adoptionStatus">종류:</label>
+                            <label for="adoptionStatus">공고 상태 변경</label>
+                            <p th:text="${post.getAdoptionStatus()}"></p>
                             <select id="adoptionStatus" name="adoptionStatus" required onchange="submitForm()">
-                                <option value="">선택하세요</option>
-                                <option value="POSTING">진행중</option>
-                                <option value="ADOPTED">완료</option>
+<!--                                <option value=""></option>-->
+                                <option value="POSTING" th:selected="${post.getAdoptionStatus().toString().equals('POSTING')}">진행중</option>
+                                <option value="ADOPTED" th:selected="${post.getAdoptionStatus().toString().equals('ADOPTED')}">완료</option>
                             </select>
                         </div>
                     </form>
