@@ -100,7 +100,7 @@ async function checkUserNameDuplicate() {
 
     try {
         // 서버에 이메일 중복 확인 요청을 보냅니다
-        const response = await fetch(`http://localhost:8080/nickname-duplication?email=${encodeURIComponent(username)}`, {
+        const response = await fetch(`http://localhost:8080/nickname-duplication?userName=${encodeURIComponent(username)}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -127,5 +127,5 @@ async function checkUserNameDuplicate() {
     }
 }
 
-// 중복 확인 버튼 클릭 시 checkEmailDuplicate 함수를 호출합니다
+// 중복 확인 버튼 클릭 시 checkUserNameDuplicate 함수를 호출합니다
 document.getElementById('check-username-btn').addEventListener('click', checkUserNameDuplicate);
