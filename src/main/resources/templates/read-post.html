@@ -4,17 +4,23 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/styles/post/read-post.css}">
+    <link rel="stylesheet" th:href="@{/styles/shared/header.css}">
+    <link rel="stylesheet" th:href="@{/styles/shared/navigation.css}">
+    <script type="module" th:src="@{/js/header.js}"></script>
+    <script type="module" th:src="@{/js/navigation.js}"></script>
 </head>
 <body>
-<header>
-    <div class="header-content">
-        <h1>DONKEY</h1>
-    </div>
-    <div class="header-content">
-        <p>닉네임 님 환영합니다 | <a href="">로그아웃</a> | <a href="">마이페이지</a></p>
-    </div>
-</header>
+<!--<header>-->
+<!--    <div class="header-content">-->
+<!--        <h1>DONKEY</h1>-->
+<!--    </div>-->
+<!--    <div class="header-content">-->
+<!--        <p>닉네임 님 환영합니다 | <a href="">로그아웃</a> | <a href="">마이페이지</a></p>-->
+<!--    </div>-->
+<!--</header>-->
+<header id="header"></header>
 <div class="container">
+    <nav id="nav" class="nav"></nav>
     <div class="content">
         <h2 th:text="${post.title}"></h2>
         <p th:text="'닉네임 |' + ${post.createdAt}"></p>

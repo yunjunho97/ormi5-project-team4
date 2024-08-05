@@ -11,28 +11,26 @@
             form.submit();
         }
     </script>
-<!--    <link rel="stylesheet" th:href="@{/styles/shared/header.css}">-->
+    <link rel="stylesheet" th:href="@{/styles/shared/header.css}">
     <link rel="stylesheet" th:href="@{/styles/shared/navigation.css}">
-<!--    <script type="module" th:src="@{/js/header.js}"></script>-->
+    <script type="module" th:src="@{/js/header.js}"></script>
     <script type="module" th:src="@{/js/navigation.js}"></script>
 </head>
 <body>
-<header>
-    <div class="logo">로고</div>
-    <div class="user-actions">
-        <span class="nickname">닉네임</span>
-        <span class="logout">로그아웃</span>
-        <span class="mypage">마이페이지</span>
-    </div>
-</header>
+<!--<header>-->
+<!--    <div class="logo">로고</div>-->
+<!--    <div class="user-actions">-->
+<!--        <span class="nickname">닉네임</span>-->
+<!--        <span class="logout">로그아웃</span>-->
+<!--        <span class="mypage">마이페이지</span>-->
+<!--    </div>-->
+<!--</header>-->
+<header id="header"></header>
 <main>
-    <nav id="nav"></nav>
-    <div>
-        <a th:href="@{/write}">글쓰기</a>
-    </div>
+    <nav id="nav" class="nav"></nav>
     <div class="main-content">
-        <div class="notice">
-            <h1>공지</h1>
+        <div class="write">
+            <a th:href="@{/write}">글쓰기</a>
         </div>
         <div th:if="${not #lists.isEmpty(posts)}">
             <ul class="container">
@@ -58,8 +56,8 @@
         <a th:if="${currentPage < totalPages - 1}" th:href="@{/home(page=${currentPage + 1})}"> > </a>
     </div>
 
-    <form action="#" th:action="@{/home/location}" method="get" onsubmit="removeSpacesAndSubmit(this); return false;">
-        <label for="foundLocation">Enter Location:</label>
+    <form class="filter" action="#" th:action="@{/home/location}" method="get" onsubmit="removeSpacesAndSubmit(this); return false;">
+        <label for="foundLocation">지역 검색:</label>
         <input type="text" id="foundLocation" name="foundLocation" required>
         <button type="submit">Search</button>
     </form>
