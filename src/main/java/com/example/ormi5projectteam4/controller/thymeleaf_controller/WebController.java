@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 @Controller
 public class WebController {
@@ -31,10 +31,9 @@ public class WebController {
                 new ParameterizedTypeReference<>() {}
         );
         List<NoticeDto> noticePage = response.getBody();
-        List<NoticeDto> recentNotices = noticePage.subList(0, 5);
 
         model.addAttribute("notices", noticePage);
-        model.addAttribute("recentNotices", recentNotices);
+        model.addAttribute("recentNotices", Objects.requireNonNull(noticePage).subList(0, 5));
 
         return "notice-list-user";
     }
@@ -66,8 +65,9 @@ public class WebController {
                 null,
                 NoticeDto.class
         );
+        NoticeDto notice = response.getBody();
 
-        Optional<NoticeDto> notice = Optional.ofNullable(response.getBody());
+        // Optional<NoticeDto> notice = Optional.ofNullable(response.getBody());
         String recentNoticesUrl = BASE_URL + "/recent";
         ResponseEntity<List<NoticeDto>> recentNoticesResponse = restTemplate.exchange(
                 recentNoticesUrl,
@@ -81,6 +81,7 @@ public class WebController {
         model.addAttribute("notice", notice);
         model.addAttribute("recentNotices", recentNotices);
 
-        return "notice";
+        return "notice-detail";
     }
+
 }
