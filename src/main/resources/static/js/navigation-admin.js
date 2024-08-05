@@ -74,14 +74,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 approvedPortal.textContent = '승인된 공고';
                 approvedFilter.appendChild(approvedPortal);
 
-                // const deniedFilter = document.createElement('li');
-                // const deniedPortal = document.createElement('a');
-                // deniedPortal.textContent = '거절된 공고';
-                // deniedFilter.appendChild(deniedPortal);
+                const deniedFilter = document.createElement('li');
+                const deniedPortal = document.createElement('a');
+                deniedPortal.textContent = '거절된 공고';
+                deniedFilter.appendChild(deniedPortal);
 
                 setAdminNavigationInfo(
                     pendingFilter, pendingPortal,
-                    approvedFilter, approvedPortal);
+                    approvedFilter, approvedPortal,
+                    deniedFilter, deniedPortal);
 
                 adminContentsList.appendChild(manageNoticeLi);
                 adminContentsList.appendChild(managePostLi);
@@ -96,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 ul.appendChild(adminHead);
                 ul.appendChild(pendingFilter)
                 ul.appendChild(approvedFilter);
-                // ul.appendChild(deniedFilter);
+                ul.appendChild(deniedFilter);
 
                 nav.appendChild(ul);
             } else {

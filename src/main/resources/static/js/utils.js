@@ -31,70 +31,70 @@ export function getPageEndNumber(page, pageSize) {
 }
 
 export function setAdminNavigationInfo(
-        pendingCategoryObj, pendingObj,approveCategoryObj, approvedObj){
-    setAdminNavigationFilter(pendingObj, approvedObj);
-    setAdminNavigationCategoryStyle(pendingCategoryObj, pendingObj,approveCategoryObj, approvedObj);
+        pendingCategoryObj, pendingObj,approveCategoryObj, approvedObj, deniedCategoryObj, deniedObj){
+    setAdminNavigationFilter(pendingObj, approvedObj, deniedObj);
+    setAdminNavigationCategoryStyle(pendingCategoryObj, pendingObj,approveCategoryObj, approvedObj, deniedCategoryObj, deniedObj);
 }
 
-function setAdminNavigationFilter(pendingObj, approvedObj){
+function setAdminNavigationFilter(pendingObj, approvedObj, deniedObj){
     switch (APPROVE_STATUS) {
         case 'PENDING':
             pendingObj.href = URL + ADMIN_PAGE + `?&page=0`;
             approvedObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=APPROVED`;
-            // deniedObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=DENIED`;
+            deniedObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=DENIED`;
             break;
         case 'APPROVED':
             pendingObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=PENDING`;
             approvedObj.href = URL + ADMIN_PAGE + `?&page=0`;
-            // deniedObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=DENIED`;
+            deniedObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=DENIED`;
             break;
-        // case 'DENIED':
-        //     pendingObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=PENDING`;
-        //     approvedObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=APPROVED`;
-        //     deniedObj.href = URL + ADMIN_PAGE + `?&page=0`;
-        //     break;
+        case 'DENIED':
+            pendingObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=PENDING`;
+            approvedObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=APPROVED`;
+            deniedObj.href = URL + ADMIN_PAGE + `?&page=0`;
+            break;
         default:
             pendingObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=PENDING`;
             approvedObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=APPROVED`;
-            // deniedObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=DENIED`;
+            deniedObj.href = URL + ADMIN_PAGE + `?&page=0&approvestatus=DENIED`;
             break;
     }
 }
 
 function setAdminNavigationCategoryStyle(
-    pendingCategoryObj, pendingObj,approveCategoryObj, approvedObj){
+    pendingCategoryObj, pendingObj,approveCategoryObj, approvedObj, deniedCategoryObj, deniedObj){
     switch (APPROVE_STATUS) {
         case 'PENDING':
             pendingCategoryObj.className = 'container-nav-category-selected';
             pendingObj.className = 'font-nav-category-selected';
             approveCategoryObj.className = 'container-nav-category';
             approvedObj.className = 'font-nav-category';
-            // deniedCategoryObj.className = 'container-nav-category';
-            // deniedObj.className = 'font-nav-category';
+            deniedCategoryObj.className = 'container-nav-category';
+            deniedObj.className = 'font-nav-category';
             break;
         case 'APPROVED':
             pendingCategoryObj.className = 'container-nav-category';
             pendingObj.className = 'font-nav-category';
             approveCategoryObj.className = 'container-nav-category-selected';
             approvedObj.className = 'font-nav-category-selected';
-            // deniedCategoryObj.className = 'container-nav-category';
-            // deniedObj.className = 'font-nav-category'
+            deniedCategoryObj.className = 'container-nav-category';
+            deniedObj.className = 'font-nav-category'
             break;
-        // case 'DENIED':
-        //     pendingCategoryObj.className = 'container-nav-category';
-        //     pendingObj.className = 'font-nav-category';
-        //     approveCategoryObj.className = 'container-nav-category';
-        //     approvedObj.className = 'font-nav-category';
-        //     deniedCategoryObj.className = 'container-nav-category-selected';
-        //     deniedObj.className = 'font-nav-category-selected';
-        //     break;
+        case 'DENIED':
+            pendingCategoryObj.className = 'container-nav-category';
+            pendingObj.className = 'font-nav-category';
+            approveCategoryObj.className = 'container-nav-category';
+            approvedObj.className = 'font-nav-category';
+            deniedCategoryObj.className = 'container-nav-category-selected';
+            deniedObj.className = 'font-nav-category-selected';
+            break;
         default:
             pendingCategoryObj.className = 'container-nav-category';
             pendingObj.className = 'font-nav-category';
             approveCategoryObj.className = 'container-nav-category';
             approvedObj.className = 'font-nav-category';
-            // deniedCategoryObj.className = 'container-nav-category';
-            // deniedObj.className = 'font-nav-category'
+            deniedCategoryObj.className = 'container-nav-category';
+            deniedObj.className = 'font-nav-category'
     }
 }
 
