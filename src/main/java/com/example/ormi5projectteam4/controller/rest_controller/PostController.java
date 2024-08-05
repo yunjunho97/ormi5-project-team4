@@ -33,9 +33,9 @@ public class PostController {
 
     //+approve
     @GetMapping("/proceed")
-    public ResponseEntity<Page<PostDTO>> getProceedPosts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size) {
+    public ResponseEntity<Page<PostDTO>> getProceedPosts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size, @RequestParam AdoptionStatus adoptionstatus) {
         PageRequest pageRequest = PageRequest.of(page, size);
-        Page<PostDTO> posts = postService.getPostsByAdoptionStatus(AdoptionStatus.POSTING, pageRequest);
+        Page<PostDTO> posts = postService.getPostsByAdoptionStatus(adoptionstatus, pageRequest);
         return ResponseEntity.ok(posts);
     }
 
