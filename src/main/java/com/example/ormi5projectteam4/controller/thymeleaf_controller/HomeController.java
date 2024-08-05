@@ -113,7 +113,7 @@ public class HomeController {
 
             if (response.getStatusCode() == HttpStatus.OK) {
                 redirectAttributes.addFlashAttribute("message", "Post created successfully!");
-                return "redirect:/home";
+                return "write-success";
             } else {
                 redirectAttributes.addFlashAttribute("error", "Failed to create post. Please try again.");
                 return "redirect:/write";
