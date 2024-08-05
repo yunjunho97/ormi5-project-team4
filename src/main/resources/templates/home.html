@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <title>home</title>
     <link rel="stylesheet" th:href="@{/styles/post/home.css}">
+    <script>
+        function removeSpacesAndSubmit(form) {
+            var foundLocationInput = form.foundLocation;
+            foundLocationInput.value = foundLocationInput.value.replace(/\s+/g, '');
+            form.submit();
+        }
+    </script>
 </head>
 <body>
 <header>
@@ -46,7 +53,7 @@
         <a th:if="${currentPage < totalPages - 1}" th:href="@{/home(page=${currentPage + 1})}"> > </a>
     </div>
 
-    <form action="#" th:action="@{/home/location}" method="get">
+    <form action="#" th:action="@{/home/location}" method="get" onsubmit="removeSpacesAndSubmit(this); return false;">
         <label for="foundLocation">Enter Location:</label>
         <input type="text" id="foundLocation" name="foundLocation" required>
         <button type="submit">Search</button>

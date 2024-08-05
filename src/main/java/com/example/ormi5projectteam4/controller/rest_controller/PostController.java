@@ -31,6 +31,7 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
+    //+approve
     @GetMapping("/proceed")
     public ResponseEntity<Page<PostDTO>> getProceedPosts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -38,6 +39,7 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
+    //+approve +proceed
     @GetMapping("/location")
     public ResponseEntity<Page<PostDTO>> getPostsByFoundAt(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size, @RequestParam String foundLocation){
         PageRequest pageRequest = PageRequest.of(page, size);
