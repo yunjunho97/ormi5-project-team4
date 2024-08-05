@@ -1,11 +1,9 @@
 import {
     getAdoptionStatus,
-    getApproveStatus,
+    getApproveStatus, getMyInfo,
     getPageId,
 
 } from "./utils.js"
-
-export const URL = "http://localhost:8080";
 
 // API 영역
 export const API_LOGIN = "/auth/login";
@@ -30,3 +28,7 @@ export const PAGE_ID_PREVIOUS = PAGE_ID - 1;
 export const PAGE_ID_NEXT = PAGE_ID + 1;
 export const APPROVE_STATUS = getApproveStatus();
 export const ADOPTION_STATUS = getAdoptionStatus();
+
+// Constants
+export const URL = "http://localhost:8080";
+export const MY_INFO = getMyInfo();

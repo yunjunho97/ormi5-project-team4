@@ -12,6 +12,16 @@ export function getResponseForAdoptionStatus(adoptionStatus) {
     }
 }
 
+export function getResponseForUserRole(role) {
+    switch (role) {
+        case 'ADMIN':
+            return '관리자';
+        case 'ACTIVE':
+            return '유저';
+        case 'INACTIVE':
+            return '차단된 유저';
+    }
+}
 export function getPageStartNumber(page, pageSize) {
     return page <= 5 ? 1 : page >= pageSize - 4 ? pageSize - 8 : page - 4;
 }
@@ -103,4 +113,13 @@ export async function getMyInfo() {
     } catch (error) {
         console.error('오류 발생:', error);
     }
+}
+
+export function getDateFormat(timestamp) {
+    const date = new Date(timestamp);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1 필요
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${year}.${month}.${day}`;
 }
