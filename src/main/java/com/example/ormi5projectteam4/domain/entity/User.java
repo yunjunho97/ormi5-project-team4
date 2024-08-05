@@ -48,17 +48,17 @@ public class User {
     @JoinColumn(name = "password_question_id")
     private PasswordQuestion passwordQuestion;
 
-    //추가
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-//    private List<Post> posts = new ArrayList<>();
-//
-//    public void addPost(Post post) {
-//        posts.add(post);
-//        post.setUser(this);
-//    }
-//
-//    public void removePost(Post post) {
-//        posts.remove(post);
-//        post.setUser(null);
-//    }
+//    추가
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Post> posts = new ArrayList<>();
+
+    public void addPost(Post post) {
+        posts.add(post);
+        post.setUser(this);
+    }
+
+    public void removePost(Post post) {
+        posts.remove(post);
+        post.setUser(null);
+    }
 }

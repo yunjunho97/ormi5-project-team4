@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 @Builder
 public class PostDTO {
     private Long id;
+    private Long userId;
     private String title;
     private LocalDate foundAt;
     private String foundLocation;

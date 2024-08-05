@@ -2,8 +2,10 @@ package com.example.ormi5projectteam4.service;
 
 import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
 import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
+import com.example.ormi5projectteam4.domain.constant.Role;
 import com.example.ormi5projectteam4.domain.dto.ImageDTO;
 import com.example.ormi5projectteam4.domain.dto.ProcessStatus;
+import com.example.ormi5projectteam4.domain.dto.UserDto;
 import com.example.ormi5projectteam4.domain.entity.Animal;
 import com.example.ormi5projectteam4.domain.entity.Image;
 import com.example.ormi5projectteam4.domain.dto.PostDTO;
@@ -81,6 +83,7 @@ public class PostService {
         post.setCreatedAt(LocalDateTime.now());
         post.setAdoptionStatus(AdoptionStatus.POSTING);
         post.setApproveStatus(ApproveStatus.PENDING);
+
         post = postRepository.save(post);
 
         for(MultipartFile file : files) {
@@ -88,16 +91,20 @@ public class PostService {
             post.addImage(image);
         }
 
-
         //user
-//        Long userId = postDTO.getUserInfoDTO().getId();
-//        User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
-//        user.addPost(post);
+        Long userId = postDTO.getUserId();
+        User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+        user.addPost(post);
 
         return PostDTO.fromPost(post);
     }
 
-    public Optional<PostDTO> updatePost(Long postId, ProcessStatus processStatus) {
+    public Optional<PostDTO> updatePost(Long postId, UserDto userDto, ProcessStatus processStatus) {
+        //user
+        Post post = postRepository.findById(postId).orElseThrow();
+        if(!post.getUser().getId().equals(userDto.getId()) && !userDto.getRole().equals(Role.ADMIN)){
+            return Optional.empty();
+        }
         return postRepository.findById(postId).map(o -> {
             o.setAdoptionStatus(processStatus.getAdoptionStatus());
             o.setUpdatedAt(LocalDateTime.now());
@@ -105,18 +112,19 @@ public class PostService {
         });
     }
 
-    public void deletePost(Long postId) {
+    public void deletePost(Long postId, UserDto userDto) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException(""));
+
+        //user
+        if(!post.getUser().getId().equals(userDto.getId()) && !userDto.getRole().equals(Role.ADMIN)){
+            return;
+        }
+
         List<Image> images = post.getImages();
 
         for(Image image : images) {
             imageService.deleteImageFile(image.getImgUrl());
         }
-
-        //user
-//        Long userId = post.getUser().getId();
-//        User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
-//        user.removePost(post); //이 부분 후에 null exception 인가? test 해보기
 
         postRepository.delete(post);
     }
