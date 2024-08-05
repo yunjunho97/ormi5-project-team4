@@ -1,46 +1,31 @@
-import {URL, MANAGE_POST, READ_POST} from "./constant.js";
+import {
+    URL,
+    MANAGE_POST,
+    READ_POST,
+    PAGE_ID,
+    APPROVE_STATUS,
+    ADOPTION_STATUS,
+    API_ADMIN_GET_POSTS, PAGE_ID_PREVIOUS, PAGE_ID_NEXT
+} from "./constant.js";
+
+import {
+    getPageStartNumber, getPageEndNumber, getResponseForAdoptionStatus, getImgSrc
+} from "./utils.js";
 
 document.addEventListener("DOMContentLoaded", function() {
-    const previousPageId = getPageId() - 1;
-    const pageId = getPageId();
-    const nextPageId = getPageId() + 1;
-
     let approveStatus = '';
-    if(getApproveStatus() !== ''){
-        approveStatus = `&approvestatus=${getApproveStatus()}`;
+    if(APPROVE_STATUS !== ''){
+        approveStatus = `&approvestatus=${APPROVE_STATUS}`;
+    }
+    let adoptionStatus = '';
+    if(ADOPTION_STATUS !== ''){
+        adoptionStatus = `&adoptionstatus=${ADOPTION_STATUS}`
     }
 
     // url 설정
-    const fetchURL = URL + `/admin/post?&page=${getPageId()}` + approveStatus;
-    const previousPageURL = URL + MANAGE_POST + `?&page=${previousPageId}` + approveStatus;
-    const nextPageURL = URL + + MANAGE_POST + `?&page=${nextPageId}` + approveStatus;
-
-    // nav 필터링 관련
-    const postingFilter = document.querySelector('#adoption-posting');
-    const adoptedFilter = document.querySelector('#adoption-adopted');
-
-    switch(getApproveStatus()){
-        case 'POSTING':
-            postingFilter.href = URL + MANAGE_POST + `?&page=${getPageId()}`;
-            adoptedFilter.href = URL + MANAGE_POST + `?&page=${getPageId()}&approvestatus=ADOPTED`;
-            break;
-        case 'ADOPTED':
-            postingFilter.href = URL + MANAGE_POST + `?&page=${getPageId()}&approvestatus=POSTING`;
-            adoptedFilter.href = URL + MANAGE_POST + `?&page=${getPageId()}`;
-            break;
-        default:
-            postingFilter.href = URL + MANAGE_POST + `?&page=${getPageId()}&approvestatus=POSTING`;
-            adoptedFilter.href = URL + MANAGE_POST + `?&page=${getPageId()}&approvestatus=ADOPTED`;
-            break;
-    }
-
-    // 유저 정보 받아오기
-    fetch(fetchURL)
-        .then(response => response.json())
-        .then(data => {
-            // todo: 로그인 정보 연동
-        })
-        .catch(error => console.error('Error:', error));
+    const fetchURL = URL + API_ADMIN_GET_POSTS + `?&page=${PAGE_ID}` + approveStatus + adoptionStatus;
+    const previousPageURL = URL + MANAGE_POST + `?&page=${PAGE_ID_PREVIOUS}` + approveStatus + adoptionStatus;
+    const nextPageURL = URL + + MANAGE_POST + `?&page=${PAGE_ID_NEXT}` + approveStatus + adoptionStatus;
 
     // 게시글 받아오기
     fetch(fetchURL)
@@ -56,8 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 input.type = 'checkbox';
                 input.className = 'checkbox';
                 const img = document.createElement('img');
-                // todo : db연결
-                img.src = '/images/animal-test-img.svg'
+                img.src = getImgSrc(post);
                 img.alt = '이미지';
                 img.className = 'margin-bottom-7'
                 const status = document.createElement("p");
@@ -87,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const previousPageImg = document.createElement('img');
             previousPageImg.src = '/images/page-previous.svg';
             previousPageImg.alt = '이전 페이지'
-            if (!(pageId === 0)) {
+            if (!(PAGE_ID === 0)) {
                 goPreviousPage.href = previousPageURL;
             }
 
@@ -96,10 +80,10 @@ document.addEventListener("DOMContentLoaded", function() {
             itemList.appendChild(goPreviousPage);
 
             // 페이지 생성
-            for (let i = getPageStartNumber(getPageId(), numOfLists); i <= getPageEndNumber(getPageId(), numOfLists); i++) {
+            for (let i = getPageStartNumber(PAGE_ID, numOfLists); i <= getPageEndNumber(PAGE_ID, numOfLists); i++) {
                 const li = document.createElement('li');
                 const pageElement = document.createElement(
-                    pageId === i ? 'p' : 'a'
+                    PAGE_ID === i ? 'p' : 'a'
                 )
                 pageElement.textContent = i.toString();
                 if (pageElement.tagName.toLowerCase() === 'p') {
@@ -119,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const nextPageImg = document.createElement('img');
             nextPageImg.src = '/images/page-next.svg';
             nextPageImg.alt = '다음 페이지'
-            if (!(pageId === numOfLists - 1)) {
+            if (!(PAGE_ID === numOfLists - 1)) {
                 goNextPage.href = nextPageURL;
             }
 
@@ -129,36 +113,3 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(error => console.error('Error:', error));
 });
-
-function getResponseForAdoptionStatus(adoptionStatus) {
-    switch(adoptionStatus) {
-        case 'POSTING':
-            return '[ 진행중인 공고 ]';
-        case 'PROCEEDING':
-            return '[ 진행중인 공고 ]';
-        case 'ADOPTED':
-            return '[ 완료된 공고 ]';
-    }
-}
-
-function getUrlParameter(name) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(name) || '';
-}
-
-function getPageId() {
-    const pageParam = getUrlParameter('page');
-    return isNaN(pageParam) ? 0 : parseInt(pageParam, 10);
-}
-
-function getApproveStatus() {
-    return getUrlParameter('approvestatus') || '';
-}
-
-function getPageStartNumber(page, pageSize){
-    return page <= 5 ? 1 : page >= pageSize - 4 ? pageSize - 8 : page - 4;
-}
-
-function getPageEndNumber(page, pageSize){
-    return page <= 5 ? 9 : page >= pageSize - 4 ? pageSize : page + 4;
-}

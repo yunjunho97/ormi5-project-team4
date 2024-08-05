@@ -29,8 +29,10 @@
 }
 
 .image-container img {
-    width: 100%;
+    width: 221px;
+    height: 221px;
     border-radius: 8px;
+    object-fit: cover;
 }
 
 .checkbox {
@@ -42,6 +44,13 @@
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.checkbox-all {
+    color: #D9D9D9;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
 }
 
 .status {

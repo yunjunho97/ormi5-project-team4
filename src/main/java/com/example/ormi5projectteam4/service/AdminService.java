@@ -1,6 +1,8 @@
 package com.example.ormi5projectteam4.service;
 
+import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
 import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
+import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.domain.dto.UserManagementDto;
 import com.example.ormi5projectteam4.domain.entity.Notice;
 import com.example.ormi5projectteam4.domain.entity.Post;
@@ -15,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.example.ormi5projectteam4.domain.constant.Role;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,55 +32,46 @@ public class AdminService {
     @Autowired
     NoticeRepository noticeRepository;
 
-    public Page<Post> getPostsByApproveStatus(ApproveStatus approveStatus, int page, int size) {
+    public Page<PostDTO> getPostsByConditions(ApproveStatus approveStatus, AdoptionStatus adoptionStatus, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
 
-        if (approveStatus == null) {
-            return postRepository.findAll(pageable);
+        if (approveStatus != null && adoptionStatus != null) {
+            return postRepository.findByApproveStatusAndAdoptionStatus(approveStatus, adoptionStatus, pageable).map(PostDTO::fromPost);
+        } else if (approveStatus != null) {
+            return postRepository.findByApproveStatus(approveStatus, pageable).map(PostDTO::fromPost);
+        } else if (adoptionStatus != null) {
+            return postRepository.findByAdoptionStatus(adoptionStatus, pageable).map(PostDTO::fromPost);
         } else {
-            return postRepository.findByApproveStatus(approveStatus, pageable);
+            return postRepository.findAll(pageable).map(PostDTO::fromPost);
         }
     }
 
     public List<UserManagementDto> getAllUsers() {
-        return userRepository.findAll().stream().map(this::userConvertToUserManagementDto).collect(Collectors.toList());
+        return userRepository.findAll().stream().map(this::userConvertToUserManagementDto).toList();
     }
 
     public List<UserManagementDto> searchUserByEmail(String email) {
-        return userRepository.findByEmailContaining(email).stream().map(this::userConvertToUserManagementDto).collect(Collectors.toList());
+        return userRepository.findByEmailContaining(email).stream().map(this::userConvertToUserManagementDto).toList();
     }
 
     public UserManagementDto changeUserRole(Long id, Role role) {
-        User user = userRepository.findById(id).orElse(null);
-        if (user != null) {
-            user.setRole(role);
-            userRepository.save(user);
-        }
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        user.setRole(role);
+        user.setUpdatedAt(LocalDateTime.now());
+        userRepository.save(user);
+
         return userConvertToUserManagementDto(user);
     }
 
-    public Post changePostApproveStatus(Long id, ApproveStatus approveStatus) {
-        Post post = postRepository.findById(id).orElse(null);
+    public PostDTO changePostApproveStatus(Long id, ApproveStatus approveStatus) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Post not found"));
+        post.setApproveStatus(approveStatus);
+        post.setUpdatedAt(LocalDateTime.now());
+        postRepository.save(post);
 
-        if (post != null) {
-            post.setApproveStatus(approveStatus);
-            postRepository.save(post);
-        }
-
-        return post;
+        return PostDTO.fromPost(post);
     }
 
-    public Notice saveNotice(Notice notice) {
-        return noticeRepository.save(notice);
-    }
-
-    public void deleteNotice(Long id) {
-//        noticeRepository.deleteById(id);
-    }
-
-    //    public Notice getNoticeById(Integer id){
-//        return noticeRepository.findById(id).orElse(null);
-//    }
     public List<Notice> getAllNotices() {
         return noticeRepository.findAll();
     }
