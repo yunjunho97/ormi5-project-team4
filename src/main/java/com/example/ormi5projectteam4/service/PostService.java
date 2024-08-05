@@ -45,19 +45,13 @@ public class PostService {
 
     public Page<PostDTO> getAllPosts(Pageable pageable) {
         PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
-        Page<Post> posts = postRepository.findAll(pageRequest);
+        Page<Post> posts = postRepository.findByApproveStatus(ApproveStatus.APPROVED ,pageRequest);
         return posts.map(PostDTO::fromPost);
     }
 
-//    public Page<PostDTO> getPostsByFoundLocation(String foundLocation, Pageable pageable){
-//        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
-//        Page<Post> posts = postRepository.findByFoundLocation(foundLocation, pageRequest);
-//        return posts.map(PostDTO::fromPost);
-//    }
-
     public Page<PostDTO> getPostsByFoundLocation(String foundLocation, Pageable pageable){
         PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
-        Page<Post> posts = postRepository.findByFoundLocationContains(foundLocation, pageRequest);
+        Page<Post> posts = postRepository.findByApproveStatusAndFoundLocationContains(ApproveStatus.APPROVED, foundLocation, pageRequest);
         return posts.map(PostDTO::fromPost);
     }
 
@@ -69,7 +63,7 @@ public class PostService {
 
     public Page<PostDTO> getPostsByAdoptionStatus(AdoptionStatus adoptionStatus, Pageable pageable){
         PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
-        Page<Post> posts = postRepository.findByAdoptionStatus(adoptionStatus, pageRequest);
+        Page<Post> posts = postRepository.findByApproveStatusAndAdoptionStatus(ApproveStatus.APPROVED, adoptionStatus, pageRequest);
         return posts.map(PostDTO::fromPost);
     }
 
