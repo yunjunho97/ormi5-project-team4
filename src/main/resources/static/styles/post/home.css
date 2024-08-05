@@ -36,8 +36,10 @@ main {
 
 .main-content {
     display: flex;
-    justify-content: space-between;
-    padding: 0 20px; /* 좌우 패딩 추가 */
+    flex-direction: column;
+    /*justify-content: space-between;*/
+    padding-left: 400px;
+    padding-right: 20px;
 }
 
 .notice {
@@ -106,4 +108,20 @@ main {
 .img-size {
     width: 200px;
     height: 200px;
+}
+
+.write {
+    margin-left: auto;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    float: right;
+}
+
+.nav {
+    margin-top: 20px;
+}
+
+.filter {
+    margin-right: 20px;
+    float: right;
 }

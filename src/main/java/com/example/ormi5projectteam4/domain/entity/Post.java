@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class Post {
     private Long id;
 
     private String title;
-    private String foundAt;
+    private LocalDate foundAt;
     private String foundLocation;
     private String detail;
     private String contact;

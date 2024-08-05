@@ -1,5 +1,6 @@
 package com.example.ormi5projectteam4.controller.thymeleaf_controller;
 
+import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
 import com.example.ormi5projectteam4.domain.dto.PagedPostsResponse;
 import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.domain.dto.ProcessStatus;
@@ -26,26 +27,11 @@ public class HomeController {
     private static final String BASE_URL = "http://localhost:8080/post";
 
     @GetMapping("/home")
-    public String home(@RequestParam(defaultValue = "0") int page, Model model) {
+    public String home(@RequestParam(defaultValue = "0") int page, Model model, @RequestParam(required = false) AdoptionStatus adoptionstatus) {
         String url = BASE_URL + "?page=" + page;
-        ResponseEntity<PagedPostsResponse> response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<PagedPostsResponse>() {}
-        );
-
-        PagedPostsResponse pagedPosts = response.getBody();
-        model.addAttribute("posts", pagedPosts.getContent());
-        model.addAttribute("currentPage", pagedPosts.getNumber());
-        model.addAttribute("totalPages", pagedPosts.getTotalPages());
-        model.addAttribute("totalElements", pagedPosts.getTotalElements());
-        return "home";
-    }
-
-    @GetMapping("/proceed")
-    public String proceed(@RequestParam(defaultValue = "0") int page, Model model) {
-        String url = BASE_URL + "/proceed?page=" + page;
+        if(adoptionstatus != null) {
+            url = BASE_URL  + "/proceed?page=" + page + "&adoptionstatus=" + adoptionstatus;
+        }
         ResponseEntity<PagedPostsResponse> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
@@ -127,7 +113,7 @@ public class HomeController {
 
             if (response.getStatusCode() == HttpStatus.OK) {
                 redirectAttributes.addFlashAttribute("message", "Post created successfully!");
-                return "redirect:/home";
+                return "write-success";
             } else {
                 redirectAttributes.addFlashAttribute("error", "Failed to create post. Please try again.");
                 return "redirect:/write";

@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProcessStatus {
-    private AdoptionStatus adoptionStatus = AdoptionStatus.ADOPTED;
+    private AdoptionStatus adoptionStatus;
 }
