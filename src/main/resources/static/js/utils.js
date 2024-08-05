@@ -1,5 +1,5 @@
 // export Function 영역
-import {ADOPTION_STATUS, URL, HOME, PAGE_ID} from "./constant.js";
+import {ADOPTION_STATUS, URL, HOME, PAGE_ID, API_NOTICE, API_MY_INFO} from "./constant.js";
 
 export function getResponseForAdoptionStatus(adoptionStatus) {
     switch (adoptionStatus) {
@@ -60,22 +60,20 @@ export function setNavigationCategoryStyle(postingCategoryObj, postingObj, adopt
     }
 }
 
-export function getImgSrc(data){
+export function getImgSrc(data) {
     let imgSrc;
-    try{
+    try {
         if (!data || !data.images || !data.images[0] || !data.images[0].imgUrl) {
             throw new Error("Image data is not available");
         }
         imgSrc = data.images[0].imgUrl;
-    }
-    catch(e){
+    } catch (e) {
         imgSrc = '/images/animal-test-img.svg';
     }
 
     return imgSrc;
 }
 
-// function 영역
 function getUrlParameter(name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name) || '';
@@ -92,4 +90,17 @@ export function getApproveStatus() {
 
 export function getAdoptionStatus() {
     return getUrlParameter('adoptionstatus') || '';
+}
+
+export async function getMyInfo() {
+    try {
+        const response = await fetch(URL + API_MY_INFO);
+        if (!response.ok) {
+            throw new Error(`HTTP 오류! 상태: ${response.status}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('오류 발생:', error);
+    }
 }

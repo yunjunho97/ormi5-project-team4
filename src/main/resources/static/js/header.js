@@ -1,4 +1,5 @@
-import {URL, API_LOGOUT, ADMIN_PAGE, MY_PAGE} from './constant.js'
+import {URL, API_LOGOUT, ADMIN_PAGE, MY_PAGE, API_NOTICE, NOTICE_LIST, HOME} from './constant.js'
+import {getMyInfo} from "./utils.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     const header = document.querySelector('#header');
@@ -12,7 +13,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const userContainer = document.createElement('div');
     const username = document.createElement('p');
         username.className = 'font-header-username';
-        username.textContent = '닉네임'; // todo: 유저 이름 받아오기
+        getMyInfo().then(data =>{
+            username.textContent = data.userName;
+        }).catch(error =>{
+            console.error('error: ', error)
+        });
+
     const welcomeText = document.createElement('p');
         welcomeText.className = 'font-header';
         welcomeText.textContent = ' 님 환영합니다';
@@ -21,10 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
         logout.href = URL + API_LOGOUT;
         logout.className = 'font-header';
         logout.textContent = '로그아웃';
-    const adminPage = document.createElement('a');
-        adminPage.href = URL + ADMIN_PAGE;
-        adminPage.className = 'font-header';
-        adminPage.textContent = '관리자 페이지';
     const myPage = document.createElement('a');
         myPage.href = URL + MY_PAGE;
         myPage.className = 'font-header';
@@ -35,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     section.appendChild(userContainer);
     section.appendChild(logout);
-    section.appendChild(adminPage) // todo: 관리자일 경우 판단
     section.appendChild(myPage);
 
     header.appendChild(logo);
