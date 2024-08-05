@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.print.Pageable;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/post")
@@ -31,6 +32,9 @@ public class PostController {
     @GetMapping
     public ResponseEntity<Page<PostDTO>> getAllPosts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
+        UserDto userDto = authenticationService.getUserDto()
+                .orElseThrow(() -> new RuntimeException("User not found"));
+//        Optional<UserDto> userDto = authenticationService.getUserDto();
         Page<PostDTO> posts = postService.getAllPosts(pageRequest); //나중에 승인된 게시물만으로 변경
         return ResponseEntity.ok(posts);
     }

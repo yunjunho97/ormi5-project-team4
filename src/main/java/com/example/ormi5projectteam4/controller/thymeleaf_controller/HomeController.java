@@ -38,10 +38,16 @@ public class HomeController {
         if(adoptionstatus != null) {
             url = BASE_URL  + "/proceed?page=" + page + "&adoptionstatus=" + adoptionstatus;
         }
+
+        HttpHeaders headers = new HttpHeaders();
+        String sessionId = session.getId();
+        headers.add("Cookie", "JSESSIONID=" + sessionId);
+        HttpEntity<?> requestEntity = new HttpEntity<>(headers);
+
         ResponseEntity<PagedPostsResponse> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
-                null,
+                requestEntity,
                 new ParameterizedTypeReference<PagedPostsResponse>() {}
         );
 
@@ -56,10 +62,16 @@ public class HomeController {
     @GetMapping("/home/location")
     public String location(@RequestParam(defaultValue = "0") int page, @RequestParam String foundLocation, Model model) {
         String url = BASE_URL + "/location?page=" + page + "&foundLocation=" + foundLocation;
+
+        HttpHeaders headers = new HttpHeaders();
+        String sessionId = session.getId();
+        headers.add("Cookie", "JSESSIONID=" + sessionId);
+        HttpEntity<?> requestEntity = new HttpEntity<>(headers);
+
         ResponseEntity<PagedPostsResponse> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
-                null,
+                requestEntity,
                 new ParameterizedTypeReference<PagedPostsResponse>() {}
         );
 
@@ -74,10 +86,16 @@ public class HomeController {
     @GetMapping("/read-post/{id}")
     public String readPost(@PathVariable Long id, Model model) {
         String url = BASE_URL + "/" + id;
+
+        HttpHeaders headers = new HttpHeaders();
+        String sessionId = session.getId();
+        headers.add("Cookie", "JSESSIONID=" + sessionId);
+        HttpEntity<?> requestEntity = new HttpEntity<>(headers);
+
         ResponseEntity<PostDTO> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
-                null,
+                requestEntity,
                 PostDTO.class);
         model.addAttribute("post", response.getBody());
         return "read-post";
@@ -136,7 +154,19 @@ public class HomeController {
     @PostMapping("/update/{id}")
     public String updatePost(@PathVariable Long id, @ModelAttribute ProcessStatus processStatus, RedirectAttributes redirectAttributes) {
         String url = BASE_URL + "/" + id;
-        restTemplate.put(url, processStatus);
+
+        HttpHeaders headers = new HttpHeaders();
+        String sessionId = session.getId();
+        headers.add("Cookie", "JSESSIONID=" + sessionId);
+        HttpEntity<?> requestEntity = new HttpEntity<>(processStatus, headers);
+
+        restTemplate.exchange(
+                url,
+                HttpMethod.PUT,
+                requestEntity,
+                Void.class
+        );
+
         redirectAttributes.addFlashAttribute("message", "Post updated successfully!");
         return "redirect:/read-post/" + id;
     }
@@ -145,7 +175,19 @@ public class HomeController {
     @PostMapping("/delete/{id}")
     public String deletePost(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         String url = BASE_URL + "/" + id;
-        restTemplate.delete(url);
+
+        HttpHeaders headers = new HttpHeaders();
+        String sessionId = session.getId();
+        headers.add("Cookie", "JSESSIONID=" + sessionId);
+        HttpEntity<?> requestEntity = new HttpEntity<>(headers);
+
+        restTemplate.exchange(
+                url,
+                HttpMethod.DELETE,
+                requestEntity,
+                Void.class
+        );
+
         redirectAttributes.addFlashAttribute("message", "Post deleted successfully!");
         return "redirect:/home";
     }
