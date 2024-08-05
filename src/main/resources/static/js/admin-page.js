@@ -35,6 +35,8 @@ document.addEventListener("DOMContentLoaded", function() {
         role.textContent = getResponseForUserRole(info.role)
         const registerDate = document.querySelector('#board-user-createdAt');
         registerDate.textContent = getDateFormat(info.createdAt);
+        const registerDescription = document.querySelector('#board-user-created-description');
+        registerDescription.innerHTML = '&nbsp;가입';
         const userPhone = document.querySelector('#board-user-phone');
         userPhone.textContent = info.phone;
         const userEmail = document.querySelector('#board-user-email');
