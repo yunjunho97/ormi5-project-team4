@@ -63,4 +63,14 @@ public class ImageService {
                 .map(Image::getImgUrl)
                 .orElseThrow(() -> new RuntimeException("이미지를 찾을 수 없습니다."));
     }
+
+    public void deleteImageFile(String imgUrl){
+        try {
+            String fileName = imgUrl.substring(imgUrl.lastIndexOf('/') + 1);
+            Path filePath = Paths.get(UPLOAD_DIR + fileName);
+            Files.deleteIfExists(filePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }

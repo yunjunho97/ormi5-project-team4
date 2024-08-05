@@ -1,5 +1,6 @@
 package com.example.ormi5projectteam4.controller.rest_controller;
 
+import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
 import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.domain.dto.ProcessStatus;
 import com.example.ormi5projectteam4.service.PostService;
@@ -23,19 +24,22 @@ public class PostController {
         this.postService = postService;
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<PostDTO>> getAllPosts() {
-//        List<PostDTO> allPost = postService.getAllPost();
-//        return ResponseEntity.ok(allPost);
-//    }
-
     @GetMapping
     public ResponseEntity<Page<PostDTO>> getAllPosts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
-        Page<PostDTO> posts = postService.getAllPosts(pageRequest);
+        Page<PostDTO> posts = postService.getAllPosts(pageRequest); //나중에 승인된 게시물만으로 변경
         return ResponseEntity.ok(posts);
     }
 
+    //+approve
+    @GetMapping("/proceed")
+    public ResponseEntity<Page<PostDTO>> getProceedPosts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<PostDTO> posts = postService.getPostsByAdoptionStatus(AdoptionStatus.POSTING, pageRequest);
+        return ResponseEntity.ok(posts);
+    }
+
+    //+approve +proceed
     @GetMapping("/location")
     public ResponseEntity<Page<PostDTO>> getPostsByFoundAt(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size, @RequestParam String foundLocation){
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -55,13 +59,6 @@ public class PostController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
-//    @PutMapping("/{id}")
-//    public ResponseEntity<PostDTO> updatePost(@PathVariable Integer id, @RequestBody PostDTO postDTO) {
-//        return postService.updatePost(id, postDTO)
-//                .map(ResponseEntity::ok)
-//                .orElse(ResponseEntity.notFound().build());
-//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<PostDTO> updatePost(@PathVariable Long id, @RequestBody ProcessStatus processStatus) {

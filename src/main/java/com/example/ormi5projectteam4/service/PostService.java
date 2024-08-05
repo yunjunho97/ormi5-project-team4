@@ -41,30 +41,35 @@ public class PostService {
         this.imageService = imageService;
     }
 
-//    public List<PostDTO> getAllPost(){
-//        List<Post> all = postRepository.findAll();
-//        return postRepository.findAll().stream()
-//                .map(PostDTO::fromPost)
-//                .collect(Collectors.toList());
-//    }
-
     public Page<PostDTO> getAllPosts(Pageable pageable) {
         PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
         Page<Post> posts = postRepository.findAll(pageRequest);
         return posts.map(PostDTO::fromPost);
     }
 
+//    public Page<PostDTO> getPostsByFoundLocation(String foundLocation, Pageable pageable){
+//        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
+//        Page<Post> posts = postRepository.findByFoundLocation(foundLocation, pageRequest);
+//        return posts.map(PostDTO::fromPost);
+//    }
+
     public Page<PostDTO> getPostsByFoundLocation(String foundLocation, Pageable pageable){
         PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
-        Page<Post> posts = postRepository.findByFoundLocation(foundLocation, pageRequest);
+        Page<Post> posts = postRepository.findByFoundLocationContains(foundLocation, pageRequest);
         return posts.map(PostDTO::fromPost);
     }
 
-    //    public Page<PostDTO> getPostsByApproveStatus(ApproveStatus approveStatus, Pageable pageable){
-//        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
-//        Page<Post> posts = postRepository.findByApproveStatus(approveStatus, pageRequest);
-//        return posts.map(PostDTO::fromPost);
-//    }
+    public Page<PostDTO> getPostsByApproveStatus(ApproveStatus approveStatus, Pageable pageable){
+        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
+        Page<Post> posts = postRepository.findByApproveStatus(approveStatus, pageRequest);
+        return posts.map(PostDTO::fromPost);
+    }
+
+    public Page<PostDTO> getPostsByAdoptionStatus(AdoptionStatus adoptionStatus, Pageable pageable){
+        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
+        Page<Post> posts = postRepository.findByAdoptionStatus(adoptionStatus, pageRequest);
+        return posts.map(PostDTO::fromPost);
+    }
 
     public Optional<PostDTO> getPostById(Long postId) {
         return postRepository.findById(postId).map(PostDTO::fromPost);
@@ -92,19 +97,8 @@ public class PostService {
         return PostDTO.fromPost(post);
     }
 
-//    //dto 분리 고려
-//    public Optional<PostDTO> updatePost(Integer postId, PostDTO postDTO) {
-//        return postRepository.findById(postId).map(o -> {
-////            o.setAdoptionStatus(postDTO.getAdoptionStatus());
-//            o.setAdoptionStatus(AdoptionStatus.ADOPTED);
-//            o.setUpdatedAt(LocalDateTime.now());
-//            return PostDTO.fromPost(postRepository.save(o));
-//        });
-//    }
-
     public Optional<PostDTO> updatePost(Long postId, ProcessStatus processStatus) {
         return postRepository.findById(postId).map(o -> {
-//            o.setAdoptionStatus(postDTO.getAdoptionStatus());
             o.setAdoptionStatus(AdoptionStatus.ADOPTED);
             o.setUpdatedAt(LocalDateTime.now());
             return PostDTO.fromPost(postRepository.save(o));
@@ -113,15 +107,18 @@ public class PostService {
 
     public void deletePost(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException(""));
-        post.getImages().clear();
+        List<Image> images = post.getImages();
+
+        for(Image image : images) {
+            imageService.deleteImageFile(image.getImgUrl());
+        }
 
         //user
 //        Long userId = post.getUser().getId();
 //        User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
 //        user.removePost(post); //이 부분 후에 null exception 인가? test 해보기
 
-        postRepository.save(post);
-        postRepository.deleteById(postId);
+        postRepository.delete(post);
     }
 
     private Post convertToPost(PostDTO postDTO) {
@@ -141,9 +138,6 @@ public class PostService {
         Animal animal = animalService.createAnimal(postDTO.getAnimalDTO());
         post.setAnimal(animal);
 
-//        postDTO.getImages().stream()
-//                .map(imageService::createImage)
-//                .forEach(post::addImage);
         return post;
     }
 

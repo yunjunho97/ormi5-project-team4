@@ -43,6 +43,42 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/proceed")
+    public String proceed(@RequestParam(defaultValue = "0") int page, Model model) {
+        String url = BASE_URL + "/proceed?page=" + page;
+        ResponseEntity<PagedPostsResponse> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<PagedPostsResponse>() {}
+        );
+
+        PagedPostsResponse pagedPosts = response.getBody();
+        model.addAttribute("posts", pagedPosts.getContent());
+        model.addAttribute("currentPage", pagedPosts.getNumber());
+        model.addAttribute("totalPages", pagedPosts.getTotalPages());
+        model.addAttribute("totalElements", pagedPosts.getTotalElements());
+        return "home";
+    }
+
+    @GetMapping("/home/location")
+    public String location(@RequestParam(defaultValue = "0") int page, @RequestParam String foundLocation, Model model) {
+        String url = BASE_URL + "/location?page=" + page + "&foundLocation=" + foundLocation;
+        ResponseEntity<PagedPostsResponse> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<PagedPostsResponse>() {}
+        );
+
+        PagedPostsResponse pagedPosts = response.getBody();
+        model.addAttribute("posts", pagedPosts.getContent());
+        model.addAttribute("currentPage", pagedPosts.getNumber());
+        model.addAttribute("totalPages", pagedPosts.getTotalPages());
+        model.addAttribute("totalElements", pagedPosts.getTotalElements());
+        return "home";
+    }
+
     @GetMapping("/read-post/{id}")
     public String readPost(@PathVariable Long id, Model model) {
         String url = BASE_URL + "/" + id;
