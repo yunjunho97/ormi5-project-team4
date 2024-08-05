@@ -9,7 +9,11 @@ import {
 } from "./constant.js";
 
 import {
-    getPageStartNumber, getPageEndNumber, getResponseForAdoptionStatus, getImgSrc, getResponseForUserRole, getDateFormat
+    getResponseForAdoptionStatus,
+    getImgSrc,
+    getResponseForUserRole,
+    getDateFormat,
+    calculatePagination
 } from "./utils.js";
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -23,9 +27,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // url 설정
-    const fetchURL = URL + API_ADMIN_GET_POSTS + `?page=0` + approveStatus + adoptionStatus;
-    const previousPageURL = URL + MANAGE_POST + `?page=0` + approveStatus + adoptionStatus;
-    const nextPageURL = URL + + MANAGE_POST + `?page=0` + approveStatus + adoptionStatus;
+    const fetchURL = URL + API_ADMIN_GET_POSTS + `?page=${PAGE_ID}` + approveStatus + adoptionStatus;
+    const previousPageURL = URL + MANAGE_POST + `?page=${PAGE_ID}` + approveStatus + adoptionStatus;
+    const nextPageURL = URL + + MANAGE_POST + `?page=${PAGE_ID}` + approveStatus + adoptionStatus;
 
     // 유저 정보 데이터 세팅
     MY_INFO.then(info => {
@@ -77,7 +81,6 @@ document.addEventListener("DOMContentLoaded", function() {
             });
 
             // 게시글 페이지 개수 생성
-            const itemCount = data.totalElements;
             const numOfLists = data.totalPages;
             const itemList = document.getElementById('post-pages');
 
@@ -95,13 +98,15 @@ document.addEventListener("DOMContentLoaded", function() {
             previousLi.appendChild(goPreviousPage);
             itemList.appendChild(goPreviousPage);
 
+            const pagination = calculatePagination(numOfLists, PAGE_ID);
+
             // 페이지 생성
-            for (let i = getPageStartNumber(PAGE_ID, numOfLists); i <= getPageEndNumber(PAGE_ID, numOfLists); i++) {
+            for (let i = pagination.startPage; i <= pagination.endPage; i++) {
                 const li = document.createElement('li');
                 const pageElement = document.createElement(
                     PAGE_ID === i ? 'p' : 'a'
                 )
-                pageElement.textContent = i.toString();
+                pageElement.textContent = (i + 1).toString();
                 if (pageElement.tagName.toLowerCase() === 'p') {
                     pageElement.className = 'font-page-selected';
                 } else {

@@ -22,21 +22,30 @@ export function getResponseForUserRole(role) {
             return '차단된 유저';
     }
 }
-export function getPageStartNumber(page, pageSize) {
-    return page <= 5 ? 1 : page >= pageSize - 4 ? pageSize - 8 : page - 4;
-}
 
-export function getPageEndNumber(page, pageSize) {
-    return page <= 5 ? 9 : page >= pageSize - 4 ? pageSize : page + 4;
+export function calculatePagination(totalPages, currentPage, maxDisplayPages = 9) {
+    if (totalPages <= maxDisplayPages) {
+        return { startPage: 0, endPage: totalPages };
+    }
+
+    let startPage = Math.max(0, currentPage - Math.floor(maxDisplayPages / 2));
+    let endPage = startPage + maxDisplayPages - 1;
+
+    if (endPage > totalPages) {
+        endPage = totalPages - 1;
+        startPage = Math.max(0, endPage - maxDisplayPages + 1);
+    }
+
+    return { startPage, endPage };
 }
 
 export function setAdminNavigationInfo(
-        pendingCategoryObj, pendingObj,approveCategoryObj, approvedObj, deniedCategoryObj, deniedObj){
+    pendingCategoryObj, pendingObj, approveCategoryObj, approvedObj, deniedCategoryObj, deniedObj) {
     setAdminNavigationFilter(pendingObj, approvedObj, deniedObj);
-    setAdminNavigationCategoryStyle(pendingCategoryObj, pendingObj,approveCategoryObj, approvedObj, deniedCategoryObj, deniedObj);
+    setAdminNavigationCategoryStyle(pendingCategoryObj, pendingObj, approveCategoryObj, approvedObj, deniedCategoryObj, deniedObj);
 }
 
-function setAdminNavigationFilter(pendingObj, approvedObj, deniedObj){
+function setAdminNavigationFilter(pendingObj, approvedObj, deniedObj) {
     switch (APPROVE_STATUS) {
         case 'PENDING':
             pendingObj.href = URL + ADMIN_PAGE + `?&page=0`;
@@ -62,7 +71,7 @@ function setAdminNavigationFilter(pendingObj, approvedObj, deniedObj){
 }
 
 function setAdminNavigationCategoryStyle(
-    pendingCategoryObj, pendingObj,approveCategoryObj, approvedObj, deniedCategoryObj, deniedObj){
+    pendingCategoryObj, pendingObj, approveCategoryObj, approvedObj, deniedCategoryObj, deniedObj) {
     switch (APPROVE_STATUS) {
         case 'PENDING':
             pendingCategoryObj.className = 'container-nav-category-selected';
