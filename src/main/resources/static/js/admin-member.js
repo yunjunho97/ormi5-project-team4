@@ -1,13 +1,10 @@
 import {
     URL,
-    MANAGE_POST,
     PAGE_ID,
-    MY_INFO, API_SET_APPROVE_STATUS, EMAIL, API_ADMIN_GET_USERS, ADMIN_USER, API_ADMIN_PUT_USER_ROLE
+    MY_INFO, EMAIL, API_ADMIN_GET_USERS, ADMIN_USER, API_ADMIN_PUT_USER_ROLE
 } from "./constant.js";
 
 import {
-    getResponseForAdoptionStatus,
-    getImgSrc,
     getResponseForUserRole,
     getDateFormat,
     calculatePagination, getResponseForUserRoleAdmin
@@ -15,7 +12,7 @@ import {
 
 document.addEventListener("DOMContentLoaded", function () {
     let email = '';
-    if (email !== '') {
+    if (EMAIL !== '') {
         email = `&email=${EMAIL}`;
     }
 
@@ -40,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
         userEmail.textContent = info.email;
     }).catch(error => console.error('Error:', error));
 
+    console.log(fetchURL);
     // 유저 목록 받아오기
     fetch(fetchURL)
         .then(response => response.json())
@@ -152,6 +150,15 @@ document.addEventListener("DOMContentLoaded", function () {
             processSelectedItems('ACTIVE');
         });
     }
+
+    // 검색 이벤트 리스너
+    const form = document.querySelector('#search-form');
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const searchEmail = document.querySelector('#search-input').value;
+        window.location.href = URL + ADMIN_USER + `?page=0` + '&email=' + searchEmail;
+    });
 });
 
 function toggleAllCheckboxes(source) {
