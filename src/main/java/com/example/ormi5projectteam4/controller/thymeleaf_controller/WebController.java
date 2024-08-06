@@ -22,14 +22,14 @@ public class WebController {
 
     @GetMapping("/notice-list")
     public String getNotices(Model model) {
-        ResponseEntity<List<NoticeDto>> response = restTemplate.exchange(
-                BASE_URL + "/notice",
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<>() {}
-        );
-        List<NoticeDto> noticePage = response.getBody();
-        model.addAttribute("notices", noticePage);
+        //ResponseEntity<List<NoticeDto>> response = restTemplate.exchange(
+        //        BASE_URL + "/notice",
+        //        HttpMethod.GET,
+        //        null,
+        //        new ParameterizedTypeReference<>() {}
+        //);
+        //List<NoticeDto> noticePage = response.getBody();
+        //model.addAttribute("notices", noticePage);
         return "notice-list-user";
     }
 

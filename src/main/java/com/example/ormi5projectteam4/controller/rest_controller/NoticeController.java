@@ -69,11 +69,18 @@ public class NoticeController {
     }
 
     // 사용자 화면에서 처리
-    // READ: 최신 공지사항 조회
+    // READ: 최신순으로 공지사항 조회
     @GetMapping("/notice")
-    public ResponseEntity<List<NoticeDto>> getLatestNotices() {
-        List<NoticeDto> latestNotices = noticeService.getLatestNotices();
-        return ResponseEntity.ok(latestNotices);
+    public ResponseEntity<Page<NoticeDto>> getNoticesSortDescForUser(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "14") int size) {
+
+        Page<NoticeDto> notices = noticeService.getAllNoticesDesc(page, size);
+        return ResponseEntity.ok(notices);
     }
+    //public ResponseEntity<List<NoticeDto>> getLatestNotices() {
+    //    List<NoticeDto> latestNotices = noticeService.getLatestNotices();
+    //    return ResponseEntity.ok(latestNotices);
+    //}
 
 }
