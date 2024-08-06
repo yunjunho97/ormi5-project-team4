@@ -66,6 +66,9 @@
                         </div>
                     </form>
                 </div>
+                <form th:action="@{/delete/{id}(id=${post.id})}" method="post">
+                    <button type="submit" onclick="return confirm('삭제 하시겠습니까?');">글삭제</button>
+                </form>
             </div>
         </div>
         <div class="contact">
@@ -85,8 +88,8 @@
         </div>
     </div>
 </div>
-<form th:action="@{/delete/{id}(id=${post.id})}" method="post">
-    <button type="submit" onclick="return confirm('삭제 하시겠습니까?');">글삭제</button>
-</form>
+<!--<form th:action="@{/delete/{id}(id=${post.id})}" method="post">-->
+<!--    <button type="submit" onclick="return confirm('삭제 하시겠습니까?');">글삭제</button>-->
+<!--</form>-->
 </body>
 </html>
