@@ -67,6 +67,15 @@ input[type=password]{
     display: flex;
 }
 
+#dropdownMenu {
+    margin-left: 693px;
+    margin-top: 20px;
+    width: 533px;
+    height: 45px;
+    border: #766CED 2px solid;
+    border-radius: 10px;
+}
+
 input[type=checkbox] {
     margin-top: 15px;
     margin-left: 693px;

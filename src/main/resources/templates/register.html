@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<script src="../static/js/register.js"></script>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -13,7 +14,8 @@
     <p class="text-style" id="email-text">아이디</p>
     <div id="email">
         <input id="register-email" type="text" placeholder="Email">
-        <button class="duplication-btn">중복확인</button>
+        <button id="check-email-btn" class="duplication-btn">중복확인</button>
+        <p id="result-message"></p>
     </div>
     <div class="line-separate"></div>
     <p class="text-style">비밀번호</p>
@@ -27,7 +29,6 @@
     </div>
     <div class="line-separate"></div>
     <p class="text-style">비밀번호 찾기 질문</p>
-    <!--드롭다운 메뉴-->
     <div class="form-group">
         <select id="dropdownMenu" required>
             <option value="">힌트를 설정해주세요</option>
@@ -63,7 +64,8 @@
     <p class="text-style">닉네임</p>
     <div id="username">
         <input id="register-username" type="text" placeholder="부적절한 닉네임 사용시 차단됩니다">
-        <button class="duplication-btn">중복확인</button>
+        <button id="check-username-btn" class="duplication-btn">중복확인</button>
+        <p id="result-message2"></p>
     </div>
     <div class="line-separate"></div>
     <p class="text-style" id="phone-text">휴대폰번호</p>
