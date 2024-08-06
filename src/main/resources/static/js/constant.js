@@ -31,5 +31,5 @@ export const APPROVE_STATUS = getApproveStatus();
 export const ADOPTION_STATUS = getAdoptionStatus();
 
 // Constants
-export const URL = "http://localhost:8080";
+export const URL = "http://43.203.58.44:8080";
 export const MY_INFO = getMyInfo();

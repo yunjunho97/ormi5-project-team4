@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     logout.textContent = '로그아웃';
 
     async function logoutEvent() {
-        const response = await fetch('http://localhost:8080/auth/logout', {
+        const response = await fetch('http://43.203.58.44:8080/auth/logout', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
