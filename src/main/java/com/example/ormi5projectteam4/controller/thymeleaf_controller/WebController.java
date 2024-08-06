@@ -27,12 +27,28 @@ public class WebController {
     private static final String BASE_URL = "http://43.203.58.44:8080";
 
     @GetMapping("/notice-list")
-    public String getNotices() {
+    public String getNotices(Model model) {
+        ResponseEntity<List<NoticeDto>> response = restTemplate.exchange(
+                BASE_URL + "/notice",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<>() {}
+        );
+        List<NoticeDto> noticePage = response.getBody();
+        model.addAttribute("notices", noticePage);
         return "notice-list-user";
     }
 
     @GetMapping("/manage/notice")
-    public String getAdminNotices() {
+    public String getAdminNotices(Model model) {
+        ResponseEntity<List<NoticeDto>> response = restTemplate.exchange(
+                BASE_URL + "/admin/notice",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<>() {}
+        );
+        List<NoticeDto> noticePage = response.getBody();
+        model.addAttribute("notices", noticePage);
         return "notice-list-admin";
     }
 
@@ -70,21 +86,6 @@ public class WebController {
         return "redirect:/manage/notice";
     }
 
-//    @GetMapping("/notice-list")
-//    public String getNotices(@RequestParam(defaultValue = "1") int page, Model model) {
-//        String url = BASE_URL + "?page=" + page;
-//        ResponseEntity<List<NoticeDto>> response = restTemplate.exchange(
-//                url,
-//                HttpMethod.GET,
-//                null,
-//                new ParameterizedTypeReference<>() {}
-//        );
-//        List<NoticeDto> noticePage = response.getBody();
-//
-//        model.addAttribute("notices", noticePage);
-//
-//        return "notice-list-user";
-//    }
 
 
 
