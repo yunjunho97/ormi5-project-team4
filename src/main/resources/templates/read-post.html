@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/styles/post/read-post.css}">
+    <link rel="stylesheet" th:href="@{/styles/shared/header.css}">
+    <link rel="stylesheet" th:href="@{/styles/shared/navigation.css}">
+    <script type="module" th:src="@{/js/header.js}"></script>
+    <script type="module" th:src="@{/js/navigation.js}"></script>
+    <script>
+        function submitForm() {
+            var status = document.getElementById('adoptionStatus').value;
+            if (status === 'ADOPTED') {
+                if (confirm('입양이 완료되었습니까?')) {
+                    document.getElementById('updateForm').submit();
+                } else {
+                    document.getElementById('adoptionStatus').value = '';
+                }
+            } else if (status === 'POSTING') {
+                document.getElementById('updateForm').submit();
+            }
+        }
+    </script>
+</head>
+<body>
+<!--<header>-->
+<!--    <div class="header-content">-->
+<!--        <h1>DONKEY</h1>-->
+<!--    </div>-->
+<!--    <div class="header-content">-->
+<!--        <p>닉네임 님 환영합니다 | <a href="">로그아웃</a> | <a href="">마이페이지</a></p>-->
+<!--    </div>-->
+<!--</header>-->
+<header id="header"></header>
+<div class="container">
+    <nav id="nav" class="nav"></nav>
+    <div class="content">
+        <h2 th:text="${post.title}"></h2>
+        <p th:text="'닉네임 |' + ${post.createdAt}"></p>
+        <hr>
+        <div class="dog-info">
+            <img class="img-size" th:src="@{{url}(url=${post.getImages()[0].getImgUrl()})}" alt="동물 사진">
+            <div class="details">
+                <h3 th:text="${post.title}"></h3>
+                <p th:text="${post.getFoundLocation()}"></p>
+                <p th:text="'종:  ' + ${post.getAnimalDTO().getSpecies()}"></p>
+                <p th:text="'품종:  ' + ${post.getAnimalDTO().getBreed()}"></p>
+                <p th:text="'이름:  ' + ${post.getAnimalDTO().getName()}"></p>
+                <p th:text="'성별:  ' + ${post.getAnimalDTO().getGender()}"></p>
+                <p th:text="'나이:  ' + ${post.getAnimalDTO().getAge()}"></p>
+                <p th:text="'몸무게:  ' + ${post.getAnimalDTO().getWeight()}"></p>
+                <p th:text="'중성화 여부:  ' + ${post.getAnimalDTO().getNeuteringStatus()}"></p>
+                <div class="status">
+<!--                    <p>공고 상태 변경</p>-->
+<!--                    <p th:text="${post.getAdoptionStatus()}"></p>-->
+                    <form id="updateForm" th:action="@{/update/{id}(id=${post.id})}" method="post">
+                        <div>
+                            <label for="adoptionStatus">공고 상태 변경</label>
+                            <p th:text="${post.getAdoptionStatus()}"></p>
+                            <select id="adoptionStatus" name="adoptionStatus" required onchange="submitForm()">
+<!--                                <option value=""></option>-->
+                                <option value="POSTING" th:selected="${post.getAdoptionStatus().toString().equals('POSTING')}">진행중</option>
+                                <option value="ADOPTED" th:selected="${post.getAdoptionStatus().toString().equals('ADOPTED')}">완료</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="contact">
+            <h4>필수공개 정보</h4>
+            <p th:text="'발견일자:  ' + ${post.getFoundAt()}"></p>
+            <p th:text="'발견장소:  ' + ${post.getFoundLocation()}"></p>
+            <p th:text="'임시보호처:  ' + ${post.getTempoLocation()}"></p>
+            <p th:text="'연락처:  ' + ${post.getContact()}"></p>
+        </div>
+        <div>
+            <p th:text="${post.detail}"></p>
+        </div>
+        <div>
+            <th th:each="image : ${post.getImages()}">
+                <img class="img-size" th:src="@{{url}(url=${image.getImgUrl()})}">
+            </th>
+        </div>
+    </div>
+</div>
+<form th:action="@{/delete/{id}(id=${post.id})}" method="post">
+    <button type="submit" onclick="return confirm('삭제 하시겠습니까?');">글삭제</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/styles/shared/header.css}">
+    <link rel="stylesheet" th:href="@{/styles/shared/navigation.css}">
+    <script type="module" th:src="@{/js/header.js}"></script>
+    <script type="module" th:src="@{/js/navigation.js}"></script>
+    <title>공지사항</title>
+</head>
+<body>
+<header id="header"></header>
+<main>
+    <nav id="nav-admin"></nav>
+    <div class="container">
+        <form action="@{admin/notice}" th:object="${noticeDto}" method="post">
+            <div class="input-group">
+                <label for="title">제목</label>
+                <input type="text" id="title" th:field="*{title}" placeholder="제목을 입력해주세요">
+            </div>
+            <div class="input-group">
+                <label for="content">내용</label>
+                <textarea id="content" th:field="*{content}" placeholder="내용을 입력해주세요"></textarea>
+            </div>
+            <button type="submit">저장하기</button>
+            <button type="button" class="cancel">취소</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,234 @@
+/* static */
+.background-purple {
+    background-color: #766CED;
+}
+
+.font-forward {
+    font-size: 12px;
+    color: #766CED;
+}
+
+.font-title {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.font-title-selected {
+    font-weight: 700;
+    font-size: 18px;
+    color: #766CED;
+}
+
+.font-12 {
+    font-size: 12px;
+}
+
+.font-accept {
+    font-size: 12px;
+    color: #F5F4FF;
+}
+
+.font-deny {
+    font-size: 12px;
+    color: #CFCFCF;
+}
+
+/* Board Area */
+.font-board {
+    color: #9B9B9B;
+}
+
+.font-board-userinfo {
+    font-weight: 400;
+    color: #9B9B9B;
+}
+
+.font-board-userinfo-small {
+    font-weight: 400;
+    color: #C3C3C3;
+}
+
+.font-board-role {
+    font-weight: 700;
+    color: #9B9B9B;
+}
+
+.font-board-username {
+    font-size: 24px;
+}
+
+.board-topline {
+    margin-bottom: 40px;
+}
+
+.board-bottomline {
+    margin-bottom: 17px;
+}
+
+.article-post {
+    padding-top: 14px;
+    justify-content: center;
+    display: flex;
+}
+
+.article-post > div {
+    width: 724px;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-board {
+    margin-bottom: 25px;
+}
+
+.container-posts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+/* Page Area */
+#post-pages {
+    display: flex;
+    justify-content: center;
+    gap: 20px
+}
+
+.font-page {
+    font-size: 12px;
+}
+
+.font-page-selected {
+    font-size: 14px;
+    color: #000000;
+}
+
+.button-apply {
+    font-size: 12px;
+    width: 60px;
+    height: 28px;
+    border-radius: 4px;
+    color: #F5F4FF;
+    background-color: #766CED;
+}
+
+.button-deny {
+    font-size: 12px;
+    width: 60px;
+    height: 28px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #CFCFCF;
+}
+
+/* Member Area */
+.member-username {
+    font-size: 12px;
+    color: #766CED;
+    text-align: center;
+}
+
+.member-phone {
+    font-size: 12px;
+    color: #9B9B9B;
+    text-align: center;
+}
+
+.member-status-normal {
+    font-size: 12px;
+    color: #9B9B9B;
+    text-align: center;
+}
+
+.member-status-banned {
+    font-size: 12px;
+    color: #766CED;
+    text-align: center;
+}
+
+/* table */
+.table-line-bottom {
+    border-bottom: 1px solid #D9D9D9;
+}
+
+/* etc */
+.background-color-default {
+    background-color: #F5F4FF;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.padding-top-13 {
+    padding-top: 13px;
+}
+
+.padding-top-19 {
+    padding-top: 19px;
+}
+
+.padding-bottom-13 {
+    padding-bottom: 13px;
+}
+
+.padding-bottom-15 {
+    padding-bottom: 15px;
+}
+
+.margin-bottom-0 {
+    margin-bottom: 0;
+}
+
+.margin-bottom-3 {
+    margin-bottom: 3px;
+}
+
+.margin-bottom-4 {
+    margin-bottom: 4px;
+}
+
+.margin-bottom-5 {
+    margin-bottom: 5px;
+}
+
+.margin-bottom-7 {
+    margin-bottom: 7px;
+}
+
+.margin-bottom-9 {
+    margin-bottom: 9px;
+}
+
+.margin-bottom-13 {
+    margin-bottom: 13px;
+}
+
+.margin-bottom-18 {
+    margin-bottom: 18px;
+}
+
+.gap-4 {
+    gap: 4px;
+}
+
+.gap-15 {
+    gap: 15px
+}
+
+.gap-17 {
+    gap: 17px;
+}
+
+.gap-22 {
+    gap: 22px;
+}
+
+.flex-center {
+    justify-content: center;
+}
+
+.height-35 {
+    height: 35px;
+}

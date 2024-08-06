@@ -1,0 +1,40 @@
+/* Header Area */
+header {
+    background-color: #766CED;
+
+    height: 130px;
+
+    padding-left: 100px;
+    padding-right: 100px;
+    margin-bottom: 146px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header * {
+    background-color: initial;
+
+    padding-left: initial;
+    padding-right: initial;
+    display: initial;
+    text-decoration-line: none;
+}
+
+.font-header {
+    color: #F5F4FF;
+}
+
+.font-header-username {
+    font-size: 20px;
+    font-weight: 700;
+    color: #F5F4FF;
+}
+
+#container-header-user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}

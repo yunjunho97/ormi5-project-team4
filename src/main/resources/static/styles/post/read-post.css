@@ -1,0 +1,67 @@
+.img-size {
+    width: 200px;
+    height: 200px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #766CED;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+.header-content {
+    margin-right: 77px;
+    margin-left: 77px;
+}
+.content {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+    margin-left: 100px;
+}
+.content h2 {
+    margin-top: 0;
+}
+.dog-info {
+    display: flex;
+    gap: 20px;
+}
+.dog-info img {
+    max-width: 300px;
+    border-radius: 10px;
+}
+.details {
+    flex-grow: 1;
+}
+.details p {
+    margin: 5px 0;
+}
+.status {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.status select {
+    padding: 5px;
+    font-size: 16px;
+}
+.contact {
+    background-color: #CFCFCF;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 10px;
+}

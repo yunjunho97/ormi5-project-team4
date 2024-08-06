@@ -1,0 +1,114 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    width: 246px;
+    height: 69px;
+    margin-top: 48px;
+    margin-left: 837px;
+}
+
+.text-style {
+    font-size: 20px;
+    color: #666666;
+    margin-top: 32px;
+    margin-left: 693px;
+}
+
+input[type=text]{
+    width: 400px;
+    height: 25px;
+    border: 0;
+    margin-top: 20px;
+    margin-left: 695px;
+    /*background-color: #766CED;*/
+}
+
+input[type=password]{
+    width: 400px;
+    height: 25px;
+    border: 0;
+    margin-top: 20px;
+    margin-left: 695px;
+    /*background-color: #766CED;*/
+}
+
+.line-separate {
+    margin-top: 10px;
+    margin-left: 693px;
+    width: 534px;
+    height: 1px;
+    background-color: black;
+}
+
+#email-text {
+    margin-top: 156px;
+    margin-left: 693px;
+}
+
+#email {
+    display: flex;
+}
+
+.duplication-btn {
+    width: 132px;
+    height: 51px;
+    border: #766CED 1px solid;
+    border-radius: 100px;
+    margin-left: 150px;
+    font-size: 16px;
+    color: #766CED;
+    background-color: #FFFFFF;
+}
+
+#password {
+    display: flex;
+}
+
+#dropdownMenu {
+    margin-left: 693px;
+    margin-top: 20px;
+    width: 533px;
+    height: 45px;
+    border: #766CED 2px solid;
+    border-radius: 10px;
+}
+
+input[type=checkbox] {
+    margin-top: 15px;
+    margin-left: 693px;
+    width: 24px;
+    height: 24px;
+}
+
+#terms {
+    display: flex;
+}
+
+#terms > p {
+    margin-left: 9px;
+    margin-top: 18px;
+    font-size: 16px;
+    color: #888888;
+}
+
+#terms > p:last-child {
+    margin-left: 344px;
+    font-size: 12px;
+    color: #888888;
+}
+
+#register-btn {
+    margin-left: 693px;
+    margin-top: 25px;
+    margin-bottom: 63px;
+    width: 534px;
+    height: 68px;
+    background-color: #766CED;
+    border: 0;
+    border-radius: 10px;
+    color: #F5F4FF;
+    font-size: 16px;
+}

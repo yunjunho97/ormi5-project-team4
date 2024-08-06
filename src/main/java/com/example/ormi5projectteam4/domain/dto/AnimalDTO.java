@@ -1,11 +1,11 @@
-package com.example.ormi5projectteam4.domain;
+package com.example.ormi5projectteam4.domain.dto;
 
 import com.example.ormi5projectteam4.domain.constant.Gender;
 import com.example.ormi5projectteam4.domain.constant.NeuteringStatus;
 import com.example.ormi5projectteam4.domain.constant.Species;
+import com.example.ormi5projectteam4.domain.entity.Animal;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class AnimalDTO {
-    private Integer id;
+    private Long id;
     private String name;
     private String breed;
     private Integer age;

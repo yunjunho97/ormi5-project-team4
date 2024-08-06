@@ -1,8 +1,8 @@
-package com.example.ormi5projectteam4.domain;
+package com.example.ormi5projectteam4.domain.dto;
 
+import com.example.ormi5projectteam4.domain.entity.Post;
 import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
 import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
-import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -17,10 +17,11 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Builder
 public class PostDTO {
-    private Integer id;
+    private Long id;
+    private Long userId;
     private String title;
-    private String fountAt;
-    private String fountLocation;
+    private LocalDate foundAt;
+    private String foundLocation;
     private String detail;
     private String contact;
     private String tempoLocation;
@@ -29,6 +30,7 @@ public class PostDTO {
     private AdoptionStatus adoptionStatus;
     private ApproveStatus approveStatus;
     private AnimalDTO animalDTO;
+//    private UserRoleDto userRoleDTO;
     private List<ImageDTO> images;
 
     public static PostDTO fromPost(Post post) {
@@ -38,12 +40,12 @@ public class PostDTO {
                     .map(ImageDTO::fromImage)
                     .collect(Collectors.toList());
         }
-
+        //user 추가
         return PostDTO.builder()
                 .id(post.getId())
                 .title(post.getTitle())
-                .fountAt(post.getFountAt())
-                .fountLocation(post.getFountLocation())
+                .foundAt(post.getFoundAt())
+                .foundLocation(post.getFoundLocation())
                 .detail(post.getDetail())
                 .contact(post.getContact())
                 .tempoLocation(post.getTempoLocation())

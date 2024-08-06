@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <link rel="stylesheet" th:href="@{/styles/post/home.css}">
+    <script>
+        function removeSpacesAndSubmit(form) {
+            var foundLocationInput = form.foundLocation;
+            foundLocationInput.value = foundLocationInput.value.replace(/\s+/g, '');
+            form.submit();
+        }
+    </script>
+    <link rel="stylesheet" th:href="@{/styles/shared/header.css}">
+    <link rel="stylesheet" th:href="@{/styles/shared/navigation.css}">
+    <script type="module" th:src="@{/js/header.js}"></script>
+    <script type="module" th:src="@{/js/navigation.js}"></script>
+</head>
+<body>
+<!--<header>-->
+<!--    <div class="logo">로고</div>-->
+<!--    <div class="user-actions">-->
+<!--        <span class="nickname">닉네임</span>-->
+<!--        <span class="logout">로그아웃</span>-->
+<!--        <span class="mypage">마이페이지</span>-->
+<!--    </div>-->
+<!--</header>-->
+<header id="header"></header>
+<main>
+    <nav id="nav" class="nav"></nav>
+    <div class="main-content">
+        <div class="write">
+            <a th:href="@{/write}">글쓰기</a>
+        </div>
+        <div th:if="${not #lists.isEmpty(posts)}">
+            <ul class="container">
+                <li th:each="post : ${posts}">
+                    <a th:href="@{/read-post/{id}(id=${post.id})}">
+<!--                        <p th:text="${post.getImages()[0].getImgUrl()}">aaa</p>-->
+                        <img class="img-size" th:src="@{{url}(url=${post.getImages()[0].getImgUrl()})}" alt="">
+                        <p th:text="${post.title}">Title</p>
+                        <p th:text="${post.foundLocation}">foundAt</p>
+                        <!-- 필드추가 -->
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="pagination">
+        <a th:if="${currentPage > 0}" th:href="@{/home(page=${currentPage - 1})}"> < </a>
+        <span th:each="i : ${#numbers.sequence((currentPage / 10) * 10 + 1, ((currentPage / 10) + 1) * 10)}">
+            <a th:if="${i == currentPage + 1}" th:text="${i}" class="active" th:href="@{/home(page=${i - 1})}"></a>
+            <a th:if="${i != currentPage + 1} and ${i <= totalPages}" th:text="${i}" th:href="@{/home(page=${i - 1})}"></a>
+        </span>
+        <a th:if="${currentPage < totalPages - 1}" th:href="@{/home(page=${currentPage + 1})}"> > </a>
+    </div>
+
+    <form class="filter" action="#" th:action="@{/home/location}" method="get" onsubmit="removeSpacesAndSubmit(this); return false;">
+        <label for="foundLocation">지역 검색:</label>
+        <input type="text" id="foundLocation" name="foundLocation" required>
+        <button type="submit">Search</button>
+    </form>
+
+</main>
+
+<!--<div th:if="${#lists.isEmpty(posts)}">-->
+<!--    <p>No posts available.</p>-->
+<!--</div>-->
+
+</body>
+</html>

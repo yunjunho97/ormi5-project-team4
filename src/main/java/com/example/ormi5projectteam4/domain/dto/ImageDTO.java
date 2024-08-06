@@ -1,5 +1,6 @@
-package com.example.ormi5projectteam4.domain;
+package com.example.ormi5projectteam4.domain.dto;
 
+import com.example.ormi5projectteam4.domain.entity.Image;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class ImageDTO {
-    private Integer id;
+    private Long id;
     private String imgUrl;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

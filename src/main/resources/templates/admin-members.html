@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/styles/admin/admin-base.css}">
+    <link rel="stylesheet" th:href="@{/styles/admin/admin-component.css}">
+    <link rel="stylesheet" th:href="@{/styles/admin/admin-layout.css}">
+    <link rel="stylesheet" th:href="@{/styles/shared/header.css}">
+    <link rel="stylesheet" th:href="@{/styles/shared/navigation.css}">
+    <script type="module" th:src="@{/js/header-admin.js}"></script>
+    <script type="module" th:src="@{/js/navigation-admin.js}"></script>
+</head>
+<body>
+<header id="header-admin"></header>
+<main>
+    <nav id="nav-admin"></nav>
+    <article class="article-post">
+        <div>
+            <!-- userInfo Area -->
+            <div class="container margin-bottom-4">
+                <div class="container gap-22">
+                    <p id="board-username" class="font-board-username">닉네임</p>
+                    <p class="font-board-userinfo-small">관리자</p>
+                </div>
+                <div class="container">
+                    <p id="board-user-createdAt" class="font-board-userinfo-small">2021.01.12</p>
+                    <p class="font-board-userinfo-small">가입</p>
+                </div>
+            </div>
+            <div class="container margin-bottom-13">
+                <div class="container gap-17">
+                    <p id="board-user-phone" class="font-board-userinfo">010-1234-5678</p>
+                    <p id="board-user-email" class="font-board-userinfo">dlfgkrltlfgek@naver.com</p>
+                </div>
+                <p class="font-board-role">관리자</p>
+            </div>
+
+            <img src="/images/admin-board-topline.svg" alt="" class="board-topline margin-bottom-0">
+
+            <!-- Member Info Area -->
+            <table class="margin-bottom-18">
+                <thead class="height-35 table-line-bottom">
+                <tr>
+                    <th></th>
+                    <th>닉네임</th>
+                    <th>이메일</th>
+                    <th>휴대폰 번호</th>
+                    <th>상태</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="height-35 table-line-bottom">
+                    <td><input type="checkbox" class="checkbox-all"></td>
+                    <td class="member-username">닉네임</td>
+                    <td>dkwlsWkdlfgkrltfgek@naver.com</td>
+                    <td class="member-phone">010-1234-5678</td>
+                    <td class="member-status-normal">일반유저</td>
+                </tr>
+                <tr class="height-35 table-line-bottom">
+                    <td><input type="checkbox"></td>
+                    <td class="member-username">닉네임</td>
+                    <td>dkwlsWkdlfgkrltfgek@naver.com</td>
+                    <td class="member-phone">010-1234-5678</td>
+                    <td class="member-status-banned">차단유저</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- Page Area -->
+            <div class="container">
+                <div class="container gap-15">
+                    <input id="check-all-member" type="checkbox" class="checkbox-all">
+                    <label for="check-all-member" class="font-page">전체선택</label>
+                </div>
+                <ul id="member-pages">
+
+                </ul>
+                <div class="container gap-4">
+                    <a class="button-apply container flex-center">차단</a>
+                    <a class="button-deny container flex-center">일반</a>
+                </div>
+            </div>
+        </div>
+    </article>
+</main>
+</body>
+</html>

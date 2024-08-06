@@ -1,4 +1,4 @@
-package com.example.ormi5projectteam4.domain;
+package com.example.ormi5projectteam4.domain.entity;
 
 import com.example.ormi5projectteam4.domain.constant.Gender;
 import com.example.ormi5projectteam4.domain.constant.NeuteringStatus;
@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,7 +20,7 @@ import java.time.LocalDateTime;
 public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String name;
     private String breed;
@@ -39,14 +38,3 @@ public class Animal {
     @Enumerated(EnumType.STRING)
     private Species species;
 }
-//enum Gender {
-//    MALE, FEMALE
-//}
-
-//enum NeuteringStatus {
-//    COMPLETE, INCOMPLETE, UNKNOWN
-//}
-//
-//enum Species {
-//    DOG, CAT, ETC
-//}

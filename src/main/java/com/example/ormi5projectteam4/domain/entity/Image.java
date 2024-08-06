@@ -1,4 +1,4 @@
-package com.example.ormi5projectteam4.domain;
+package com.example.ormi5projectteam4.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String imgUrl;
     private LocalDateTime createdAt;

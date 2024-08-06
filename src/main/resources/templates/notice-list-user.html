@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/styles/shared/header.css}">
+    <link rel="stylesheet" th:href="@{/styles/shared/navigation.css}">
+    <script type="module" th:src="@{/js/header.js}"></script>
+    <script type="module" th:src="@{/js/navigation.js}"></script>
+    <title>공지사항</title>
+</head>
+<body>
+<header id="header"></header>
+<main>
+    <nav id="nav-admin"></nav>
+    <div class="main-content">
+        <h2>공지사항</h2>
+        <form id="notice-form" th:action="@{/admin/notice}" method="get">
+            <table>
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>제목</th>
+                    <th>작성일</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="notice : ${notices}">
+                    <td><input type="checkbox" name="ids" th:value="${notice.id}"></td>
+                    <td th:text="${notice.title}">Title</td>
+                    <td th:text="${notice.createdAt}">Date</td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</main>
+</body>
+</html>

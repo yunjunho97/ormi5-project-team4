@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/styles/mypage/mypage-base.css}">
+    <link rel="stylesheet" th:href="@{/styles/mypage/mypage-component.css}">
+    <link rel="stylesheet" th:href="@{/styles/mypage/mypage-layout.css}">
+    <link rel="stylesheet" th:href="@{/styles/shared/header.css}">
+    <link rel="stylesheet" th:href="@{/styles/shared/navigation.css}">
+    <script type="module" th:src="@{/js/header.js}"></script>
+    <script type="module" th:src="@{/js/navigation.js}"></script>
+</head>
+<body>
+<header id="header"></header>
+
+<main>
+    <nav id="nav"></nav>
+    <article class="article-post">
+        <div>
+            <!-- userInfo Area -->
+            <div class="container margin-bottom-4">
+                <div class="container gap-9">
+                    <div class="container-username">
+                            <span id="board-username" class="font-board-username">
+                                닉네임
+                            </span>
+                        <img src="/images/edit.svg" alt="">
+                    </div>
+                    <p id="board-user-role" class="font-board-userinfo-small">일반유저</p>
+                </div>
+                <div class="container">
+                    <p id="board-user-createdAt" class="font-board-userinfo-small">2021.01.12</p>
+                    <p class="font-board-userinfo-small">가입</p>
+                </div>
+            </div>
+            <div class="container margin-bottom-13">
+                <div class="container gap-17">
+                    <p id="board-user-phone" class="font-board-userinfo">010-1234-5678</p>
+                    <p id="board-user-email" class="font-board-userinfo">dlfgkrltlfgek@naver.com</p>
+                </div>
+                <p>
+                    <span>작성한 글</span>
+                    <span id="user-posting-count" class="font-board-role">14</span>
+                    <span>개</span>
+                </p>
+
+            </div>
+
+            <img src="/images/admin-board-topline.svg" alt="" class="board-topline margin-bottom-0">
+
+            <!-- Member Info Area -->
+            <table class="margin-bottom-18">
+                <thead class="height-35 my-page-table-line-bottom">
+                <tr>
+                    <th colspan="3">제목</th>
+                    <th>작성일</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="height-35 my-page-table-line-bottom">
+                    <td><input type="checkbox" class="checkbox-all"></td>
+                    <td class="post-posting">[ 진행중인 공고 ]</td>
+                    <td>우리 귀여운 뽀삐 눈물을 머금고 분양합니다</td>
+                    <td class="post-created">2024.07.24</td>
+                </tr>
+                <tr class="height-35 my-page-table-line-bottom">
+                    <td><input type="checkbox" class="checkbox-all"></td>
+                    <td class="post-adopted">[ 완료된 공고 ]</td>
+                    <td>우리 귀여운 뽀삐 눈물을 머금고 분양합니다</td>
+                    <td class="post-created">2024.07.24</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- Page Area -->
+            <div class="container">
+                <div class="container gap-15">
+                    <input id="check-all-member" type="checkbox" class="checkbox-all">
+                    <label for="check-all-member" class="font-page">전체선택</label>
+                </div>
+                <ul id="member-pages">
+
+                </ul>
+                <div class="container gap-4">
+                    <a id="write-button" class="button-apply container flex-center">글쓰기</a>
+                    <a id="delete-button" class="button-deny container flex-center">삭제</a>
+                </div>
+            </div>
+        </div>
+    </article>
+</main>
+<script th:src="@{/js/mypage.js}"></script>
+</body>
+</html>

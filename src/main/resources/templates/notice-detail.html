@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/styles/shared/header.css}">
+    <link rel="stylesheet" th:href="@{/styles/shared/navigation.css}">
+    <script type="module" th:src="@{/js/header.js}"></script>
+    <script type="module" th:src="@{/js/navigation.js}"></script>
+    <title>공지사항</title>
+</head>
+<body>
+<header id="header"></header>
+<main>
+    <nav id="nav-admin"></nav>
+    <div class="main-content" th:object="${notice}">
+        <p th:text="*{title}">Title</p>
+        <p th:text="*{createdAt}">Date</p>
+        <p th:text="*{content}">Content</p>
+    </div>
+</main>
+</body>
+</html>

@@ -1,12 +1,12 @@
 package com.example.ormi5projectteam4.service;
 
-import com.example.ormi5projectteam4.domain.Animal;
-import com.example.ormi5projectteam4.domain.AnimalDTO;
+import com.example.ormi5projectteam4.domain.constant.NeuteringStatus;
+import com.example.ormi5projectteam4.domain.entity.Animal;
+import com.example.ormi5projectteam4.domain.dto.AnimalDTO;
 import com.example.ormi5projectteam4.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
