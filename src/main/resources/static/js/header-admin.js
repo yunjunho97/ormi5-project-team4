@@ -25,9 +25,27 @@ document.addEventListener("DOMContentLoaded", function () {
     welcomeText.textContent = ' 님 환영합니다';
 
     const logout = document.createElement('a');
-    logout.href = URL + API_LOGOUT;
+    // logout.href = URL + API_LOGOUT;
     logout.className = 'font-header';
     logout.textContent = '로그아웃';
+
+    async function logoutEvent() {
+        const response = await fetch('http://43.203.58.44:8080/auth/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            window.location.href = 'http://43.203.58.44:8080'
+        } else {
+            console.error("Something went wrong");
+        }
+    }
+
+    logout.addEventListener('click', logoutEvent);
+
     const adminPage = document.createElement('a');
     adminPage.href = URL + ADMIN_PAGE;
     adminPage.className = 'font-header';

@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (response.ok) {
-            window.location.href = 'http://localhost:8080'
+            window.location.href = 'http://43.203.58.44:8080'
         } else {
             console.error("Something went wrong");
         }
