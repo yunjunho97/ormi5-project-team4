@@ -1,35 +1,25 @@
 import {
     URL,
-    MANAGE_POST,
-    READ_POST,
     PAGE_ID,
-    APPROVE_STATUS,
-    ADOPTION_STATUS,
-    API_ADMIN_GET_POSTS, MY_INFO, API_SET_APPROVE_STATUS
+    MY_INFO, EMAIL, API_ADMIN_GET_USERS, ADMIN_USER, API_ADMIN_PUT_USER_ROLE
 } from "./constant.js";
 
 import {
-    getResponseForAdoptionStatus,
-    getImgSrc,
     getResponseForUserRole,
     getDateFormat,
-    calculatePagination
+    calculatePagination, getResponseForUserRoleAdmin
 } from "./utils.js";
 
 document.addEventListener("DOMContentLoaded", function () {
-    let approveStatus = '';
-    if (APPROVE_STATUS !== '') {
-        approveStatus = `&approveStatus=${APPROVE_STATUS}`;
-    }
-    let adoptionStatus = '';
-    if (ADOPTION_STATUS !== '') {
-        adoptionStatus = `&adoptionStatus=${ADOPTION_STATUS}`
+    let email = '';
+    if (EMAIL !== '') {
+        email = `&email=${EMAIL}`;
     }
 
     // url 설정
-    const fetchURL = URL + API_ADMIN_GET_POSTS + `?page=${PAGE_ID}` + approveStatus + adoptionStatus;
-    const previousPageURL = URL + MANAGE_POST + `?page=${PAGE_ID}` + approveStatus + adoptionStatus;
-    const nextPageURL = URL + +MANAGE_POST + `?page=${PAGE_ID}` + approveStatus + adoptionStatus;
+    const fetchURL = URL + API_ADMIN_GET_USERS + `?page=${PAGE_ID}` + email;
+    const previousPageURL = URL + ADMIN_USER + `?page=${PAGE_ID}` + email;
+    const nextPageURL = URL + ADMIN_USER + `?page=${PAGE_ID}` + email;
 
     // 유저 정보 데이터 세팅
     MY_INFO.then(info => {
@@ -47,43 +37,47 @@ document.addEventListener("DOMContentLoaded", function () {
         userEmail.textContent = info.email;
     }).catch(error => console.error('Error:', error));
 
-    // 게시글 받아오기
+    console.log(fetchURL);
+    // 유저 목록 받아오기
     fetch(fetchURL)
         .then(response => response.json())
         .then(data => {
-            const postList = document.getElementById('post-list');
-            data.content.forEach(post => {
-                const listItem = document.createElement('li');
-                listItem.className = 'container-post-img'
-                const div = document.createElement('div');
-                div.className = 'image-container'
-                const input = document.createElement('input');
-                input.type = 'checkbox';
-                input.className = 'checkbox item-checkbox';
-                input.id = post.id;
-                const img = document.createElement('img');
-                img.src = getImgSrc(post);
-                img.alt = '이미지';
-                img.className = 'margin-bottom-7'
-                const status = document.createElement("p");
-                status.textContent = getResponseForAdoptionStatus(post.adoptionStatus);
-                status.className = 'font-forward margin-bottom-3'
-                const title = document.createElement('a');
-                title.href = URL + READ_POST + `${post.id}`;
-                title.textContent = post.title;
+            const tbody = document.querySelector('#tbody-user-list');
+            data.content.forEach(user => {
+                const tr = document.createElement('tr');
+                tr.className = 'height-35 table-line-bottom';
+                const checkBoxTd = document.createElement('td');
+                const checkBox = document.createElement('input');
+                checkBox.className = 'checkbox-all item-checkbox';
+                checkBox.type = 'checkbox'
+                checkBox.id = user.id;
+                const userName = document.createElement('td');
+                userName.className = 'member-username';
+                userName.textContent = user.userName;
+                const userEmail = document.createElement('td');
+                userEmail.textContent = user.email;
+                const userPhone = document.createElement('td');
+                userPhone.className = 'member-phone';
+                userPhone.textContent = user.phone;
+                const userRoleSetData = getResponseForUserRoleAdmin(user.role);
+                const userRole = document.createElement('td');
+                userRole.className = userRoleSetData.className.toString();
+                userRole.textContent = userRoleSetData.text;
 
-                div.appendChild(input);
-                div.appendChild(img);
-                listItem.appendChild(div);
-                listItem.appendChild(status);
-                listItem.appendChild(title);
+                checkBoxTd.appendChild(checkBox);
 
-                postList.appendChild(listItem);
+                tr.appendChild(checkBoxTd);
+                tr.appendChild(userName);
+                tr.appendChild(userEmail);
+                tr.appendChild(userPhone);
+                tr.appendChild(userRole);
+
+                tbody.appendChild(tr);
             });
 
             // 게시글 페이지 개수 생성
             const numOfLists = data.totalPages;
-            const itemList = document.getElementById('post-pages');
+            const itemList = document.getElementById('member-pages');
 
             // 이전 페이지 바로가기 이미지
             const previousLi = document.createElement('li');
@@ -112,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     pageElement.className = 'font-page-selected';
                 } else {
                     pageElement.className = 'font-page';
-                    pageElement.href = URL + MANAGE_POST + `?&page=${i}` + approveStatus;
+                    pageElement.href = URL + ADMIN_USER + `?&page=${i}` + email;
                 }
 
                 li.appendChild(pageElement);
@@ -136,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => console.error('Error:', error));
 
     // 전체 선택 이벤트 리스너
-    const selectAllCheckbox = document.querySelector('#check-all');
+    const selectAllCheckbox = document.querySelector('#check-all-member');
     if (selectAllCheckbox) {
         selectAllCheckbox.addEventListener('click', function () {
             toggleAllCheckboxes(this);
@@ -144,18 +138,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // 게시글 상태 변경 버튼 이벤트 리스너
-    const setPostApprovedButton = document.querySelector('#post-approved');
-    if (setPostApprovedButton) {
-        setPostApprovedButton.addEventListener('click', function () {
-            processSelectedItems('APPROVED');
+    const setUserBannedButton = document.querySelector('#user-banned');
+    if (setUserBannedButton) {
+        setUserBannedButton.addEventListener('click', function () {
+            processSelectedItems('INACTIVE');
         });
     }
-    const setPostDeniedButton = document.querySelector('#post-denied');
-    if (setPostDeniedButton) {
-        setPostDeniedButton.addEventListener('click', function () {
-            processSelectedItems('DENIED');
+    const setUserActiveButton = document.querySelector('#user-active');
+    if (setUserActiveButton) {
+        setUserActiveButton.addEventListener('click', function () {
+            processSelectedItems('ACTIVE');
         });
     }
+
+    // 검색 이벤트 리스너
+    const form = document.querySelector('#search-form');
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const searchEmail = document.querySelector('#search-input').value;
+        window.location.href = URL + ADMIN_USER + `?page=0` + '&email=' + searchEmail;
+    });
 });
 
 function toggleAllCheckboxes(source) {
@@ -164,12 +167,10 @@ function toggleAllCheckboxes(source) {
 }
 
 function processSelectedItems(mode) {
-    let successCount = 0;
-    let failCount = 0;
-    const posts = document.querySelectorAll('.item-checkbox');
-    posts.forEach(post=>{
-        if(post.checked){
-            fetch(URL + API_SET_APPROVE_STATUS + '/' + post.id + '?approveStatus=' + mode, {
+    const users = document.querySelectorAll('.item-checkbox');
+    users.forEach(user => {
+        if (user.checked) {
+            fetch(URL + API_ADMIN_PUT_USER_ROLE + '/' + user.id + '?role=' + mode, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

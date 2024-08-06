@@ -19,7 +19,6 @@ import com.example.ormi5projectteam4.domain.constant.Role;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class AdminService {
@@ -46,12 +45,14 @@ public class AdminService {
         }
     }
 
-    public List<UserManagementDto> getAllUsers() {
-        return userRepository.findAll().stream().map(this::userConvertToUserManagementDto).toList();
-    }
+    public Page<UserManagementDto> getUsersByConditions(String email, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
 
-    public List<UserManagementDto> searchUserByEmail(String email) {
-        return userRepository.findByEmailContaining(email).stream().map(this::userConvertToUserManagementDto).toList();
+        if (email == null) {
+            return userRepository.findByRoleNot(Role.ADMIN, pageable).map(this::userConvertToUserManagementDto);
+        } else {
+            return userRepository.findByEmailContainingAndRoleNot(email, Role.ADMIN, pageable).map(this::userConvertToUserManagementDto);
+        }
     }
 
     public UserManagementDto changeUserRole(Long id, Role role) {
@@ -78,7 +79,9 @@ public class AdminService {
 
     private UserManagementDto userConvertToUserManagementDto(User user) {
         UserManagementDto userManagementDto = new UserManagementDto();
+        userManagementDto.setId(user.getId());
         userManagementDto.setEmail(user.getEmail());
+        userManagementDto.setUserName(user.getUserName());
         userManagementDto.setPhone(user.getPhone());
         userManagementDto.setRole(user.getRole());
         userManagementDto.setPassword(user.getPassword());

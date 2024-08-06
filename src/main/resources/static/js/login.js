@@ -1,3 +1,7 @@
+import {
+    URL, API_LOGIN, ADMIN_PAGE, HOME
+} from './constant.js'
+
 document.getElementById('login-form').addEventListener('submit', function (event) {
     event.preventDefault();
 
@@ -9,7 +13,7 @@ document.getElementById('login-form').addEventListener('submit', function (event
         password: password
     };
 
-    fetch('http://43.203.58.44:8080/auth/login', {
+    fetch(URL + API_LOGIN, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -20,7 +24,12 @@ document.getElementById('login-form').addEventListener('submit', function (event
         .then(data => {
             console.log('Success:', data);
             if (data.userDto !== null) {
-                window.location.href = 'http://43.203.58.44:8080/home' // home 화면으로 이동
+                if(data.userDto.role == 'ADMIN'){
+                    window.location.href = URL + ADMIN_PAGE;
+                }
+                else{
+                    window.location.href = URL + HOME // home 화면으로 이동
+                }
             }
         })
         .catch((error) => {
