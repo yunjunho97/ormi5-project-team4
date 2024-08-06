@@ -4,13 +4,17 @@ import com.example.ormi5projectteam4.annotation.Secured;
 import com.example.ormi5projectteam4.domain.constant.Role;
 import com.example.ormi5projectteam4.domain.dto.NoticeDto;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
@@ -46,9 +50,24 @@ public class WebController {
     }
 
     @GetMapping("/write-notice")
-    public String createNotice(Model model) {
-        model.addAttribute("notice", new NoticeDto());
+    public String getNoticeForm(Model model) {
+        model.addAttribute("noticeDto", new NoticeDto());
         return "write-notice";
+    }
+
+    @PostMapping("/write-notice")
+    public String submitNotice(NoticeDto noticeDto, Model model) {
+        if (noticeDto.getTitle() == null || noticeDto.getTitle().isEmpty()) {
+            model.addAttribute("titleError", "제목을 입력해주세요");
+            return "write-notice";
+        }
+        if (noticeDto.getContent() == null || noticeDto.getContent().isEmpty()) {
+            model.addAttribute("contentError", "내용을 입력해주세요");
+            return "write-notice";
+        }
+
+        restTemplate.postForObject(BASE_URL + "/notice", noticeDto, NoticeDto.class);
+        return "redirect:/manage/notice";
     }
 
 //    @GetMapping("/notice-list")
