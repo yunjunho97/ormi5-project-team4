@@ -36,7 +36,7 @@
         <script>
             async function fetchDropdownData() {
                 try {
-                    const response = await fetch('http://localhost:8080/password-question');
+                    const response = await fetch('http://43.203.58.44:8080/password-question');
                     const data = await response.json();
 
                     const dropdown = document.getElementById('dropdownMenu');
