@@ -3,30 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/styles/admin/admin-base.css}">
+    <link rel="stylesheet" th:href="@{/styles/admin/admin-component.css}">
+    <link rel="stylesheet" th:href="@{/styles/admin/admin-layout.css}">
+    <link rel="stylesheet" th:href="@{/styles/shared/base.css}">
     <link rel="stylesheet" th:href="@{/styles/shared/header.css}">
     <link rel="stylesheet" th:href="@{/styles/shared/navigation.css}">
-    <script type="module" th:src="@{/js/header.js}"></script>
-    <script type="module" th:src="@{/js/navigation.js}"></script>
+    <script type="module" th:src="@{/js/header-admin.js}"></script>
+    <script type="module" th:src="@{/js/navigation-admin.js}"></script>
+    <script type="module" th:src="@{/js/admin-notice-write.js}"></script>
     <title>공지사항</title>
 </head>
 <body>
-<header id="header"></header>
+<header id="header-admin"></header>
 <main>
     <nav id="nav-admin"></nav>
-    <div class="container">
-        <form action="@{admin/notice}" th:object="${noticeDto}" method="post">
-            <div class="input-group">
-                <label for="title">제목</label>
-                <input type="text" id="title" th:field="*{title}" placeholder="제목을 입력해주세요">
+    <article class="article-notice-write">
+        <div>
+            <div class="margin-bottom-24">
+                <div class="margin-bottom-13 padding-bottom-13 line-bottom-thin">
+                    <p class="notice-category margin-bottom-15">[ 공지사항 ]</p>
+                    <div class="notice-write-container">
+                        <input id="notice-title" type="text" class="margin-right-4" placeholder="제목을 입력하세요">
+                        <button id="notice-title-apply" class="notice-button-apply">확인</button>
+                        <button id="notice-title-deny" class="notice-button-deny">취소</button>
+                    </div>
+                </div>
+                <textarea id="notice-content" placeholder="내용을 입력해주세요"></textarea>
             </div>
-            <div class="input-group">
-                <label for="content">내용</label>
-                <textarea id="content" th:field="*{content}" placeholder="내용을 입력해주세요"></textarea>
+            <div class="notice-write-apply-container">
+                <button id="notice-write-apply" class="notice-button-apply">게시</button>
+                <button id="notice-write-deny" class="notice-button-deny">취소</button>
             </div>
-            <button type="submit">저장하기</button>
-            <button type="button" class="cancel">취소</button>
-        </form>
-    </div>
+        </div>
+    </article>
+    <!--<div class="container">-->
+    <!--    <form action="@{admin/notice}" th:object="${noticeDto}" method="post">-->
+    <!--        <div class="input-group">-->
+    <!--            <label for="title">제목</label>-->
+    <!--            <input type="text" id="title" th:field="*{title}" placeholder="제목을 입력해주세요">-->
+    <!--        </div>-->
+    <!--        <div class="input-group">-->
+    <!--            <label for="content">내용</label>-->
+    <!--            <textarea id="content" th:field="*{content}" placeholder="내용을 입력해주세요"></textarea>-->
+    <!--        </div>-->
+    <!--        <button type="submit">저장하기</button>-->
+    <!--        <button type="button" class="cancel">취소</button>-->
+    <!--    </form>-->
+    <!--</div>-->
 </main>
 </body>
 </html>

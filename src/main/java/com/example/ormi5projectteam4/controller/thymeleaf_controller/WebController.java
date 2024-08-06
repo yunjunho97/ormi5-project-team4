@@ -18,7 +18,7 @@ import java.util.List;
 public class WebController {
 
     private final RestTemplate restTemplate = new RestTemplate();
-    private static final String BASE_URL = "http://43.203.58.44:8080";
+    private static final String BASE_URL = "http://localhost:8080";
 
     @GetMapping("/notice-list")
     public String getNotices(Model model) {
@@ -35,14 +35,14 @@ public class WebController {
 
     @GetMapping("/manage/notice")
     public String getAdminNotices(Model model) {
-        ResponseEntity<List<NoticeDto>> response = restTemplate.exchange(
-                BASE_URL + "/admin/notice",
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<>() {}
-        );
-        List<NoticeDto> noticePage = response.getBody();
-        model.addAttribute("notices", noticePage);
+        //ResponseEntity<List<NoticeDto>> response = restTemplate.exchange(
+        //        BASE_URL + "/admin/notice",
+        //        HttpMethod.GET,
+        //        null,
+        //        new ParameterizedTypeReference<>() {}
+        //);
+        //List<NoticeDto> noticePage = response.getBody();
+        //model.addAttribute("notices", noticePage);
         return "notice-list-admin";
     }
 

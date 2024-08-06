@@ -1,8 +1,12 @@
 package com.example.ormi5projectteam4.controller.rest_controller;
 
+import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
+import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
 import com.example.ormi5projectteam4.domain.dto.NoticeDto;
+import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,10 +31,19 @@ public class NoticeController {
 
     // READ: 모든 공지사항 조회
     @GetMapping("/admin/notice")
-    public ResponseEntity<List<NoticeDto>> getAllNotices() {
-        List<NoticeDto> notices = noticeService.getAllNotices();
+    public ResponseEntity<Page<NoticeDto>> getNoticesSortDesc(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "14") int size) {
+
+        Page<NoticeDto> notices = noticeService.getAllNoticesDesc(page, size);
         return ResponseEntity.ok(notices);
     }
+
+    //@GetMapping("/admin/notice")
+    //public ResponseEntity<List<NoticeDto>> getAllNotices() {
+    //    List<NoticeDto> notices = noticeService.getAllNotices();
+    //    return ResponseEntity.ok(notices);
+    //}
 
     // READ: 특정 ID의 공지사항 조회
     @GetMapping("/admin/notice/{id}")

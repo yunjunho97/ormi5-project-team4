@@ -15,11 +15,11 @@ import java.time.LocalDateTime;
 @Builder
 public class NoticeDto {
     private Long id;
+    private Long userId;
     private String title;
     private String content;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private User user;
 
     public static NoticeDto fromEntity(Notice notice) {
         return NoticeDto.builder()
@@ -28,18 +28,23 @@ public class NoticeDto {
                 .content(notice.getContent())
                 .createdAt(notice.getCreatedAt())
                 .updatedAt(notice.getUpdatedAt())
-                .user(notice.getUser())
                 .build();
     }
 
-    public Notice toEntity() {
-        return new Notice(
-                this.id,
-                this.title,
-                this.content,
-                this.createdAt,
-                this.updatedAt,
-                this.user
-        );
+    public static Notice toEntity(NoticeDto noticeDto) {
+        Notice notice = new Notice();
+        notice.setId(noticeDto.getId());
+        notice.setTitle(noticeDto.getTitle());
+        notice.setContent(noticeDto.getContent());
+        notice.setCreatedAt(noticeDto.getCreatedAt());
+        notice.setUpdatedAt(noticeDto.getUpdatedAt());
+        return notice;
+        //return new Notice(
+        //        this.id,
+        //        this.title,
+        //        this.content,
+        //        this.createdAt,
+        //        this.updatedAt
+        //);
     }
 }
