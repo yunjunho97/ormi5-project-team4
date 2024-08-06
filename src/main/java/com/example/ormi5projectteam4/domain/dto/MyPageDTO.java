@@ -1,6 +1,7 @@
 package com.example.ormi5projectteam4.domain.dto;
 
 
+import com.example.ormi5projectteam4.domain.constant.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,5 +25,6 @@ public class MyPageDTO {
     private String phone;
     private Long postCount;
     private List<PostDTO> posts;
+    private Role role;
 
 }
