@@ -1,6 +1,7 @@
 package com.example.ormi5projectteam4.controller.thymeleaf_controller;
 
 import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
+import com.example.ormi5projectteam4.domain.constant.Config;
 import com.example.ormi5projectteam4.domain.dto.PagedPostsResponse;
 import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.domain.dto.ProcessStatus;
@@ -25,7 +26,7 @@ import java.util.List;
 @Controller
 public class HomeController {
     private final RestTemplate restTemplate = new RestTemplate();
-    private static final String BASE_URL = "http://43.203.58.44:8080/post";
+    private static final String BASE_URL = Config.BASE_URL + "/post";
     private final HttpSession session;
 
     public HomeController(HttpSession session) {

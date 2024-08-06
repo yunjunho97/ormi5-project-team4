@@ -25,12 +25,11 @@ document.addEventListener("DOMContentLoaded", function () {
     welcomeText.textContent = ' 님 환영합니다';
 
     const logout = document.createElement('a');
-    // logout.href = URL + API_LOGOUT;
     logout.className = 'font-header';
     logout.textContent = '로그아웃';
 
     async function logoutEvent() {
-        const response = await fetch('http://43.203.58.44:8080/auth/logout', {
+        const response = await fetch(URL + API_LOGOUT, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -38,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (response.ok) {
-            window.location.href = 'http://43.203.58.44:8080'
+            window.location.href = URL;
         } else {
             console.error("Something went wrong");
         }
