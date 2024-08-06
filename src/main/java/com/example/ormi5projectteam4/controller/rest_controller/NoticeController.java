@@ -1,7 +1,9 @@
 package com.example.ormi5projectteam4.controller.rest_controller;
 
+import com.example.ormi5projectteam4.annotation.Secured;
 import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
 import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
+import com.example.ormi5projectteam4.domain.constant.Role;
 import com.example.ormi5projectteam4.domain.dto.NoticeDto;
 import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.service.NoticeService;
@@ -23,6 +25,7 @@ public class NoticeController {
     }
 
     // CREATE: 새 공지사항 추가
+    @Secured(role = Role.ADMIN)
     @PostMapping("/admin/notice")
     public ResponseEntity<NoticeDto> createNotice(@RequestBody NoticeDto noticeDto) {
         NoticeDto createdNotice = noticeService.createNotice(noticeDto);
@@ -30,6 +33,7 @@ public class NoticeController {
     }
 
     // READ: 모든 공지사항 조회
+    @Secured(role = Role.ADMIN)
     @GetMapping("/admin/notice")
     public ResponseEntity<Page<NoticeDto>> getNoticesSortDesc(
             @RequestParam(defaultValue = "0") int page,
@@ -54,6 +58,7 @@ public class NoticeController {
     }
 
     // UPDATE: 공지사항 정보 업데이트
+    @Secured(role = Role.ADMIN)
     @PutMapping("/admin/notice/{id}")
     public ResponseEntity<NoticeDto> updateNotice(@PathVariable Long id, @RequestBody NoticeDto noticeDto) {
         return noticeService.updateNotice(id, noticeDto)
@@ -62,6 +67,7 @@ public class NoticeController {
     }
 
     // DELETE: 공지사항 삭제
+    @Secured(role = Role.ADMIN)
     @DeleteMapping("/admin/notice/{id}")
     public ResponseEntity<Void> deleteNotice(@PathVariable Long id) {
         boolean deleted = noticeService.deleteNotice(id);
