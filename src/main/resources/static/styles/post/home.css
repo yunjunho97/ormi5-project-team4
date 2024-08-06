@@ -125,3 +125,13 @@ main {
     margin-right: 20px;
     float: right;
 }
+
+#write-container {
+    display: flex;
+}
+
+#write-icon {
+    margin-left: 1340px;
+    width: 21px;
+    height: 21px;
+}
