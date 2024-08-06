@@ -8,14 +8,12 @@
     <script type="module" th:src="@{/js/header.js}"></script>
     <script type="module" th:src="@{/js/admin-page.js}"></script>
     <script type="module" th:src="@{/js/navigation-admin.js}"></script>
-    <title>공지사항</title>
 </head>
 <body>
 <header id="header"></header>
 <main>
     <div id="nav-admin"></div>
     <div class="main-content">
-        <h2>All Notices</h2>
         <form id="admin-form" th:action="@{/admin/notice}" method="get">
             <table>
                 <thead>
