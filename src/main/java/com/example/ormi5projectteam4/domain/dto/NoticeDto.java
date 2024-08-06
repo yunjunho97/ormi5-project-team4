@@ -19,7 +19,7 @@ public class NoticeDto {
     private String content;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private User userId;
+    private User user;
 
     public static NoticeDto fromEntity(Notice notice) {
         return NoticeDto.builder()
@@ -28,7 +28,7 @@ public class NoticeDto {
                 .content(notice.getContent())
                 .createdAt(notice.getCreatedAt())
                 .updatedAt(notice.getUpdatedAt())
-//                .userId(notice.getUserId())
+                .user(notice.getUser())
                 .build();
     }
 
@@ -38,8 +38,8 @@ public class NoticeDto {
                 this.title,
                 this.content,
                 this.createdAt,
-                this.updatedAt
-//                this.userId
+                this.updatedAt,
+                this.user
         );
     }
 }
