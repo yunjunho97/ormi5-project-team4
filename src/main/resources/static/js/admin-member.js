@@ -79,19 +79,19 @@ document.addEventListener("DOMContentLoaded", function () {
             const numOfLists = data.totalPages;
             const itemList = document.getElementById('member-pages');
 
-            // 이전 페이지 바로가기 이미지
-            const previousLi = document.createElement('li');
-            const goPreviousPage = document.createElement('a');
-            const previousPageImg = document.createElement('img');
-            previousPageImg.src = '/images/page-previous.svg';
-            previousPageImg.alt = '이전 페이지'
-            if (!(PAGE_ID === 0)) {
-                goPreviousPage.href = previousPageURL;
-            }
-
-            goPreviousPage.appendChild(previousPageImg);
-            previousLi.appendChild(goPreviousPage);
-            itemList.appendChild(goPreviousPage);
+            // // 이전 페이지 바로가기 이미지
+            // const previousLi = document.createElement('li');
+            // const goPreviousPage = document.createElement('a');
+            // const previousPageImg = document.createElement('img');
+            // previousPageImg.src = '/images/page-previous.svg';
+            // previousPageImg.alt = '이전 페이지'
+            // if (!(PAGE_ID === 0)) {
+            //     goPreviousPage.href = previousPageURL;
+            // }
+            //
+            // goPreviousPage.appendChild(previousPageImg);
+            // previousLi.appendChild(goPreviousPage);
+            // itemList.appendChild(goPreviousPage);
 
             const pagination = calculatePagination(numOfLists, PAGE_ID);
 
@@ -113,19 +113,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 itemList.appendChild(li);
             }
 
-            // 다음 페이지 바로가기 이미지
-            const nextLi = document.createElement('li');
-            const goNextPage = document.createElement('a');
-            const nextPageImg = document.createElement('img');
-            nextPageImg.src = '/images/page-next.svg';
-            nextPageImg.alt = '다음 페이지'
-            if (!(PAGE_ID === numOfLists - 1)) {
-                goNextPage.href = nextPageURL;
-            }
-
-            goNextPage.appendChild(nextPageImg);
-            nextLi.appendChild(goNextPage);
-            itemList.appendChild(goNextPage);
+            // // 다음 페이지 바로가기 이미지
+            // const nextLi = document.createElement('li');
+            // const goNextPage = document.createElement('a');
+            // const nextPageImg = document.createElement('img');
+            // nextPageImg.src = '/images/page-next.svg';
+            // nextPageImg.alt = '다음 페이지'
+            // if (!(PAGE_ID === numOfLists - 1)) {
+            //     goNextPage.href = nextPageURL;
+            // }
+            //
+            // goNextPage.appendChild(nextPageImg);
+            // nextLi.appendChild(goNextPage);
+            // itemList.appendChild(goNextPage);
         })
         .catch(error => console.error('Error:', error));
 
