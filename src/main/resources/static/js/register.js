@@ -17,7 +17,7 @@ document.getElementById('register-form').addEventListener('submit', function (ev
         phone: phone
     };
 
-    fetch('http://localhost:8080/member', {
+    fetch('http://43.203.58.44:8080/member', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -28,7 +28,7 @@ document.getElementById('register-form').addEventListener('submit', function (ev
         .then(data => {
             console.log("Success: ", data.id);
             if(data.id) {
-                window.location.href = 'http://localhost:8080/register-success'
+                window.location.href = 'http://43.203.58.44:8080/register-success'
             }
         })
         .catch(e => {
@@ -53,7 +53,7 @@ async function checkEmailDuplicate() {
 
     try {
         // 서버에 이메일 중복 확인 요청을 보냅니다
-        const response = await fetch(`http://localhost:8080/email-duplication?email=${encodeURIComponent(email)}`, {
+        const response = await fetch(`http://43.203.58.44:8080/email-duplication?email=${encodeURIComponent(email)}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -100,7 +100,7 @@ async function checkUserNameDuplicate() {
 
     try {
         // 서버에 이메일 중복 확인 요청을 보냅니다
-        const response = await fetch(`http://localhost:8080/nickname-duplication?userName=${encodeURIComponent(username)}`, {
+        const response = await fetch(`http://43.203.58.44:8080/nickname-duplication?userName=${encodeURIComponent(username)}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

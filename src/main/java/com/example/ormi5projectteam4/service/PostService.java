@@ -76,8 +76,8 @@ public class PostService {
         Post post = convertToPost(postDTO);
         post.setCreatedAt(LocalDateTime.now());
         post.setAdoptionStatus(AdoptionStatus.POSTING);
-        post.setApproveStatus(ApproveStatus.PENDING);
-//        post.setApproveStatus(ApproveStatus.APPROVED);
+//        post.setApproveStatus(ApproveStatus.PENDING);
+        post.setApproveStatus(ApproveStatus.APPROVED);
 
         post = postRepository.save(post);
 

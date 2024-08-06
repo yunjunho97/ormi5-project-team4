@@ -38,3 +38,9 @@ header * {
     align-items: center;
     gap: 24px;
 }
+
+#logo {
+    max-height: 80px;
+    height: auto;
+    width: auto;
+}

@@ -25,7 +25,7 @@ import java.util.List;
 @Controller
 public class HomeController {
     private final RestTemplate restTemplate = new RestTemplate();
-    private static final String BASE_URL = "http://localhost:8080/post";
+    private static final String BASE_URL = "http://43.203.58.44:8080/post";
     private final HttpSession session;
 
     public HomeController(HttpSession session) {

@@ -3,21 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/styles/admin/admin-base.css}">
+    <link rel="stylesheet" th:href="@{/styles/admin/admin-component.css}">
+    <link rel="stylesheet" th:href="@{/styles/admin/admin-layout.css}">
+    <link rel="stylesheet" th:href="@{/styles/shared/base.css}">
     <link rel="stylesheet" th:href="@{/styles/shared/header.css}">
     <link rel="stylesheet" th:href="@{/styles/shared/navigation.css}">
     <script type="module" th:src="@{/js/header.js}"></script>
     <script type="module" th:src="@{/js/navigation.js}"></script>
+    <script type="module" th:src="@{/js/notice-detail.js}"></script>
     <title>공지사항</title>
 </head>
 <body>
 <header id="header"></header>
 <main>
-    <nav id="nav-admin"></nav>
-    <div class="main-content" th:object="${notice}">
-        <p th:text="*{title}">Title</p>
-        <p th:text="*{createdAt}">Date</p>
-        <p th:text="*{content}">Content</p>
-    </div>
+    <nav id="nav"></nav>
+    <article class="article-post">
+        <div>
+            <div class="line-bottom-thin padding-bottom-28 margin-bottom-27">
+                <p class="margin-bottom-9 notice-category">[ 공지사항 ]</p>
+                <h2 id="notice-detail-title" class="margin-bottom-19">공지사항</h2>
+                <p id="notice-detail-username">관리자</p>
+                <p id="notice-detail-created-at">2024.07.24. 19:56</p>
+            </div>
+            <textarea id="textarea-notice" class="margin-bottom-19"></textarea>
+            <div id="notice-detail-portal-container">
+                <button id="button-notice-list-portal">목록으로</button>
+            </div>
+        </div>
+    </article>
 </main>
 </body>
 </html>

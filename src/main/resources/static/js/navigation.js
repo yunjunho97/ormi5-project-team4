@@ -1,4 +1,4 @@
-import {URL, API_NOTICE, HOME, NOTICE_LIST, READ_POST, READ_NOTICE} from './constant.js';
+import {URL, API_NOTICE, HOME, NOTICE_LIST, READ_NOTICE} from './constant.js';
 import {
     setNavigationFilter, setNavigationCategoryStyle, getMyInfo
 } from './utils.js';
@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch(URL + API_NOTICE)
         .then(response => response.json())
         .then(data => {
-            if (Array.isArray(data)) {
                 const noticeHead = document.createElement('li');
                 const noticeTitle = document.createElement('a');
                 noticeTitle.href = URL + NOTICE_LIST;
@@ -19,8 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const noticeContentsArea = document.createElement('div');
                 const noticeContentsList = document.createElement('ul');
 
-                const reversedData = data.reverse();
-                const recentNotices = reversedData.slice(0, 5);
+                const recentNotices = data.content.slice(0, 5);
                 const textLength = 11;
 
                 recentNotices.forEach((item, index) => {
@@ -76,9 +74,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
 
                 nav.appendChild(ul);
-            } else {
-                console.error('Received data is not an array:', data);
-            }
         })
         .catch(error => console.error('Error:', error));
 

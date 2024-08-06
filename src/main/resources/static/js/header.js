@@ -8,8 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
     section.id = 'container-header-user';
 
     const logo = document.createElement('img')
-    logo.src = ''; // todo: 로고 이미지 제작
+    logo.src = '/images/logo.png'; // todo: 로고 이미지 제작
     logo.alt = '로고';
+    logo.id = 'logo';
 
     const userContainer = document.createElement('div');
     const username = document.createElement('p');
@@ -30,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
     logout.textContent = '로그아웃';
 
     async function logoutEvent() {
-        const response = await fetch('http://localhost:8080/auth/logout', {
+        const response = await fetch('http://43.203.58.44:8080/auth/logout', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -38,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (response.ok) {
-            window.location.href = 'http://localhost:8080'
+            window.location.href = 'http://43.203.58.44:8080'
         } else {
             console.error("Something went wrong");
         }

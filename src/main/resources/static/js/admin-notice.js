@@ -1,35 +1,23 @@
 import {
     URL,
-    MANAGE_POST,
-    READ_POST,
     PAGE_ID,
-    APPROVE_STATUS,
-    ADOPTION_STATUS,
-    API_ADMIN_GET_POSTS, MY_INFO, API_SET_APPROVE_STATUS
+    MY_INFO,
+    WRITE_NOTICE,
+    API_ADMIN_NOTICE,
+    ADMIN_NOTICE, READ_NOTICE
 } from "./constant.js";
 
 import {
-    getResponseForAdoptionStatus,
-    getImgSrc,
     getResponseForUserRole,
     getDateFormat,
-    calculatePagination
+    calculatePagination, getResponseForUserRoleAdmin
 } from "./utils.js";
 
 document.addEventListener("DOMContentLoaded", function () {
-    let approveStatus = '';
-    if (APPROVE_STATUS !== '') {
-        approveStatus = `&approveStatus=${APPROVE_STATUS}`;
-    }
-    let adoptionStatus = '';
-    if (ADOPTION_STATUS !== '') {
-        adoptionStatus = `&adoptionStatus=${ADOPTION_STATUS}`
-    }
-
     // url 설정
-    const fetchURL = URL + API_ADMIN_GET_POSTS + `?page=${PAGE_ID}` + approveStatus + adoptionStatus;
-    const previousPageURL = URL + MANAGE_POST + `?page=${PAGE_ID}` + approveStatus + adoptionStatus;
-    const nextPageURL = URL + +MANAGE_POST + `?page=${PAGE_ID}` + approveStatus + adoptionStatus;
+    const fetchURL = URL + API_ADMIN_NOTICE + `?page=${PAGE_ID}`;
+    const previousPageURL = URL + ADMIN_NOTICE + `?page=${PAGE_ID}`;
+    const nextPageURL = URL + ADMIN_NOTICE + `?page=${PAGE_ID}`;
 
     // 유저 정보 데이터 세팅
     MY_INFO.then(info => {
@@ -47,43 +35,45 @@ document.addEventListener("DOMContentLoaded", function () {
         userEmail.textContent = info.email;
     }).catch(error => console.error('Error:', error));
 
-    // 게시글 받아오기
+    // 공지 목록 받아오기
     fetch(fetchURL)
         .then(response => response.json())
         .then(data => {
-            const postList = document.getElementById('post-list');
-            data.content.forEach(post => {
-                const listItem = document.createElement('li');
-                listItem.className = 'container-post-img'
-                const div = document.createElement('div');
-                div.className = 'image-container'
-                const input = document.createElement('input');
-                input.type = 'checkbox';
-                input.className = 'checkbox item-checkbox';
-                input.id = post.id;
-                const img = document.createElement('img');
-                img.src = getImgSrc(post);
-                img.alt = '이미지';
-                img.className = 'margin-bottom-7'
-                const status = document.createElement("p");
-                status.textContent = getResponseForAdoptionStatus(post.adoptionStatus);
-                status.className = 'font-forward margin-bottom-3'
+            const tbody = document.querySelector('#tbody-user-list');
+            data.content.forEach(notice => {
+                const tr = document.createElement('tr');
+                tr.className = 'height-35 table-line-bottom';
+                const checkBoxTd = document.createElement('td');
+                const checkBox = document.createElement('input');
+                checkBox.className = 'checkbox-all item-checkbox';
+                checkBox.type = 'checkbox'
+                checkBox.id = notice.id;
+                const category = document.createElement('td');
+                category.className = 'notice-category';
+                category.textContent = '[ 공지사항 ]';
+                const titleTd = document.createElement('td');
                 const title = document.createElement('a');
-                title.href = URL + READ_POST + `${post.id}`;
-                title.textContent = post.title;
+                title.textContent = notice.title;
+                title.href = URL + READ_NOTICE + '/' + notice.id;
+                const createdAt = document.createElement('td');
+                createdAt.className = 'notice-created-at text-align-center';
+                createdAt.textContent = getDateFormat(notice.createdAt);
 
-                div.appendChild(input);
-                div.appendChild(img);
-                listItem.appendChild(div);
-                listItem.appendChild(status);
-                listItem.appendChild(title);
+                checkBoxTd.appendChild(checkBox);
 
-                postList.appendChild(listItem);
+                titleTd.appendChild(title);
+
+                tr.appendChild(checkBoxTd);
+                tr.appendChild(category);
+                tr.appendChild(titleTd);
+                tr.appendChild(createdAt);
+
+                tbody.appendChild(tr);
             });
 
             // 게시글 페이지 개수 생성
             const numOfLists = data.totalPages;
-            const itemList = document.getElementById('post-pages');
+            const itemList = document.getElementById('notice-pages');
 
             // // 이전 페이지 바로가기 이미지
             // const previousLi = document.createElement('li');
@@ -112,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     pageElement.className = 'font-page-selected';
                 } else {
                     pageElement.className = 'font-page';
-                    pageElement.href = URL + MANAGE_POST + `?&page=${i}` + approveStatus;
+                    pageElement.href = URL + ADMIN_NOTICE + `?&page=${i}`;
                 }
 
                 li.appendChild(pageElement);
@@ -136,24 +126,26 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => console.error('Error:', error));
 
     // 전체 선택 이벤트 리스너
-    const selectAllCheckbox = document.querySelector('#check-all');
+    const selectAllCheckbox = document.querySelector('#check-all-notice');
     if (selectAllCheckbox) {
         selectAllCheckbox.addEventListener('click', function () {
             toggleAllCheckboxes(this);
         });
     }
 
-    // 게시글 상태 변경 버튼 이벤트 리스너
-    const setPostApprovedButton = document.querySelector('#post-approved');
-    if (setPostApprovedButton) {
-        setPostApprovedButton.addEventListener('click', function () {
-            processSelectedItems('APPROVED');
+    // 공지 글쓰기 버튼 이벤트 리스너
+    const writeNoticeButton = document.querySelector('#notice-write');
+    if (writeNoticeButton) {
+        writeNoticeButton.addEventListener('click', function () {
+            writeNotice();
         });
     }
-    const setPostDeniedButton = document.querySelector('#post-denied');
-    if (setPostDeniedButton) {
-        setPostDeniedButton.addEventListener('click', function () {
-            processSelectedItems('DENIED');
+
+    // 공지 삭제 버튼 이벤트 리스너
+    const deleteNoticeButton = document.querySelector('#notice-delete');
+    if (deleteNoticeButton) {
+        deleteNoticeButton.addEventListener('click', function () {
+            deleteNotice();
         });
     }
 });
@@ -163,21 +155,17 @@ function toggleAllCheckboxes(source) {
     checkboxes.forEach(checkbox => checkbox.checked = source.checked);
 }
 
-function processSelectedItems(mode) {
-    let successCount = 0;
-    let failCount = 0;
-    const posts = document.querySelectorAll('.item-checkbox');
-    posts.forEach(post=>{
-        if(post.checked){
-            fetch(URL + API_SET_APPROVE_STATUS + '/' + post.id + '?approveStatus=' + mode, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-                .then(response => response.json())
-                .then(data => console.log('Success:', data))
-                .catch(error => console.error('Error:', error));
+function writeNotice() {
+    window.location.href = URL + WRITE_NOTICE;
+}
+
+function deleteNotice() {
+    const notices = document.querySelectorAll('.item-checkbox');
+    notices.forEach(notice => {
+        if (notice.checked) {
+            fetch(URL + API_ADMIN_NOTICE + '/' + notice.id, {
+                method: 'DELETE'
+            }).catch(error => console.error('Error:', error));
         }
     });
 
