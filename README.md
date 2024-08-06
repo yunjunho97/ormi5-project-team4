@@ -97,7 +97,7 @@
 ```
 
 ## 🏭System Structure
-![img.png](readme/SystemStructure.png)
+![img.png](https://velog.velcdn.com/images/elma98/post/1ff92b9a-3ee2-42e5-ba28-0519bace5d6f/image.jpg)
 
 
 ## 🔐ERD Structure
