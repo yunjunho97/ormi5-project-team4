@@ -210,6 +210,25 @@ export function getDateFormat(timestamp) {
     return `${year}.${month}.${day}`;
 }
 
+export function getDateTimeformat(timestamp) {
+    const date = new Date(timestamp);
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
+    const day = String(date.getDate()).padStart(2, '0');
+
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+    return `${year}.${month}.${day}. ${hours}:${minutes}`;
+}
+
 export function getEmail() {
     return getUrlParameter('email') || '';
+}
+
+export function getLastPathVariable() {
+    const url = window.location.href;
+    const parts = url.split('/');
+    return parts.pop() || parts.pop(); // 마지막 요소가 빈 문자열일 경우를 처리
 }

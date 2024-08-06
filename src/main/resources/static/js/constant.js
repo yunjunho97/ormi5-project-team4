@@ -12,6 +12,7 @@ export const API_NOTICE = '/notice';
 export const API_ADMIN_GET_POSTS = '/admin/post';
 export const API_ADMIN_GET_USERS = '/admin/member';
 export const API_ADMIN_PUT_USER_ROLE = '/admin/member';
+export const API_ADMIN_NOTICE = '/admin/notice'; // notice API는 모두 동일
 export const API_MY_INFO = '/auth/this';
 export const API_SET_APPROVE_STATUS = '/admin/post';
 
@@ -24,6 +25,7 @@ export const ADMIN_PAGE = '/manage/posts';
 export const ADMIN_NOTICE = '/manage/notice';
 export const ADMIN_USER = '/manage/member';
 export const NOTICE_LIST = '/notice-list';
+export const WRITE_NOTICE = '/write-notice';
 export const READ_NOTICE = '/read-notice';
 
 // Parameter 영역
@@ -36,4 +38,5 @@ export const EMAIL = getEmail();
 
 // Constants
 export const URL = "http://43.203.58.44:8080";
+// export const URL = 'http://localhost:8080';
 export const MY_INFO = getMyInfo();

@@ -1,5 +1,7 @@
 package com.example.ormi5projectteam4.controller.thymeleaf_controller;
 
+import com.example.ormi5projectteam4.annotation.Secured;
+import com.example.ormi5projectteam4.domain.constant.Role;
 import com.example.ormi5projectteam4.domain.dto.NoticeDto;
 
 import org.springframework.core.ParameterizedTypeReference;
@@ -18,53 +20,53 @@ import java.util.List;
 public class WebController {
 
     private final RestTemplate restTemplate = new RestTemplate();
-    private static final String BASE_URL = "http://43.203.58.44:8080";
+    private static final String BASE_URL = "http://localhost:8080";
 
     @GetMapping("/notice-list")
     public String getNotices(Model model) {
-        ResponseEntity<List<NoticeDto>> response = restTemplate.exchange(
-                BASE_URL + "/notice",
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<>() {}
-        );
-        List<NoticeDto> noticePage = response.getBody();
-        model.addAttribute("notices", noticePage);
+        //ResponseEntity<List<NoticeDto>> response = restTemplate.exchange(
+        //        BASE_URL + "/notice",
+        //        HttpMethod.GET,
+        //        null,
+        //        new ParameterizedTypeReference<>() {}
+        //);
+        //List<NoticeDto> noticePage = response.getBody();
+        //model.addAttribute("notices", noticePage);
         return "notice-list-user";
     }
-
+    @Secured(role = Role.ADMIN)
     @GetMapping("/manage/notice")
     public String getAdminNotices(Model model) {
-        ResponseEntity<List<NoticeDto>> response = restTemplate.exchange(
-                BASE_URL + "/admin/notice",
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<>() {}
-        );
-        List<NoticeDto> noticePage = response.getBody();
-        model.addAttribute("notices", noticePage);
+        //ResponseEntity<List<NoticeDto>> response = restTemplate.exchange(
+        //        BASE_URL + "/admin/notice",
+        //        HttpMethod.GET,
+        //        null,
+        //        new ParameterizedTypeReference<>() {}
+        //);
+        //List<NoticeDto> noticePage = response.getBody();
+        //model.addAttribute("notices", noticePage);
         return "notice-list-admin";
     }
 
-    @GetMapping("/notice/{id}")
+    @GetMapping("/read-notice/{id}")
     public String getNoticeDetail(@PathVariable Long id, Model model) {
-        String url = BASE_URL + "/notice/" + id;
-        ResponseEntity<NoticeDto> response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                null,
-                NoticeDto.class
-        );
-        model.addAttribute("notice", response.getBody());
+        //String url = BASE_URL + "/notice/" + id;
+        //ResponseEntity<NoticeDto> response = restTemplate.exchange(
+        //        url,
+        //        HttpMethod.GET,
+        //        null,
+        //        NoticeDto.class
+        //);
+        //model.addAttribute("notice", response.getBody());
         return "notice-detail";
     }
-
+    @Secured(role = Role.ADMIN)
     @GetMapping("/write-notice")
     public String getNoticeForm(Model model) {
         model.addAttribute("noticeDto", new NoticeDto());
         return "write-notice";
     }
-
+    @Secured(role = Role.ADMIN)
     @PostMapping("/write-notice")
     public String submitNotice(NoticeDto noticeDto, Model model) {
         if (noticeDto.getTitle() == null || noticeDto.getTitle().isEmpty()) {

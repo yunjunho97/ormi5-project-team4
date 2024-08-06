@@ -1,8 +1,14 @@
 package com.example.ormi5projectteam4.controller.rest_controller;
 
+import com.example.ormi5projectteam4.annotation.Secured;
+import com.example.ormi5projectteam4.domain.constant.AdoptionStatus;
+import com.example.ormi5projectteam4.domain.constant.ApproveStatus;
+import com.example.ormi5projectteam4.domain.constant.Role;
 import com.example.ormi5projectteam4.domain.dto.NoticeDto;
+import com.example.ormi5projectteam4.domain.dto.PostDTO;
 import com.example.ormi5projectteam4.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +25,7 @@ public class NoticeController {
     }
 
     // CREATE: 새 공지사항 추가
+    @Secured(role = Role.ADMIN)
     @PostMapping("/admin/notice")
     public ResponseEntity<NoticeDto> createNotice(@RequestBody NoticeDto noticeDto) {
         NoticeDto createdNotice = noticeService.createNotice(noticeDto);
@@ -26,14 +33,24 @@ public class NoticeController {
     }
 
     // READ: 모든 공지사항 조회
+    @Secured(role = Role.ADMIN)
     @GetMapping("/admin/notice")
-    public ResponseEntity<List<NoticeDto>> getAllNotices() {
-        List<NoticeDto> notices = noticeService.getAllNotices();
+    public ResponseEntity<Page<NoticeDto>> getNoticesSortDesc(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "14") int size) {
+
+        Page<NoticeDto> notices = noticeService.getAllNoticesDesc(page, size);
         return ResponseEntity.ok(notices);
     }
 
+    //@GetMapping("/admin/notice")
+    //public ResponseEntity<List<NoticeDto>> getAllNotices() {
+    //    List<NoticeDto> notices = noticeService.getAllNotices();
+    //    return ResponseEntity.ok(notices);
+    //}
+
     // READ: 특정 ID의 공지사항 조회
-    @GetMapping("/admin/notice/{id}")
+    @GetMapping("/notice/{id}")
     public ResponseEntity<NoticeDto> getNoticeById(@PathVariable Long id) {
         return noticeService.getNoticeById(id)
                 .map(ResponseEntity::ok)
@@ -41,6 +58,7 @@ public class NoticeController {
     }
 
     // UPDATE: 공지사항 정보 업데이트
+    @Secured(role = Role.ADMIN)
     @PutMapping("/admin/notice/{id}")
     public ResponseEntity<NoticeDto> updateNotice(@PathVariable Long id, @RequestBody NoticeDto noticeDto) {
         return noticeService.updateNotice(id, noticeDto)
@@ -49,6 +67,7 @@ public class NoticeController {
     }
 
     // DELETE: 공지사항 삭제
+    @Secured(role = Role.ADMIN)
     @DeleteMapping("/admin/notice/{id}")
     public ResponseEntity<Void> deleteNotice(@PathVariable Long id) {
         boolean deleted = noticeService.deleteNotice(id);
@@ -56,11 +75,18 @@ public class NoticeController {
     }
 
     // 사용자 화면에서 처리
-    // READ: 최신 공지사항 조회
+    // READ: 최신순으로 공지사항 조회
     @GetMapping("/notice")
-    public ResponseEntity<List<NoticeDto>> getLatestNotices() {
-        List<NoticeDto> latestNotices = noticeService.getLatestNotices();
-        return ResponseEntity.ok(latestNotices);
+    public ResponseEntity<Page<NoticeDto>> getNoticesSortDescForUser(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "14") int size) {
+
+        Page<NoticeDto> notices = noticeService.getAllNoticesDesc(page, size);
+        return ResponseEntity.ok(notices);
     }
+    //public ResponseEntity<List<NoticeDto>> getLatestNotices() {
+    //    List<NoticeDto> latestNotices = noticeService.getLatestNotices();
+    //    return ResponseEntity.ok(latestNotices);
+    //}
 
 }
