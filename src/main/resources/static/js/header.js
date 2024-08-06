@@ -8,8 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
     section.id = 'container-header-user';
 
     const logo = document.createElement('img')
-    logo.src = ''; // todo: 로고 이미지 제작
+    logo.src = '/images/logo.png'; // todo: 로고 이미지 제작
     logo.alt = '로고';
+    logo.id = 'logo';
 
     const userContainer = document.createElement('div');
     const username = document.createElement('p');
