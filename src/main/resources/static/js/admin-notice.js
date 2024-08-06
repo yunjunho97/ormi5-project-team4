@@ -2,7 +2,6 @@ import {
     URL,
     PAGE_ID,
     MY_INFO,
-    ADMIN_USER,
     WRITE_NOTICE,
     API_ADMIN_NOTICE,
     ADMIN_NOTICE
@@ -99,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     pageElement.className = 'font-page-selected';
                 } else {
                     pageElement.className = 'font-page';
-                    pageElement.href = URL + ADMIN_USER + `?&page=${i}` + email;
+                    pageElement.href = URL + ADMIN_NOTICE + `?&page=${i}`;
                 }
 
                 li.appendChild(pageElement);

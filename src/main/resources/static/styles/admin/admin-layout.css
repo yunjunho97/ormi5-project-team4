@@ -37,6 +37,10 @@
     border-bottom: 1px solid #D9D9D9;
 }
 
+.line-bottom-thick {
+    border-bottom: 2px solid #777777;
+}
+
 /* Board Area */
 .font-board {
     color: #9B9B9B;
@@ -181,6 +185,12 @@
     gap: 20px
 }
 
+#notice-pages {
+    display: flex;
+    justify-content: center;
+    gap: 20px
+}
+
 .font-page {
     font-size: 12px;
 }
@@ -252,6 +262,17 @@
 }
 #table-admin-notice colgroup col:nth-child(3){
     width: 461px;
+}
+
+#table-user-notice{
+    border-collapse: collapse;
+}
+
+#table-user-notice colgroup col:nth-child(1){
+    width: 91px;
+}
+#table-user-notice colgroup col:nth-child(2){
+    width: 439px;
 }
 
 /* search */
@@ -375,4 +396,8 @@
 
 .height-35 {
     height: 35px;
+}
+
+.justify-content-center{
+    justify-content: center;
 }
