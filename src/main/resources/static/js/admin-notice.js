@@ -4,7 +4,7 @@ import {
     MY_INFO,
     WRITE_NOTICE,
     API_ADMIN_NOTICE,
-    ADMIN_NOTICE
+    ADMIN_NOTICE, READ_NOTICE
 } from "./constant.js";
 
 import {
@@ -51,17 +51,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 const category = document.createElement('td');
                 category.className = 'notice-category';
                 category.textContent = '[ 공지사항 ]';
-                const title = document.createElement('td');
+                const titleTd = document.createElement('td');
+                const title = document.createElement('a');
                 title.textContent = notice.title;
+                title.href = URL + READ_NOTICE + '/' + notice.id;
                 const createdAt = document.createElement('td');
                 createdAt.className = 'notice-created-at text-align-center';
                 createdAt.textContent = getDateFormat(notice.createdAt);
 
                 checkBoxTd.appendChild(checkBox);
 
+                titleTd.appendChild(title);
+
                 tr.appendChild(checkBoxTd);
                 tr.appendChild(category);
-                tr.appendChild(title);
+                tr.appendChild(titleTd);
                 tr.appendChild(createdAt);
 
                 tbody.appendChild(tr);

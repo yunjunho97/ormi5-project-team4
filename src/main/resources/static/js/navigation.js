@@ -1,4 +1,4 @@
-import {URL, API_NOTICE, HOME, NOTICE_LIST, READ_POST, READ_NOTICE} from './constant.js';
+import {URL, API_NOTICE, HOME, NOTICE_LIST, READ_NOTICE} from './constant.js';
 import {
     setNavigationFilter, setNavigationCategoryStyle, getMyInfo
 } from './utils.js';
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 noticeTitle.textContent = '공지사항';
                 const noticeContentsArea = document.createElement('div');
                 const noticeContentsList = document.createElement('ul');
-                
+
                 const recentNotices = data.content.slice(0, 5);
                 const textLength = 11;
 

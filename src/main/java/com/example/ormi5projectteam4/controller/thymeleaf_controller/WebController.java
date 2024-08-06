@@ -46,16 +46,16 @@ public class WebController {
         return "notice-list-admin";
     }
 
-    @GetMapping("/notice/{id}")
+    @GetMapping("/read-notice/{id}")
     public String getNoticeDetail(@PathVariable Long id, Model model) {
-        String url = BASE_URL + "/notice/" + id;
-        ResponseEntity<NoticeDto> response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                null,
-                NoticeDto.class
-        );
-        model.addAttribute("notice", response.getBody());
+        //String url = BASE_URL + "/notice/" + id;
+        //ResponseEntity<NoticeDto> response = restTemplate.exchange(
+        //        url,
+        //        HttpMethod.GET,
+        //        null,
+        //        NoticeDto.class
+        //);
+        //model.addAttribute("notice", response.getBody());
         return "notice-detail";
     }
 

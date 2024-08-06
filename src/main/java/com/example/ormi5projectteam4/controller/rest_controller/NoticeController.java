@@ -46,7 +46,7 @@ public class NoticeController {
     //}
 
     // READ: 특정 ID의 공지사항 조회
-    @GetMapping("/admin/notice/{id}")
+    @GetMapping("/notice/{id}")
     public ResponseEntity<NoticeDto> getNoticeById(@PathVariable Long id) {
         return noticeService.getNoticeById(id)
                 .map(ResponseEntity::ok)
