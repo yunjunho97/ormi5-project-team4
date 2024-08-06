@@ -32,7 +32,7 @@ function fetchUserInfo() {
 
 // 사용자가 작성한 글 목록 가져오기
 function fetchUserPosts() {
-    fetch(URL +'/this/post', {
+    fetch(URL + '/this/post', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -45,13 +45,14 @@ function fetchUserPosts() {
             const postListBody = document.getElementById('post-list-body');
             posts.forEach(post => {
                 let approveStatus;
-                if(post.approveStatus === "APPROVED") {
+                if (post.approveStatus === "APPROVED") {
                     approveStatus = '진행중인 공고'
                 } else {
                     approveStatus = '승인 대기중인 공고'
                 }
                 const row = document.createElement('tr');
-                row.classList.add('height-35', 'my-page-table-line-bottom');
+                row.setAttribute('data-id', post.id); // post pk
+                row.classList.add('height-35', 'my-page-table-line-bottom', 'item');
                 row.innerHTML = `
                         <td><input type="checkbox" class="checkbox-all"></td>
                         <td class="post-posting">${approveStatus}</td>
@@ -78,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // 삭제 버튼 클릭
     const deleteButton = document.getElementById('delete-button');
     deleteButton.addEventListener('click', function () {
-        console.log('삭제 버튼 클릭됨');
+        // console.log('삭제 버튼 클릭됨');
         // 선택된 항목 삭제
         const checkboxes = document.querySelectorAll('.checkbox-all');
         checkboxes.forEach(checkbox => {
@@ -88,3 +89,41 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+// 체크된 게시물 삭제
+async function deletePost() {
+    const checkedEl = document.querySelectorAll('.checkbox-all:checked');
+    const ids = Array.from(checkedEl).map(el => el.parentElement.parentElement.getAttribute('data-id'));
+
+    if (ids.length > 0) {
+        for (let i = 0; i < ids.length; i++) {
+            try {
+                const res = await fetch(URL + `/post/${ids[i]}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (res.ok) {
+                    ids.forEach(id => {
+                        const item = document.querySelector(`.item[data-id="${id}"]`);
+                        if (item) {
+                            item.remove();
+                        }
+                    });
+                } else {
+                    console.log("Failed to delete posts");
+                }
+            } catch (e) {
+                console.error("Error: ", e);
+            }
+        }
+
+    } else {
+        alert("삭제할 게시글이 존재하지 않습니다.");
+    }
+
+}
+
+document.getElementById('delete-button').addEventListener('click', deletePost);
