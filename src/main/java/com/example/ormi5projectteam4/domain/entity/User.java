@@ -52,6 +52,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Notice> notices = new ArrayList<>();
+
     public void addPost(Post post) {
         posts.add(post);
         post.setUser(this);
@@ -60,5 +63,10 @@ public class User {
     public void removePost(Post post) {
         posts.remove(post);
         post.setUser(null);
+    }
+
+    public void addNotice(Notice notice){
+        notices.add(notice);
+        notice.setUser(this);
     }
 }

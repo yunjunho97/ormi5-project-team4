@@ -12,7 +12,7 @@ async function findPassword() {
     }
 
     try{
-        const response = await fetch('http://localhost:8080/auth/password-certification',{
+        const response = await fetch('http://43.203.58.44:8080/auth/password-certification',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
