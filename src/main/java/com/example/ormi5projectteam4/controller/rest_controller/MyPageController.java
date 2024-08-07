@@ -79,16 +79,16 @@
       return ResponseEntity.ok(posts);
     }
 
-    @GetMapping("/read-post/{postId}")
-    public ResponseEntity<PostDTO> getPostDetail(@PathVariable Long postId) {
-      UserDto userDto = authenticationService.getUserDto()
-              .orElseThrow(() -> new RuntimeException("No authenticated user found"));
-      Long userId = userDto.getId();
-
-      return myPageService.getMyPostDetail(postId, userId)
-              .map(ResponseEntity::ok)
-              .orElseGet(() -> ResponseEntity.notFound().build());
-    }
+//    @GetMapping("/read-post/{postId}")
+//    public ResponseEntity<PostDTO> getPostDetail(@PathVariable Long postId) {
+//      UserDto userDto = authenticationService.getUserDto()
+//              .orElseThrow(() -> new RuntimeException("No authenticated user found"));
+//      Long userId = userDto.getId();
+//
+//      return myPageService.getMyPostDetail(postId, userId)
+//              .map(ResponseEntity::ok)
+//              .orElseGet(() -> ResponseEntity.notFound().build());
+//    }
   }
 
 
