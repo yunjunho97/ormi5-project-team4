@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>home</title>
@@ -29,17 +29,14 @@
 <main>
     <nav id="nav" class="nav"></nav>
     <div class="main-content">
-        <div id="write-container">
-            <img id="write-icon" src="https://velog.velcdn.com/images/elma98/post/df3ee34a-523f-41e2-82c1-6103f166527c/image.jpg" alt="글쓰기 아이콘">
-            <div class="write">
-                <a th:href="@{/write}">글쓰기</a>
-            </div>
+        <div class="write">
+            <a th:href="@{/write}">글쓰기</a>
         </div>
         <div th:if="${not #lists.isEmpty(posts)}">
             <ul class="container">
                 <li th:each="post : ${posts}">
                     <a th:href="@{/read-post/{id}(id=${post.id})}">
-<!--                        <p th:text="${post.getImages()[0].getImgUrl()}">aaa</p>-->
+                        <!--                        <p th:text="${post.getImages()[0].getImgUrl()}">aaa</p>-->
                         <img class="img-size" th:src="@{{url}(url=${post.getImages()[0].getImgUrl()})}" alt="">
                         <p th:text="${post.title}">Title</p>
                         <p th:text="${post.foundLocation}">foundAt</p>
