@@ -1,11 +1,11 @@
-# 🐶 Happy Tales 🐱
+# 🐶 Happy Tails 🐱
 <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"><img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"><img src="https://img.shields.io/badge/html-61DAFB?style=for-the-badge&logoColor=black"><img src="https://img.shields.io/badge/JavaScript-f5f242?style=for-the-badge&logo=javascript&logoColor=white"><img src="https://img.shields.io/badge/MySQL-4169E1?style=for-the-badge&logo=mysql&logoColor=white"><img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white"><img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=AmazonAWS&logoColor=white"><img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 
 > 유기동물을 개인 간에 입양할 수 있는 커뮤니티 👉 [[링크]](http://43.203.58.44:8080)
 
-## 🐾 Happy Tales: 유기동물 입양 커뮤니티
+## 🐾 Happy Tails: 유기동물 입양 커뮤니티
 
-유기동물들이 새로운 가족을 찾을 수 있도록 돕는 곳이 많지 않고, 입양 과정을 투명하고 안전하게 진행하기 어려운 경우가 많습니다. **Happy Tales**는 유기동물을 사랑하는 사람들이 모여 자유롭게 소통하며, 안전하고 투명한 입양 과정을 통해 유기동물들이 행복한 새 가정을 찾을 수 있도록 지원하는 커뮤니티입니다.
+유기동물들이 새로운 가족을 찾을 수 있도록 돕는 곳이 많지 않고, 입양 과정을 투명하고 안전하게 진행하기 어려운 경우가 많습니다. **Happy Tails**는 유기동물을 사랑하는 사람들이 모여 자유롭게 소통하며, 안전하고 투명한 입양 과정을 통해 유기동물들이 행복한 새 가정을 찾을 수 있도록 지원하는 커뮤니티입니다.
 
 ### 주요 특징:
 
@@ -15,7 +15,7 @@
 
 ### 📢 우리의 목표:
 
-유기동물들이 사랑받으며 행복하게 살아갈 수 있는 가정을 찾을 수 있도록, 누구나 쉽게 참여하고 도울 수 있는 커뮤니티를 만드는 것입니다. **Happy Tales**는 유기동물을 보호하고 입양을 희망하는 모든 사람들이 모여 따뜻한 마음을 나눌 수 있는 공간이 되기를 바랍니다.
+유기동물들이 사랑받으며 행복하게 살아갈 수 있는 가정을 찾을 수 있도록, 누구나 쉽게 참여하고 도울 수 있는 커뮤니티를 만드는 것입니다. **Happy Tails**는 유기동물을 보호하고 입양을 희망하는 모든 사람들이 모여 따뜻한 마음을 나눌 수 있는 공간이 되기를 바랍니다.
 
 ### 📌 우리의 비전:
 
@@ -23,7 +23,7 @@
 2. **안전하고 투명한 입양 과정**: 입양 과정을 투명하게 공개하여, 모든 참여자가 신뢰할 수 있는 커뮤니티를 만듭니다.
 3. **행복한 이야기**: 유기동물들이 새로운 가정에서 행복한 삶을 살 수 있도록 돕고, 그들의 이야기를 함께 나누는 커뮤니티가 되기를 바랍니다.
 
-### 함께 만들어가는 **Happy Tales**:
+### 함께 만들어가는 **Happy Tails**:
 
 유기동물을 입양하고자 하는 분들, 그리고 유기동물을 보호하고 있는 분들이 서로를 도울 수 있는 따뜻한 공간입니다. 유기동물들에게 두 번째 기회를 주고, 행복한 이야기들이 가득한 커뮤니티를 함께 만들어가요!
 
